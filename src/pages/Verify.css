@@ -411,4 +411,249 @@
   .tips-grid {
     grid-template-columns: 1fr;
   }
+/* =========================================
+   VERIFY TABS
+========================================= */
+
+.verify-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 15px;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.verify-tabs button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-width: 130px;
+  padding: 12px 20px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #94a3b8;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.verify-tabs button:hover {
+  color: #e2e8f0;
+  background: rgba(96, 165, 250, 0.08);
+}
+
+.verify-tabs button.active {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.85),
+    rgba(124, 58, 237, 0.85)
+  );
+  border-color: rgba(96, 165, 250, 0.25);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.18);
+}
+
+.verify-tabs button small {
+  font-size: 9px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: rgba(148, 163, 184, 0.12);
+  color: #64748b;
+}
+
+.verify-tabs .disabled-tab {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+
+/* =========================================
+   APP SOURCE OPTIONS
+========================================= */
+
+.app-source {
+  margin-top: 25px;
+}
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.source-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 58px;
+  padding: 12px;
+
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 13px;
+
+  background: rgba(2, 6, 23, 0.55);
+  color: #cbd5e1;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.source-option:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(59, 130, 246, 0.08);
+  transform: translateY(-2px);
+}
+
+.source-option strong {
+  font-size: 19px;
+}
+
+.source-option.selected {
+  border-color: rgba(96, 165, 250, 0.7);
+  background: rgba(59, 130, 246, 0.13);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+}
+
+
+/* =========================================
+   PERMISSION SECTION
+========================================= */
+
+.permission-help {
+  margin: -3px 0 15px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.permission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.permission-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 13px 14px;
+
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 11px;
+
+  background: rgba(2, 6, 23, 0.55);
+  color: #cbd5e1;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.permission-option:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.permission-option > span {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.permission-option.selected {
+  border-color: rgba(139, 92, 246, 0.65);
+  background: rgba(139, 92, 246, 0.1);
+  color: #ffffff;
+}
+
+.permission-option.selected > span {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #ffffff;
+}
+
+
+/* =========================================
+   APP CHECKER SPACING
+========================================= */
+
+.checker-card .input-area {
+  margin-bottom: 22px;
+}
+
+.checker-card .input-area:last-of-type {
+  margin-bottom: 0;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .verify-tabs {
+    flex-wrap: wrap;
+  }
+
+  .verify-tabs button {
+    flex: 1;
+    min-width: 100px;
+    padding: 11px 10px;
+    font-size: 12px;
+  }
+
+  .source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .permission-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .permission-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
 }
