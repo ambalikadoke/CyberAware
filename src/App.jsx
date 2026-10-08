@@ -2,10 +2,40 @@ import { useState } from "react";
 import "./App.css";
 import Learn from "./pages/Learn";
 import Verify from "./pages/Verify";
+import CyraX from "./pages/CyraX";
 
 function App() {
   const [showLearn, setShowLearn] = useState(false);
   const [showVerify, setShowVerify] = useState(false);
+  const [showCyraX, setShowCyraX] = useState(false);
+
+  // CYRA X PAGE
+  if (showCyraX) {
+    return (
+      <div>
+        <button
+          onClick={() => setShowCyraX(false)}
+          style={{
+            position: "fixed",
+            top: "25px",
+            left: "25px",
+            zIndex: 1000,
+            padding: "12px 18px",
+            border: "1px solid rgba(96, 165, 250, 0.4)",
+            borderRadius: "10px",
+            background: "rgba(15, 23, 42, 0.9)",
+            color: "#60a5fa",
+            cursor: "pointer",
+            fontWeight: "700",
+          }}
+        >
+          ← Back to Home
+        </button>
+
+        <CyraX />
+      </div>
+    );
+  }
 
   // VERIFY PAGE
   if (showVerify) {
@@ -108,8 +138,14 @@ function App() {
             Threat Lab
           </a>
 
-          <a href="#assistant">
-            Assistant
+          <a
+            href="#assistant"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowCyraX(true);
+            }}
+          >
+            CYRA X
           </a>
 
         </div>
@@ -160,8 +196,11 @@ function App() {
                 🔍 Verify Something
               </button>
 
-              <button className="secondary-btn">
-                🚨 I’ve Been Scammed
+              <button
+                className="secondary-btn"
+                onClick={() => setShowCyraX(true)}
+              >
+                🤖 Ask CYRA X
               </button>
 
             </div>
@@ -310,16 +349,19 @@ function App() {
 
             <div className="feature-icon">🤖</div>
 
-            <h3>Ask Assistant</h3>
+            <h3>CYRA X</h3>
 
             <p>
-              Get simple guidance when you're confused about a
+              Get smart guidance when you're confused about a
               suspicious digital situation.
             </p>
 
-            <a href="#assistant">
-              Ask CyberAware →
-            </a>
+            <button
+              className="learn-link-button"
+              onClick={() => setShowCyraX(true)}
+            >
+              Ask CYRA X →
+            </button>
 
           </div>
 
@@ -366,6 +408,7 @@ function App() {
         <div className="threat-grid">
 
           <div className="threat-card">
+
             <span>🎣</span>
 
             <h3>Phishing</h3>
@@ -373,10 +416,12 @@ function App() {
             <p>
               Fake messages and links designed to steal your information.
             </p>
+
           </div>
 
 
           <div className="threat-card">
+
             <span>💳</span>
 
             <h3>UPI Fraud</h3>
@@ -384,10 +429,12 @@ function App() {
             <p>
               Scams involving QR codes, payment requests and fake calls.
             </p>
+
           </div>
 
 
           <div className="threat-card">
+
             <span>📱</span>
 
             <h3>Fake Apps</h3>
@@ -395,10 +442,12 @@ function App() {
             <p>
               Malicious or suspicious applications pretending to be genuine.
             </p>
+
           </div>
 
 
           <div className="threat-card">
+
             <span>💰</span>
 
             <h3>Loan Scams</h3>
@@ -406,6 +455,7 @@ function App() {
             <p>
               Fraudulent loan offers designed to steal money or personal data.
             </p>
+
           </div>
 
         </div>

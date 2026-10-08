@@ -1,0 +1,298 @@
+.cyrax-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.cyrax-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 24px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #111827, #172554);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.cyrax-avatar,
+.small-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cyrax-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  font-size: 28px;
+}
+
+.cyrax-title {
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.cyrax-title span {
+  color: #60a5fa;
+}
+
+.cyrax-header p {
+  margin: 4px 0 0;
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.cyrax-status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cyrax-status span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+.cyrax-intro {
+  text-align: center;
+  padding: 30px 15px 20px;
+}
+
+.cyrax-intro h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+  color: #111827;
+}
+
+.cyrax-intro p {
+  max-width: 650px;
+  margin: auto;
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.cyrax-chat {
+  max-width: 900px;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.1);
+}
+
+.cyrax-messages {
+  min-height: 360px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 25px;
+  background: #f8fafc;
+}
+
+.cyrax-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.cyrax-message-row.user {
+  justify-content: flex-end;
+}
+
+.small-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: #e0e7ff;
+  font-size: 18px;
+}
+
+.cyrax-bubble {
+  max-width: 72%;
+  padding: 13px 16px;
+  border-radius: 17px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.cyrax-message-row.bot .cyrax-bubble {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  border-bottom-left-radius: 5px;
+}
+
+.cyrax-message-row.user .cyrax-bubble {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border-bottom-right-radius: 5px;
+}
+
+.quick-section {
+  padding: 18px 22px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.quick-section p {
+  margin: 0 0 11px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.quick-buttons button {
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 9px 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s ease;
+}
+
+.quick-buttons button:hover {
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
+.cyrax-input-area {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cyrax-input-area textarea {
+  flex: 1;
+  resize: none;
+  min-height: 45px;
+  max-height: 120px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.cyrax-input-area textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.cyrax-send {
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cyrax-send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.3);
+}
+
+.cyrax-warning {
+  padding: 12px 20px 16px;
+  text-align: center;
+  color: #64748b;
+  background: #ffffff;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .cyrax-page {
+    padding: 15px;
+  }
+
+  .cyrax-header {
+    padding: 17px;
+  }
+
+  .cyrax-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 23px;
+  }
+
+  .cyrax-title {
+    font-size: 21px;
+  }
+
+  .cyrax-status {
+    font-size: 11px;
+  }
+
+  .cyrax-intro {
+    padding: 24px 8px 17px;
+  }
+
+  .cyrax-intro h2 {
+    font-size: 23px;
+  }
+
+  .cyrax-chat {
+    border-radius: 19px;
+  }
+
+  .cyrax-messages {
+    min-height: 390px;
+    padding: 18px 13px;
+  }
+
+  .cyrax-bubble {
+    max-width: 82%;
+    font-size: 13px;
+  }
+
+  .quick-section {
+    padding: 15px;
+  }
+
+  .quick-buttons {
+    flex-direction: column;
+  }
+
+  .quick-buttons button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .cyrax-input-area {
+    padding: 12px;
+  }
+}
