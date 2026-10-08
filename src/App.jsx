@@ -1,121 +1,272 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app">
+
+      {/* NAVBAR */}
+      <nav className="navbar">
+        <div className="brand">
+          <div className="brand-icon">🛡️</div>
+          <div>
+            <h2>CyberAware</h2>
+            <span>Stay Smart. Stay Safe.</span>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
+
+        <div className="nav-links">
+          <a href="#home">Home</a>
+          <a href="#learn">Learn</a>
+          <a href="#verify">Verify</a>
+          <a href="#threats">Threat Lab</a>
+          <a href="#assistant">Assistant</a>
+        </div>
+
+        <div className="nav-actions">
+          <button className="login-btn">Login</button>
+          <button className="register-btn">Get Started</button>
+        </div>
+      </nav>
+
+
+      {/* HERO SECTION */}
+      <main id="home">
+        <section className="hero-section">
+
+          <div className="hero-content">
+
+            <div className="status-badge">
+              <span className="pulse"></span>
+              Your Digital Safety Companion
+            </div>
+
+            <h1>
+              Think Before You Click.
+              <br />
+              <span>Stay Safe Online.</span>
+            </h1>
+
+            <p className="hero-text">
+              Learn about cyber threats, verify suspicious websites and
+              messages, get instant guidance, and know what to do when
+              something goes wrong.
+            </p>
+
+            <div className="hero-buttons">
+              <button className="primary-btn">
+                🔍 Verify Something
+              </button>
+
+              <button className="secondary-btn">
+                🚨 I’ve Been Scammed
+              </button>
+            </div>
+
+            <div className="hero-trust">
+              <div>
+                <strong>4+</strong>
+                <span>Safety Tools</span>
+              </div>
+
+              <div>
+                <strong>24/7</strong>
+                <span>Guidance</span>
+              </div>
+
+              <div>
+                <strong>100%</strong>
+                <span>Awareness Focus</span>
+              </div>
+            </div>
+
+          </div>
+
+
+          {/* HERO VISUAL */}
+          <div className="hero-visual">
+
+            <div className="glow"></div>
+
+            <div className="shield-card">
+              <div className="shield">🛡️</div>
+
+              <div className="scan-ring ring-one"></div>
+              <div className="scan-ring ring-two"></div>
+
+              <div className="floating-card card-one">
+                <span>🔍</span>
+                <div>
+                  <strong>Threat Check</strong>
+                  <small>Scan before you trust</small>
+                </div>
+              </div>
+
+              <div className="floating-card card-two">
+                <span>✓</span>
+                <div>
+                  <strong>Protected</strong>
+                  <small>Digital safety active</small>
+                </div>
+              </div>
+
+              <div className="floating-card card-three">
+                <span>⚠️</span>
+                <div>
+                  <strong>Stay Alert</strong>
+                  <small>New threats detected</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+      </main>
+
+
+      {/* QUICK ACTIONS */}
+      <section className="quick-section">
+
+        <div className="section-heading">
+          <span>WHAT CAN YOU DO?</span>
+          <h2>Your Digital Safety Toolkit</h2>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            Everything you need to understand, verify and respond to
+            online threats.
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+        <div className="feature-grid">
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+          <div className="feature-card blue">
+            <div className="feature-icon">📚</div>
+            <h3>Learn</h3>
+            <p>
+              Understand phishing, UPI fraud, fake apps, social
+              engineering and more.
+            </p>
+            <a href="#learn">Explore Learning →</a>
+          </div>
+
+          <div className="feature-card purple">
+            <div className="feature-icon">🔍</div>
+            <h3>Verify</h3>
+            <p>
+              Check suspicious websites, apps and messages before
+              trusting them.
+            </p>
+            <a href="#verify">Verify Something →</a>
+          </div>
+
+          <div className="feature-card cyan">
+            <div className="feature-icon">🤖</div>
+            <h3>Ask Assistant</h3>
+            <p>
+              Get simple guidance when you're confused about a
+              suspicious digital situation.
+            </p>
+            <a href="#assistant">Ask CyberAware →</a>
+          </div>
+
+          <div className="feature-card red">
+            <div className="feature-icon">🚨</div>
+            <h3>Report</h3>
+            <p>
+              Report an online fraud incident and keep track of your
+              case.
+            </p>
+            <a href="#report">Report an Incident →</a>
+          </div>
+
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+
+      {/* THREAT SECTION */}
+      <section className="threat-section" id="threats">
+
+        <div className="section-heading">
+          <span>KNOW THE RISKS</span>
+          <h2>Common Digital Threats</h2>
+          <p>
+            Awareness is your first line of defense.
+          </p>
+        </div>
+
+        <div className="threat-grid">
+
+          <div className="threat-card">
+            <span>🎣</span>
+            <h3>Phishing</h3>
+            <p>Fake messages and links designed to steal your information.</p>
+          </div>
+
+          <div className="threat-card">
+            <span>💳</span>
+            <h3>UPI Fraud</h3>
+            <p>Scams involving QR codes, payment requests and fake calls.</p>
+          </div>
+
+          <div className="threat-card">
+            <span>📱</span>
+            <h3>Fake Apps</h3>
+            <p>Malicious or suspicious applications pretending to be genuine.</p>
+          </div>
+
+          <div className="threat-card">
+            <span>💰</span>
+            <h3>Loan Scams</h3>
+            <p>Fraudulent loan offers designed to steal money or personal data.</p>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* CTA */}
+      <section className="cta-section">
+
+        <div className="cta-content">
+          <span>🔐 STAY ONE STEP AHEAD</span>
+
+          <h2>
+            Not sure if something is safe?
+          </h2>
+
+          <p>
+            Don't guess. Check it first.
+          </p>
+
+          <button className="primary-btn">
+            Start with CyberAware →
+          </button>
+        </div>
+
+      </section>
+
+
+      {/* FOOTER */}
+      <footer className="footer">
+
+        <div className="footer-brand">
+          <div className="brand-icon">🛡️</div>
+          <div>
+            <h2>CyberAware</h2>
+            <span>Cybersecurity Awareness & Fraud Prevention</span>
+          </div>
+        </div>
+
+        <p>
+          Think Before You Click. Stay Safe Online.
+        </p>
+
+        <div className="footer-bottom">
+          © 2026 CyberAware. Built for a safer digital world.
+        </div>
+
+      </footer>
+
+    </div>
   )
 }
 
