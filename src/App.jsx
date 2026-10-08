@@ -1,11 +1,41 @@
 import { useState } from "react";
 import "./App.css";
 import Learn from "./pages/Learn";
+import Verify from "./pages/Verify";
 
 function App() {
   const [showLearn, setShowLearn] = useState(false);
+  const [showVerify, setShowVerify] = useState(false);
 
-  // Learn page
+  // VERIFY PAGE
+  if (showVerify) {
+    return (
+      <div>
+        <button
+          onClick={() => setShowVerify(false)}
+          style={{
+            position: "fixed",
+            top: "25px",
+            left: "25px",
+            zIndex: 1000,
+            padding: "12px 18px",
+            border: "1px solid rgba(96, 165, 250, 0.4)",
+            borderRadius: "10px",
+            background: "rgba(15, 23, 42, 0.9)",
+            color: "#60a5fa",
+            cursor: "pointer",
+            fontWeight: "700",
+          }}
+        >
+          ← Back to Home
+        </button>
+
+        <Verify />
+      </div>
+    );
+  }
+
+  // LEARN PAGE
   if (showLearn) {
     return (
       <div>
@@ -49,7 +79,10 @@ function App() {
         </div>
 
         <div className="nav-links">
-          <a href="#home">Home</a>
+
+          <a href="#home">
+            Home
+          </a>
 
           <a
             href="#learn"
@@ -61,14 +94,34 @@ function App() {
             Learn
           </a>
 
-          <a href="#verify">Verify</a>
-          <a href="#threats">Threat Lab</a>
-          <a href="#assistant">Assistant</a>
+          <a
+            href="#verify"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowVerify(true);
+            }}
+          >
+            Verify
+          </a>
+
+          <a href="#threats">
+            Threat Lab
+          </a>
+
+          <a href="#assistant">
+            Assistant
+          </a>
+
         </div>
 
         <div className="nav-actions">
-          <button className="login-btn">Login</button>
-          <button className="register-btn">Get Started</button>
+          <button className="login-btn">
+            Login
+          </button>
+
+          <button className="register-btn">
+            Get Started
+          </button>
         </div>
 
       </nav>
@@ -100,7 +153,10 @@ function App() {
 
             <div className="hero-buttons">
 
-              <button className="primary-btn">
+              <button
+                className="primary-btn"
+                onClick={() => setShowVerify(true)}
+              >
                 🔍 Verify Something
               </button>
 
@@ -239,9 +295,12 @@ function App() {
               trusting them.
             </p>
 
-            <a href="#verify">
+            <button
+              className="learn-link-button"
+              onClick={() => setShowVerify(true)}
+            >
               Verify Something →
-            </a>
+            </button>
 
           </div>
 
@@ -308,7 +367,9 @@ function App() {
 
           <div className="threat-card">
             <span>🎣</span>
+
             <h3>Phishing</h3>
+
             <p>
               Fake messages and links designed to steal your information.
             </p>
@@ -317,7 +378,9 @@ function App() {
 
           <div className="threat-card">
             <span>💳</span>
+
             <h3>UPI Fraud</h3>
+
             <p>
               Scams involving QR codes, payment requests and fake calls.
             </p>
@@ -326,7 +389,9 @@ function App() {
 
           <div className="threat-card">
             <span>📱</span>
+
             <h3>Fake Apps</h3>
+
             <p>
               Malicious or suspicious applications pretending to be genuine.
             </p>
@@ -335,7 +400,9 @@ function App() {
 
           <div className="threat-card">
             <span>💰</span>
+
             <h3>Loan Scams</h3>
+
             <p>
               Fraudulent loan offers designed to steal money or personal data.
             </p>
@@ -363,9 +430,9 @@ function App() {
 
           <button
             className="primary-btn"
-            onClick={() => setShowLearn(true)}
+            onClick={() => setShowVerify(true)}
           >
-            Start with CyberAware →
+            Check with CyberAware →
           </button>
 
         </div>
@@ -382,6 +449,7 @@ function App() {
 
           <div>
             <h2>CyberAware</h2>
+
             <span>
               Cybersecurity Awareness & Fraud Prevention
             </span>
