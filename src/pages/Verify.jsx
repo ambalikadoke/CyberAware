@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./Verify.css";
 
 function Verify() {
-  const [mode, setMode] = useState("website");
+  const [mode, setMode] = useState(() => {
+    const savedMode = sessionStorage.getItem("cyberaware-verify-mode");
+    return ["website", "app", "message"].includes(savedMode)
+      ? savedMode
+      : "website";
+  });
 
   // Website states
   const [url, setUrl] = useState("");
@@ -478,9 +483,13 @@ function Verify() {
         </h1>
 
         <p>
-          Check suspicious websites, apps and messages for common warning
-          signs before sharing information or taking action.
+          Check suspicious websites, app permissions and messages for common
+          warning signs before sharing information or taking action.
         </p>
+
+        <div className="verify-hero-note">
+          <span>✓</span> Basic pattern-based checks · No passwords or OTPs required
+        </div>
 
       </section>
 
@@ -529,7 +538,7 @@ function Verify() {
               <div>
                 <h2>Website Safety Checker</h2>
                 <p>
-                  Analyze a suspicious URL for common red flags.
+                  Review a URL for common warning signs using local checks.
                 </p>
               </div>
 
@@ -610,7 +619,7 @@ function Verify() {
               <div>
                 <h2>App Safety Checker</h2>
                 <p>
-                  Check an app for suspicious sources and risky permissions.
+                  Review the download source and permissions you select.
                 </p>
               </div>
 
@@ -855,7 +864,7 @@ function Verify() {
             <h3>Analyzing...</h3>
 
             <p>
-              Checking the information for common warning signs.
+              Running basic pattern checks on the information you entered.
             </p>
 
           </div>

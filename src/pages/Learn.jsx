@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Learn.css";
 import TopicDetails from "./TopicDetails";
 
@@ -69,111 +69,134 @@ const topics = [
   },
 ];
 
-function Learn() {
-  const [selectedTopic, setSelectedTopic] = useState(null);
+const homepageTopicAliases = {
+  phishing: "phishing",
+  "phishing & scam messages": "phishing",
+  "upi scams": "upi",
+  "upi & payment fraud": "upi",
+  "fake job offers": "jobs",
+  "job & part-time scams": "jobs",
+  "social media scams": "social",
+  "social media safety": "social",
+  "shopping frauds": "shopping",
+  "fake shopping websites": "shopping",
+  "loan app frauds": "loan",
+  "loan app scams": "loan",
+  "fake apps": "apps",
+  "fake & malicious apps": "apps",
+  passwords: "passwords",
+  "password & account security": "passwords",
+};
+
+function getInitialSelection() {
+  if (typeof window === "undefined") {
+    return { topic: null, origin: null };
+  }
+
+  const storedTopic = sessionStorage.getItem("cyberaware-selected-topic");
+  const storedOrigin =
+    sessionStorage.getItem("cyberaware-topic-origin") || "home";
+
+  sessionStorage.removeItem("cyberaware-selected-topic");
+  sessionStorage.removeItem("cyberaware-topic-origin");
+
+  if (!storedTopic) {
+    return { topic: null, origin: null };
+  }
+
+  const normalized = storedTopic.trim().toLowerCase();
+  const topicId = homepageTopicAliases[normalized] || normalized;
+  const exists = topics.some((topic) => topic.id === topicId);
+
+  return exists
+    ? { topic: topicId, origin: storedOrigin }
+    : { topic: null, origin: null };
+}
+
+function Learn({ onDetailChange }) {
+  const [initialSelection] = useState(getInitialSelection);
+  const [selectedTopic, setSelectedTopic] = useState(initialSelection.topic);
+  const [detailOrigin, setDetailOrigin] = useState(initialSelection.origin);
+
+  useEffect(() => {
+    onDetailChange?.(selectedTopic ? detailOrigin : null);
+  }, [selectedTopic, detailOrigin, onDetailChange]);
+
+  useEffect(() => {
+    const returnToOverview = () => {
+      setSelectedTopic(null);
+      setDetailOrigin(null);
+      onDetailChange?.(null);
+    };
+
+    window.addEventListener(
+      "cyberaware-back-to-learn-overview",
+      returnToOverview
+    );
+
+    return () => {
+      window.removeEventListener(
+        "cyberaware-back-to-learn-overview",
+        returnToOverview
+      );
+    };
+  }, [onDetailChange]);
+
+  const openTopic = (topicId) => {
+    setDetailOrigin("overview");
+    setSelectedTopic(topicId);
+    onDetailChange?.("overview");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (selectedTopic) {
-    return (
-      <TopicDetails
-        topic={selectedTopic}
-        onBack={() => setSelectedTopic(null)}
-      />
-    );
+    return <TopicDetails topic={selectedTopic} />;
   }
 
   return (
     <div className="learn-page">
-
-      {/* HERO */}
       <section className="learn-hero">
-
-        <div className="learn-badge">
-          🛡️ CYBER SAFETY ACADEMY
-        </div>
-
+        <div className="learn-badge">🛡️ CYBER SAFETY ACADEMY</div>
         <h1>
           Learn to Stay
           <span> Cyber Safe.</span>
         </h1>
-
         <p>
           Understand common online threats, recognize warning signs and learn
           how to protect yourself before it is too late.
         </p>
-
       </section>
 
-
-      {/* TOPICS */}
       <section className="topics-section">
-
         <div className="section-heading">
-
           <div>
-            <p className="small-label">
-              EXPLORE TOPICS
-            </p>
-
-            <h2>
-              Master Your Digital Safety
-            </h2>
+            <p className="small-label">EXPLORE TOPICS</p>
+            <h2>Master Your Digital Safety</h2>
           </div>
-
-          <p className="topic-count">
-            {topics.length} Topics
-          </p>
-
         </div>
 
-
-        {/* TOPIC CARDS */}
         <div className="topics-grid">
-
           {topics.map((topic) => (
-
-            <div
-              className="topic-card"
-              key={topic.id}
-            >
-
+            <div className="topic-card" key={topic.id}>
               <div className="topic-top">
-
-                <div className="topic-icon">
-                  {topic.icon}
-                </div>
-
-                <span>
-                  {topic.level}
-                </span>
-
+                <div className="topic-icon">{topic.icon}</div>
+                <span>{topic.level}</span>
               </div>
 
-
-              <h3>
-                {topic.title}
-              </h3>
-
-
-              <p>
-                {topic.description}
-              </p>
-
+              <h3>{topic.title}</h3>
+              <p>{topic.description}</p>
 
               <button
                 className="learn-button"
-                onClick={() => setSelectedTopic(topic.id)}
+                onClick={() => openTopic(topic.id)}
+                type="button"
               >
                 Learn More <span>→</span>
               </button>
-
             </div>
-
           ))}
-
         </div>
-
       </section>
-
     </div>
   );
 }

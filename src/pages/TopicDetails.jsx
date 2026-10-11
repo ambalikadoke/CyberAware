@@ -1,286 +1,255 @@
 import React from "react";
 import "./TopicDetails.css";
 
-const topicData = {
+const topicContent = {
   phishing: {
-    icon: "🎣",
     title: "Phishing & Scam Messages",
-    subtitle:
-      "Learn how scammers use fake messages, emails and links to steal your information.",
-    what:
-      "Phishing is a cyber attack where scammers pretend to be a trusted person, company or service to trick you into sharing sensitive information or clicking a malicious link.",
+    icon: "🎣",
+    tag: "ESSENTIAL",
+    intro:
+      "Phishing is when scammers pretend to be a trusted person or organisation to steal your information, money, or account access.",
+    example:
+      "A message claims your bank account will be blocked today and asks you to open a link and enter your OTP.",
     signs: [
-      "Urgent messages asking you to act immediately",
-      "Unknown or suspicious links",
-      "Requests for passwords, OTPs, PINs or card details",
-      "Spelling mistakes or unusual sender addresses",
-      "Promises of prizes, refunds or unexpected rewards",
+      "Unexpected links or attachments",
+      "Urgent threats or prize claims",
+      "Misspelled domains or unusual sender addresses",
+      "Requests for OTPs, passwords, or bank details",
     ],
-    safety: [
-      "Never share OTP, PIN, CVV or passwords with anyone.",
-      "Check the sender and website address carefully.",
-      "Do not click links from unexpected messages.",
-      "Open the official website or app yourself instead.",
-      "When in doubt, verify through an official contact number.",
+    tips: [
+      "Open the official app or type the known website address yourself.",
+      "Never share an OTP or password with anyone.",
+      "Check the sender and the full URL before acting.",
+      "Report and delete suspicious messages.",
     ],
   },
 
   upi: {
-    icon: "💳",
     title: "UPI & Payment Fraud",
-    subtitle:
-      "Understand common UPI scams and protect your money during digital payments.",
-    what:
-      "UPI fraud happens when scammers manipulate users into approving payments, sharing sensitive information or installing malicious applications.",
+    icon: "💳",
+    tag: "ESSENTIAL",
+    intro:
+      "UPI fraud often relies on fake collect requests, QR codes, screen-sharing apps, and people pretending to send you money.",
+    example:
+      "Someone says they are sending a refund and asks you to scan a QR code or enter your UPI PIN to receive it.",
     signs: [
-      "Someone asks you to scan a QR code to receive money",
-      "Unexpected collect/payment requests",
-      "Fake customer-care calls",
-      "Requests to share your UPI PIN or OTP",
-      "Pressure to complete a payment immediately",
+      "A request to enter your UPI PIN to receive money",
+      "Unknown collect requests",
+      "Pressure to install a screen-sharing app",
+      "A payment screenshot without money appearing in your account",
     ],
-    safety: [
-      "Remember: receiving money does not require your UPI PIN.",
-      "Never share your UPI PIN or OTP.",
-      "Check the recipient name before approving a payment.",
-      "Do not install remote-access apps on someone's request.",
-      "Contact your bank immediately if you notice an unauthorized transaction.",
+    tips: [
+      "A UPI PIN authorises a payment; it is not needed to receive money.",
+      "Check transactions in your own payment app.",
+      "Decline requests you do not recognise.",
+      "Never share your PIN or allow remote access.",
     ],
   },
 
   apps: {
-    icon: "📱",
     title: "Fake & Malicious Apps",
-    subtitle:
-      "Learn how suspicious apps can misuse permissions and steal your data.",
-    what:
-      "Malicious apps are applications designed to perform harmful activities such as stealing information, displaying unwanted content or abusing device permissions.",
+    icon: "📱",
+    tag: "IMPORTANT",
+    intro:
+      "A malicious app may collect personal data, display deceptive ads, or misuse permissions to access information on your device.",
+    example:
+      "A website offers a free APK outside the official store and the app asks for SMS, accessibility, and contact access without a clear reason.",
     signs: [
-      "App downloaded from an unknown website",
-      "Too many unnecessary permissions",
-      "Very few or suspicious reviews",
-      "Requests for SMS, contacts or accessibility access without a clear reason",
-      "Promises that sound too good to be true",
+      "App downloaded from an unknown source",
+      "Permissions unrelated to the app's purpose",
+      "Developer name or reviews look suspicious",
+      "Requests to disable device security",
     ],
-    safety: [
-      "Prefer official app stores.",
-      "Check the developer name and reviews.",
-      "Review permissions before installation.",
-      "Keep your phone and apps updated.",
-      "Remove apps that behave suspiciously.",
+    tips: [
+      "Prefer official app stores and verified developers.",
+      "Review permissions and deny unnecessary access.",
+      "Keep Android and apps updated.",
+      "Uninstall suspicious apps and run a trusted security check.",
     ],
   },
 
   loan: {
-    icon: "💰",
     title: "Loan App Scams",
-    subtitle:
-      "Recognize fake loan offers designed to steal money or personal information.",
-    what:
-      "Loan scams often attract users with instant loans, very low interest rates or minimal documentation and then demand fees or access to personal data.",
+    icon: "💰",
+    tag: "IMPORTANT",
+    intro:
+      "Fraudulent loan apps may advertise instant approval, hide fees, collect excessive personal data, or use threats to demand money.",
+    example:
+      "An app promises an instant loan but asks for an advance processing fee and access to contacts before explaining the terms.",
     signs: [
-      "Guaranteed loan approval without proper checks",
-      "Large processing fees before receiving a loan",
-      "Threatening messages or calls",
-      "Requests for excessive phone permissions",
-      "Unknown apps or websites claiming to be lenders",
+      "Guaranteed loans without clear checks",
+      "Advance fees demanded through personal accounts",
+      "Unclear interest rates or repayment terms",
+      "Unnecessary access to contacts, photos, or messages",
     ],
-    safety: [
-      "Verify the lender before sharing personal information.",
-      "Avoid paying suspicious advance fees.",
-      "Check the app's developer and permissions.",
-      "Do not share OTPs, PINs or banking credentials.",
-      "Keep evidence of suspicious calls, messages and transactions.",
+    tips: [
+      "Check the lender and its regulatory status independently.",
+      "Read fees, interest, and repayment terms before agreeing.",
+      "Do not grant unrelated permissions.",
+      "Save evidence and report threats to the appropriate authorities.",
     ],
   },
 
   shopping: {
-    icon: "🛒",
     title: "Fake Shopping Websites",
-    subtitle:
-      "Learn how fake online stores can steal money and personal information.",
-    what:
-      "Fake shopping websites imitate genuine stores and use unrealistic discounts or limited-time offers to convince users to make payments.",
+    icon: "🛒",
+    tag: "ESSENTIAL",
+    intro:
+      "Fake shopping stores use unusually low prices, copied product photos, and misleading checkout pages to steal payments or personal details.",
+    example:
+      "A social media ad offers a premium phone at a tiny fraction of its normal price and accepts only direct transfers.",
     signs: [
-      "Prices far below normal market prices",
-      "New or suspicious domain name",
-      "No proper contact information",
-      "Only advance payment options",
-      "Poor grammar or copied website content",
+      "Prices that seem too good to be true",
+      "No clear return policy or contact information",
+      "New or misspelled domain names",
+      "Only irreversible or unusual payment options",
     ],
-    safety: [
-      "Research the website before purchasing.",
-      "Check the domain carefully.",
-      "Use trusted payment methods.",
-      "Avoid websites that pressure you to pay immediately.",
-      "Keep transaction records and order information.",
+    tips: [
+      "Research the seller and independent reviews.",
+      "Check the domain carefully before paying.",
+      "Use trusted payment methods with buyer protection.",
+      "Keep order confirmations and payment records.",
     ],
   },
 
   jobs: {
-    icon: "💼",
     title: "Job & Part-time Scams",
-    subtitle:
-      "Identify fake job offers, task scams and fraudulent work-from-home schemes.",
-    what:
-      "Job scams promise easy income or guaranteed employment and may ask victims to pay registration fees, complete fake tasks or share personal information.",
+    icon: "💼",
+    tag: "IMPORTANT",
+    intro:
+      "Fake recruiters may promise high income for little work and then demand registration fees, deposits, or repeated payments for tasks.",
+    example:
+      "A recruiter asks you to pay a refundable fee or add money to a task wallet before you can withdraw your supposed earnings.",
     signs: [
-      "Guaranteed high income for very little work",
-      "Registration or security fees",
-      "Recruiters contacting you through random messaging accounts",
-      "Pressure to deposit money to unlock tasks",
-      "No verifiable company information",
+      "Payment required to get a job",
+      "Unrealistic salary for simple tasks",
+      "Recruiter uses unofficial email or messaging only",
+      "You must deposit money to unlock earnings",
     ],
-    safety: [
-      "Verify the company independently.",
-      "Never pay money to get a genuine job.",
-      "Do not share sensitive financial information.",
-      "Be careful with task-based investment schemes.",
-      "Research the recruiter and company before proceeding.",
+    tips: [
+      "Verify vacancies on the employer's official careers page.",
+      "Never pay a recruiter to secure a job.",
+      "Do not share identity documents before verifying the employer.",
+      "Stop if a task platform asks you to deposit money to withdraw earnings.",
     ],
   },
 
   passwords: {
-    icon: "🔐",
     title: "Password & Account Security",
-    subtitle:
-      "Build stronger account protection and reduce the risk of account takeover.",
-    what:
-      "Weak or reused passwords can make multiple accounts vulnerable if one password is exposed.",
+    icon: "🔐",
+    tag: "ESSENTIAL",
+    intro:
+      "Strong account security makes it harder for someone to guess your password or take over your account using leaked credentials.",
+    example:
+      "A password reused on several websites is exposed in one data breach and attackers try it on your email and social accounts.",
     signs: [
-      "Using the same password everywhere",
-      "Very short or predictable passwords",
-      "Sharing passwords with others",
-      "No two-factor authentication",
-      "Ignoring login alerts",
+      "Login alerts you cannot explain",
+      "Password reset emails you did not request",
+      "Unknown devices or sessions",
+      "The same password used across multiple accounts",
     ],
-    safety: [
-      "Use a strong and unique password for important accounts.",
-      "Enable two-factor authentication whenever available.",
-      "Never share passwords or authentication codes.",
-      "Review account login activity.",
-      "Change compromised passwords immediately.",
+    tips: [
+      "Use long, unique passwords or passphrases.",
+      "Use a reputable password manager.",
+      "Enable multi-factor authentication.",
+      "Review active sessions and change compromised passwords.",
     ],
   },
 
   social: {
-    icon: "📲",
     title: "Social Media Safety",
-    subtitle:
-      "Protect your identity, privacy and social media accounts.",
-    what:
-      "Oversharing information online can help scammers perform impersonation, social engineering and account takeover attacks.",
+    icon: "📲",
+    tag: "IMPORTANT",
+    intro:
+      "Scammers use fake profiles, impersonation, account takeovers, and emotional manipulation to trick people on social platforms.",
+    example:
+      "A profile copied from your friend asks urgently for money or sends a link to vote in a contest.",
     signs: [
-      "Unknown accounts sending urgent requests",
-      "Suspicious giveaway or investment messages",
-      "Fake profiles pretending to be friends",
-      "Requests for private information",
-      "Unexpected login notifications",
+      "New or duplicate profile asking for money",
+      "Unexpected links from a friend",
+      "Requests for verification codes",
+      "Pressure to keep a conversation secret",
     ],
-    safety: [
-      "Use strong privacy settings.",
-      "Avoid sharing sensitive personal information publicly.",
-      "Enable two-factor authentication.",
-      "Verify unexpected requests through another channel.",
-      "Report suspicious accounts and messages.",
+    tips: [
+      "Verify unusual requests using another trusted channel.",
+      "Make your profile and posts private where appropriate.",
+      "Never share login or verification codes.",
+      "Report impersonation and enable multi-factor authentication.",
     ],
   },
 };
 
-function TopicDetails({ topic = "phishing", onBack }) {
-  const data = topicData[topic] || topicData.phishing;
+export default function TopicDetails({ topic }) {
+  const data = topicContent[topic] || topicContent.phishing;
 
   return (
-    <div className="topic-details-page">
-
-      <button className="topic-back-button" onClick={onBack}>
-        ← Back to Learn
-      </button>
-
-      <section className="topic-details-hero">
-
-        <div className="topic-large-icon">
+    <main className="topic-details-page">
+      <section className="topic-detail-hero">
+        <div className="topic-detail-icon" aria-hidden="true">
           {data.icon}
         </div>
 
-        <div>
-          <div className="topic-label">CYBER SAFETY GUIDE</div>
+        <span className="topic-detail-tag">
+          🛡️ {data.tag} · CYBER SAFETY GUIDE
+        </span>
 
-          <h1>{data.title}</h1>
+        <h1>{data.title}</h1>
 
-          <p>{data.subtitle}</p>
-        </div>
-
+        <p>{data.intro}</p>
       </section>
 
+      <section className="topic-detail-content">
+        <article className="topic-info-card topic-example-card">
+          <span className="topic-card-kicker">
+            REAL-WORLD EXAMPLE
+          </span>
 
-      <section className="topic-content">
+          <h2>How this scam works</h2>
 
-        <div className="info-card">
+          <p>{data.example}</p>
+        </article>
 
-          <div className="info-number">01</div>
+        <article className="topic-info-card">
+          <span className="topic-card-kicker">
+            🚩 WATCH OUT
+          </span>
 
-          <h2>What is it?</h2>
+          <h2>Warning signs</h2>
 
-          <p>{data.what}</p>
-
-        </div>
-
-
-        <div className="info-card">
-
-          <div className="info-number">02</div>
-
-          <h2>🚩 Warning Signs</h2>
-
-          <ul>
-            {data.signs.map((sign, index) => (
-              <li key={index}>
-                <span>⚠️</span>
-                {sign}
-              </li>
+          <ul className="topic-check-list warning-list">
+            {data.signs.map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
+        </article>
 
-        </div>
+        <article className="topic-info-card topic-safety-card">
+          <span className="topic-card-kicker">
+            ✓ YOUR SAFETY PLAN
+          </span>
 
+          <h2>How to stay safe</h2>
 
-        <div className="info-card safety-card">
-
-          <div className="info-number">03</div>
-
-          <h2>🛡️ How to Stay Safe</h2>
-
-          <ul>
-            {data.safety.map((tip, index) => (
-              <li key={index}>
-                <span>✓</span>
-                {tip}
-              </li>
+          <ul className="topic-check-list safety-list">
+            {data.tips.map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
+        </article>
 
-        </div>
-
-
-        <div className="remember-card">
-
-          <div className="remember-icon">🧠</div>
+        <aside className="topic-reminder">
+          <span>💡</span>
 
           <div>
-            <h3>Remember</h3>
+            <strong>Remember</strong>
+
             <p>
-              If something feels urgent, suspicious or too good to be true,
-              stop and verify before taking action.
+              If something feels suspicious, pause and verify it
+              through an official channel before taking action.
             </p>
           </div>
-
-        </div>
-
+        </aside>
       </section>
-
-    </div>
+    </main>
   );
 }
-
-export default TopicDetails;
