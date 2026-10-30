@@ -11,9 +11,13 @@ app.use(cors());
 app.use(express.json({ limit: "20kb" }));
 
 const apiKey = process.env.GEMINI_API_KEY;
-
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
+// Models to try, in order
+const MODELS = [
+  "gemini-3.6-flash",
+  "gemini-3.5-flash-lite",
+];
 
 app.get("/", (req, res) => {
   res.json({
@@ -22,13 +26,12 @@ app.get("/", (req, res) => {
   });
 });
 
-// AI chat endpoint
 app.post("/api/chat", async (req, res) => {
   try {
     if (!ai) {
       return res.status(503).json({
         success: false,
-        message: "AI configuration is missing. Please check the backend setup.",
+        message: "AI configuration is missing. Please check server/.env.",
       });
     }
 
@@ -63,88 +66,101 @@ app.post("/api/chat", async (req, res) => {
           }))
       : [];
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
-      contents: [
-        ...safeHistory,
-        {
-          role: "user",
-          parts: [{ text: message.trim() }],
-        },
-      ],
-      config: {
-       systemInstruction: `
-You are CYRA X, a friendly multilingual AI assistant.
+    const systemInstruction = `
+You are CYRA X, a friendly, helpful multilingual AI assistant.
 
-CRITICAL LANGUAGE RULE:
-You MUST reply in the SAME LANGUAGE AND THE SAME WRITING SCRIPT
-that the user uses in their latest message.
-
-ROMAN MARATHI:
-If the user writes Marathi using English letters, you MUST
-reply in Marathi using English letters only.
-NEVER reply in English or Devanagari in this case.
-
-Example:
-User: Bhai mala sang online scam pasun kasa vachaycha?
-Correct: Bhava, online scam pasun vachnyasathi unknown links
-open karu nakos. OTP kiwa password konalahi share karu nakos.
-Wrong: To stay safe from online scams, avoid suspicious links.
-Wrong: ऑनलाइन स्कॅमपासून वाचण्यासाठी संशयास्पद लिंक उघडू नका.
-
-HINGLISH:
-If the user writes Hindi using English letters, reply in
-natural Hinglish using English letters only.
-
-Example:
-User: Bhai mujhe bata online scam se kaise bachna hai?
-Correct: Bhai, unknown links par click mat karo aur OTP
-kisi ke saath share mat karo.
-Wrong: To stay safe from online scams, avoid suspicious links.
-
-DEVANAGARI MARATHI:
-If the user writes Marathi in Devanagari, reply in Marathi
-using Devanagari script.
-
-ENGLISH:
-If the user writes in English, reply in English.
-
-For mixed-language messages, identify the dominant language
-and follow the script used by the user.
-
-Do not translate the user's message into another language.
-Do not automatically switch to English.
-Keep the user's casual conversational tone.
+LANGUAGE RULES:
+- Reply in the same language and writing script as the user's latest message.
+- If the user writes Marathi using English letters, reply in Roman Marathi only.
+- If the user writes Hindi using English letters, reply in natural Hinglish only.
+- If the user writes Marathi in Devanagari, reply in Marathi using Devanagari.
+- If the user writes English, reply in English.
+- For mixed-language messages, follow the dominant language and script.
+- Do not automatically switch to English or translate the user's message.
+- Match the user's casual conversational tone.
 
 Answer general questions as well as cybersecurity questions.
-For cybersecurity topics, give clear and practical safety advice.
-Never ask for OTPs, passwords, PINs, CVVs or API keys.
-`,
-        temperature: 0.8,
-        maxOutputTokens: 800,
-      },
-    });
+For cybersecurity topics, give clear, practical safety advice.
+Never ask the user to share OTPs, passwords, PINs, CVVs, or API keys.
+`;
 
-    const answer = response.text;
+    let response;
+    let lastError;
 
-    if (!answer) {
+    for (const model of MODELS) {
+      try {
+        console.log(`CYRA X trying model: ${model}`);
+
+        response = await ai.models.generateContent({
+          model,
+          contents: [
+            ...safeHistory,
+            {
+              role: "user",
+              parts: [{ text: message.trim() }],
+            },
+          ],
+          config: {
+            systemInstruction,
+            temperature: 0.8,
+            maxOutputTokens: 800,
+          },
+        });
+
+        if (response?.text?.trim()) {
+          console.log(`CYRA X response received from: ${model}`);
+          break;
+        }
+
+        lastError = new Error(`No response text received from ${model}`);
+        response = null;
+      } catch (error) {
+        lastError = error;
+
+        console.error(
+          `Model ${model} failed:`,
+          error.status || error.code || "",
+          error.message
+        );
+
+        // Try the next model only for temporary availability,
+        // rate-limit, or model-not-found errors.
+        const status = Number(error.status || error.code);
+
+        const shouldTryNext =
+          status === 404 ||
+          status === 429 ||
+          status === 503 ||
+          /not found|unavailable|high demand|resource exhausted/i.test(
+            error.message || ""
+          );
+
+        if (!shouldTryNext) {
+          break;
+        }
+      }
+    }
+
+    if (!response?.text?.trim()) {
+      console.error("All CYRA X models failed:", lastError?.message);
+
       return res.status(502).json({
         success: false,
-        message: "CYRA X couldn't generate a response. Please try again.",
+        message:
+          "CYRA X is temporarily unavailable. Please try again in a little while.",
       });
     }
 
     return res.json({
       success: true,
-      reply: answer,
+      reply: response.text.trim(),
     });
   } catch (error) {
-    console.error("CYRA X error:", error.message);
+    console.error("CYRA X unexpected error:", error.message);
 
-    return res.status(502).json({
+    return res.status(500).json({
       success: false,
-      message:
-        "CYRA X couldn't respond right now. Please try again later.",
+      message: "Something went wrong. Please try again.",
     });
   }
 });

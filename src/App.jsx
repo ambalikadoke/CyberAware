@@ -4,6 +4,7 @@ import "./App.css";
 import Learn from "./pages/Learn";
 import Verify from "./pages/Verify";
 import CyraX from "./pages/CyraX";
+import CyberArena from "./pages/CyberArena";
 
 const tools = [
   {
@@ -245,6 +246,7 @@ export default function App() {
         )}
         {page === "verify" && <Verify />}
         {page === "cyrax" && <CyraX />}
+        {page === "arena" && <CyberArena />}
       </div>
     );
   }
@@ -283,6 +285,10 @@ export default function App() {
 
           <button onClick={() => navigate("cyrax")}>
             CYRA X
+          </button>
+
+          <button onClick={() => navigate("arena")}>
+            ⚡ Cyber Arena
           </button>
 
           <a
@@ -841,6 +847,13 @@ export default function App() {
             type="button"
           >
             CYRA X
+          </button>
+
+          <button
+            onClick={() => navigate("arena")}
+            type="button"
+          >
+            Cyber Arena
           </button>
         </div>
 

@@ -1,0 +1,450 @@
+.arena-page {
+min-height: 100vh;
+padding: 110px 7% 80px;
+background: #f5f2ea;
+color: #20211e;
+font-family: "DM Sans", sans-serif;
+}
+
+.arena-hero {
+max-width: 1000px;
+margin: 0 auto 55px;
+text-align: center;
+}
+
+.arena-kicker,
+.arena-section-heading > div > span,
+.arena-achievement > div > span {
+color: #ff5b35;
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 2px;
+}
+
+.arena-hero h1 {
+margin: 22px 0;
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(38px, 6vw, 68px);
+line-height: 1.05;
+letter-spacing: -2.5px;
+}
+
+.arena-hero h1 span {
+color: #ff5b35;
+}
+
+.arena-hero > p {
+max-width: 650px;
+margin: auto;
+color: #73746d;
+font-size: 15px;
+line-height: 1.8;
+}
+
+.arena-hero-stats {
+display: flex;
+justify-content: center;
+gap: 55px;
+margin-top: 40px;
+}
+
+.arena-hero-stats div {
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.arena-hero-stats strong {
+font-size: 28px;
+font-family: "Space Grotesk", sans-serif;
+}
+
+.arena-hero-stats span {
+color: #85857d;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 1px;
+}
+
+.arena-progress-panel {
+max-width: 1100px;
+margin: auto auto 55px;
+padding: 25px;
+border: 1px solid #e5e1d8;
+border-radius: 18px;
+background: white;
+}
+
+.arena-progress-panel > div:first-child {
+display: flex;
+justify-content: space-between;
+gap: 15px;
+margin-bottom: 17px;
+}
+
+.arena-progress-panel span {
+color: #73746d;
+font-size: 11px;
+font-weight: 800;
+}
+
+.arena-progress-panel strong {
+font-size: 13px;
+}
+
+.arena-progress-track {
+height: 9px;
+overflow: hidden;
+border-radius: 20px;
+background: #eeeae2;
+}
+
+.arena-progress-track div {
+height: 100%;
+border-radius: 20px;
+background: #ff5b35;
+transition: width 0.4s ease;
+}
+
+.arena-missions {
+max-width: 1100px;
+margin: auto;
+}
+
+.arena-section-heading {
+display: flex;
+justify-content: space-between;
+align-items: end;
+margin-bottom: 25px;
+}
+
+.arena-section-heading h2 {
+margin: 9px 0 0;
+font-size: 30px;
+font-family: "Space Grotesk", sans-serif;
+}
+
+.arena-live-label {
+color: #77776f;
+font-size: 11px;
+font-weight: 800;
+}
+
+.arena-mission-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 20px;
+}
+
+.arena-mission-card {
+position: relative;
+padding: 25px;
+border: 1px solid #e5e1d8;
+border-radius: 20px;
+background: #fff;
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.arena-mission-card:hover {
+transform: translateY(-6px);
+box-shadow: 0 18px 35px rgba(32, 33, 30, 0.09);
+}
+
+.arena-card-top,
+.arena-card-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+}
+
+.arena-card-top > span:first-child {
+color: #999990;
+font-size: 10px;
+font-weight: 800;
+}
+
+.arena-difficulty {
+padding: 6px 10px;
+border-radius: 20px;
+background: #fff0e9;
+color: #d95725;
+font-size: 10px;
+font-weight: 800;
+}
+
+.arena-mission-icon {
+display: grid;
+place-items: center;
+width: 55px;
+height: 55px;
+margin: 25px 0 18px;
+border-radius: 16px;
+background: #fff0e9;
+color: #ff5b35;
+font-size: 27px;
+}
+
+.arena-category {
+color: #e45b27;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 1.2px;
+}
+
+.arena-mission-card h3 {
+margin: 10px 0;
+font-size: 19px;
+}
+
+.arena-mission-card > p {
+min-height: 65px;
+color: #73746d;
+font-size: 13px;
+line-height: 1.7;
+}
+
+.arena-card-footer {
+flex-wrap: wrap;
+padding-top: 17px;
+border-top: 1px solid #eeeae2;
+}
+
+.arena-card-footer strong {
+color: #d95725;
+font-size: 12px;
+}
+
+.arena-card-footer button,
+.arena-submit,
+.arena-feedback button {
+border: none;
+border-radius: 9px;
+padding: 12px 15px;
+background: #ff5b35;
+color: white;
+font-size: 10px;
+font-weight: 800;
+cursor: pointer;
+}
+
+.arena-card-footer button:hover,
+.arena-submit:hover,
+.arena-feedback button:hover {
+background: #df4623;
+}
+
+.arena-completed {
+position: absolute;
+top: 15px;
+right: 15px;
+color: #278b50;
+font-size: 10px;
+font-weight: 800;
+}
+
+.arena-achievement {
+display: flex;
+align-items: center;
+gap: 20px;
+max-width: 1100px;
+margin: 45px auto 0;
+padding: 28px;
+border-radius: 20px;
+background: #20211e;
+color: white;
+}
+
+.arena-achievement-icon {
+font-size: 42px;
+}
+
+.arena-achievement h3 {
+margin: 8px 0;
+}
+
+.arena-achievement p {
+margin: 0;
+color: #c5c5bc;
+font-size: 13px;
+line-height: 1.6;
+}
+
+.arena-game {
+max-width: 850px;
+margin: auto;
+}
+
+.arena-back {
+margin-bottom: 20px;
+border: none;
+background: transparent;
+color: #d95725;
+font-weight: 800;
+cursor: pointer;
+}
+
+.arena-game-card {
+padding: 35px;
+border: 1px solid #e5e1d8;
+border-radius: 22px;
+background: white;
+}
+
+.arena-game-card h2 {
+margin: 12px 0 25px;
+font-size: 30px;
+}
+
+.arena-scenario {
+padding: 23px;
+border: 1px solid #ffd4c4;
+border-radius: 15px;
+background: #fff4ee;
+}
+
+.arena-scenario span {
+color: #d95725;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 1px;
+}
+
+.arena-scenario p {
+margin-bottom: 0;
+color: #383832;
+line-height: 1.8;
+}
+
+.arena-game-card > h3 {
+margin: 30px 0 18px;
+}
+
+.arena-options {
+display: grid;
+gap: 12px;
+}
+
+.arena-options button {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 16px;
+border: 1px solid #e5e1d8;
+border-radius: 12px;
+background: white;
+color: #20211e;
+text-align: left;
+cursor: pointer;
+transition: 0.2s ease;
+}
+
+.arena-options button > span {
+display: grid;
+place-items: center;
+width: 30px;
+height: 30px;
+flex-shrink: 0;
+border-radius: 8px;
+background: #f5f2ea;
+font-weight: 800;
+}
+
+.arena-options button.selected {
+border-color: #ff5b35;
+background: #fff4ee;
+}
+
+.arena-options button.correct {
+border-color: #269d5b;
+background: #edfff4;
+}
+
+.arena-options button.incorrect {
+border-color: #e34d4d;
+background: #fff0f0;
+}
+
+.arena-submit {
+margin-top: 25px;
+padding: 15px 25px;
+}
+
+.arena-submit:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
+
+.arena-feedback {
+margin-top: 25px;
+padding: 22px;
+border-radius: 14px;
+background: #f5f2ea;
+}
+
+.arena-feedback h3 {
+margin-top: 0;
+}
+
+.arena-feedback p {
+color: #64645d;
+line-height: 1.7;
+}
+
+.arena-feedback > strong {
+display: block;
+margin: 15px 0;
+color: #278b50;
+}
+
+@media (max-width: 850px) {
+.arena-mission-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+
+@media (max-width: 600px) {
+.arena-page {
+padding: 95px 5% 55px;
+}
+
+.arena-hero h1 {
+font-size: 39px;
+letter-spacing: -1.5px;
+}
+
+.arena-hero-stats {
+gap: 20px;
+}
+
+.arena-hero-stats strong {
+font-size: 21px;
+}
+
+.arena-hero-stats span {
+font-size: 8px;
+}
+
+.arena-mission-grid {
+grid-template-columns: 1fr;
+}
+
+.arena-section-heading {
+align-items: flex-start;
+flex-direction: column;
+gap: 12px;
+}
+
+.arena-progress-panel > div:first-child {
+flex-direction: column;
+}
+
+.arena-game-card {
+padding: 22px;
+}
+
+.arena-achievement {
+align-items: flex-start;
+padding: 20px;
+}
+}
