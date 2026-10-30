@@ -5,72 +5,38 @@ import Learn from "./pages/Learn";
 import Verify from "./pages/Verify";
 import CyraX from "./pages/CyraX";
 import CyberArena from "./pages/CyberArena";
+import CyberDetective from "./pages/CyberDetective";
+import ScamSimulator from "./pages/ScamSimulator";
+import SafetyScore from "./pages/SafetyScore";
 
 const tools = [
   {
-    title: "Website Checker",
-    description: "Check if a website is safe or suspicious.",
-    icon: "◎",
+    title: "Cyber Safety Check Hub",
+    description: "Check websites, apps and suspicious messages in one place.",
+    icon: "⌕",
     color: "orange",
     page: "verify",
-    mode: "website",
   },
   {
-    title: "App Safety Checker",
-    description: "Analyse Android apps for potential risks.",
-    icon: "▣",
-    color: "green",
-    page: "verify",
-    mode: "app",
-  },
-  {
-    title: "Message Analyzer",
-    description: "Detect scam patterns in messages.",
-    icon: "▤",
-    color: "pink",
-    page: "verify",
-    mode: "message",
-  },
-  {
-    title: "CYRA X",
-    description: "Your personal cyber safety assistant.",
-    icon: "✳",
+    title: "Cyber Detective",
+    description: "Investigate suspicious digital clues and solve cybercrime cases.",
+    icon: "🔎",
     color: "purple",
-    page: "cyrax",
-  },
-];
-
-const scams = [
-  {
-    title: "Phishing",
-    icon: "✉",
-    description:
-      "Fake emails and links designed to steal your personal data.",
+    page: "detective",
   },
   {
-    title: "UPI Scams",
-    icon: "₹",
-    description: "Fake collect requests and payment frauds.",
+    title: "Scam Simulator",
+    description: "Practice identifying scam situations before they happen.",
+    icon: "🎯",
+    color: "pink",
+    page: "simulator",
   },
   {
-    title: "Fake Job Offers",
-    icon: "▣",
-    description: "High-salary traps and work-from-home scams.",
-  },
-  {
-    title: "Social Media Scams",
-    icon: "▤",
-    description: "Impersonation and fake profiles.",
-  },
-  {
-    title: "Shopping Frauds",
-    icon: "🛒",
-    description: "Fake websites and discount traps.",
-  },
-  {
-    title: "Loan App Frauds",
-    icon: "₹",
-    description: "Loan apps with hidden risks.",
+    title: "My Safety Score",
+    description: "Evaluate your cyber safety habits and improve your digital security.",
+    icon: "🛡️",
+    color: "green",
+    page: "safety",
   },
 ];
 
@@ -96,6 +62,7 @@ function Logo({ darkMode = false }) {
     </button>
   );
 }
+
 export default function App() {
   const [page, setPage] = useState("home");
   const [previousPages, setPreviousPages] = useState([]);
@@ -103,8 +70,10 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [scamIndex, setScamIndex] = useState(0);
-  const [clueIndex, setClueIndex] = useState(0);
+  const [dailyAnswer, setDailyAnswer] = useState(null);
+  const [dailySubmitted, setDailySubmitted] = useState(false);
+  const [activeRedFlag, setActiveRedFlag] = useState(0);
+  const [mythAnswer, setMythAnswer] = useState(null);
 
   // Navigate between pages and remember the previous page's scroll position.
   const navigate = (nextPage, mode = null, topic = null) => {
@@ -119,7 +88,6 @@ export default function App() {
       if (["website", "app", "message"].includes(mode)) {
         sessionStorage.setItem("cyberaware-verify-mode", mode);
       } else {
-        // The top Verify button opens the default Website checker.
         sessionStorage.removeItem("cyberaware-verify-mode");
       }
     } else {
@@ -128,13 +96,12 @@ export default function App() {
 
     if (nextPage === "learn" && topic) {
       sessionStorage.setItem("cyberaware-selected-topic", topic);
-      // Homepage topic cards should return directly to the same homepage position.
+
       sessionStorage.setItem(
         "cyberaware-topic-origin",
         page === "home" ? "home" : "overview"
       );
     } else if (nextPage === "learn") {
-      // Explore All opens the normal Learn overview, not a specific topic.
       sessionStorage.removeItem("cyberaware-selected-topic");
       sessionStorage.removeItem("cyberaware-topic-origin");
       setLearnDetailOrigin(null);
@@ -175,7 +142,6 @@ export default function App() {
     setLearnDetailOrigin(null);
     setMenuOpen(false);
 
-    // Wait for the previous page to render before restoring its scroll position.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({
@@ -189,7 +155,6 @@ export default function App() {
   // One toolbar arrow handles both topic-detail navigation paths.
   const handleBackArrow = () => {
     if (page === "learn" && learnDetailOrigin === "overview") {
-      // First return from a topic opened inside Learn to the 8-topic overview.
       window.dispatchEvent(
         new Event("cyberaware-back-to-learn-overview")
       );
@@ -199,60 +164,37 @@ export default function App() {
     goBack();
   };
 
-  const clues = [
-    {
-      title: "Urgency Tactic",
-      description:
-        "Scammers use words like today or immediately to make you act without thinking.",
-    },
-    {
-      title: "Suspicious Link",
-      description:
-        "Unexpected or misspelled domains may lead to fake websites.",
-    },
-    {
-      title: "Fake Sender",
-      description:
-        "Scammers may impersonate banks, employers, or government officials.",
-    },
-    {
-      title: "Data Theft",
-      description:
-        "Never share OTPs, passwords, UPI PINs, or sensitive personal information.",
-    },
-  ];
-
-  const visibleScams = scams.filter((scam) =>
-    `${scam.title} ${scam.description}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
-
   // Inner pages: minimal back arrow, no Dashboard or theme toolbar.
   if (page !== "home") {
     return (
       <div className={`site ${darkMode ? "dark" : ""}`}>
         <div className="page-toolbar minimal-toolbar">
-  <button
-    className="minimal-back-button"
-    onClick={handleBackArrow}
-  >
-    ←
-  </button>
-</div>
+          <button
+            className="minimal-back-button"
+            onClick={handleBackArrow}
+          >
+            ←
+          </button>
+        </div>
 
         {page === "learn" && (
           <Learn onDetailChange={setLearnDetailOrigin} />
         )}
+
         {page === "verify" && <Verify />}
         {page === "cyrax" && <CyraX />}
         {page === "arena" && <CyberArena />}
+
+        {page === "detective" && <CyberDetective />}
+        {page === "simulator" && <ScamSimulator />}
+        {page === "safety" && <SafetyScore />}
       </div>
     );
   }
 
   return (
     <div className={`site ${darkMode ? "dark" : ""}`}>
+
       {/* NAVBAR */}
       <header className="navbar">
         <Logo darkMode={darkMode} />
@@ -288,7 +230,7 @@ export default function App() {
           </button>
 
           <button onClick={() => navigate("arena")}>
-            ⚡ Cyber Arena
+            Cyber Arena
           </button>
 
           <a
@@ -305,11 +247,29 @@ export default function App() {
 
             <input
               type="search"
-              placeholder="Search threats, scams, tools..."
+              placeholder="Search features..."
               value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
+              onChange={(event) => setSearch(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  const term = search.trim().toLowerCase();
+
+                  if (/verify|website|app|message|check/.test(term))
+                    navigate("verify");
+                  else if (/cyra|chat|assistant/.test(term))
+                    navigate("cyrax");
+                  else if (/detective|investigation|case/.test(term))
+                    navigate("detective");
+                  else if (/simulator|practice/.test(term))
+                    navigate("simulator");
+                  else if (/safety score|scorecard|safety habits/.test(term))
+                    navigate("safety");
+                  else if (/arena|game|mission/.test(term))
+                    navigate("arena");
+                  else if (/learn|topic|scam|fraud/.test(term))
+                    navigate("learn");
+                }
+              }}
             />
           </label>
 
@@ -344,6 +304,7 @@ export default function App() {
       </header>
 
       <main id="home">
+
         {/* HERO SECTION */}
         <section className="hero">
           <div
@@ -378,20 +339,20 @@ export default function App() {
                 className="primary-button"
                 onClick={() =>
                   document
-                    .getElementById("threat-radar")
+                    .getElementById("interactive-zone")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 type="button"
               >
-                Explore Threats <span>→</span>
+                Explore Cyber World <span>→</span>
               </button>
 
               <button
                 className="secondary-button"
-                onClick={() => navigate("cyrax")}
+                onClick={() => navigate("simulator")}
                 type="button"
               >
-                ▣ &nbsp; Talk to CYRA X
+                Play Scam Simulator
               </button>
             </div>
 
@@ -413,107 +374,96 @@ export default function App() {
             </div>
           </div>
 
-          {/* SAFETY CHECK PREVIEW */}
-          <aside className="live-dashboard">
+          {/* DAILY CYBER MISSION */}
+          <aside className="live-dashboard daily-mission-card">
             <div className="dashboard-heading">
-              <strong>🛡️ SAFETY CHECK PREVIEW</strong>
-              <a href="#tools">Explore tools →</a>
+              <strong>✦ DAILY CYBER MISSION</strong>
+              <span className="mission-pill">1 MIN</span>
             </div>
 
-            <div className="dashboard-content">
-              <div className="world-radar">
-                <span>✦</span>
-                <span>✧</span>
-                <span>✦</span>
-                <span>✧</span>
-                <span>✦</span>
-              </div>
+            <div className="daily-mission-body">
+              <span className="daily-mission-label">
+                TODAY'S SITUATION
+              </span>
 
-              <div className="activity-list">
+              <h3>
+                A caller claims to be from your bank and asks for your OTP
+                to stop a transaction.
+              </h3>
+
+              <p>What is the safest next step?</p>
+
+              <div className="daily-options">
                 {[
-                  [
-                    "🔴",
-                    "Urgent account warning",
-                    "Red flag",
-                  ],
-                  [
-                    "🟠",
-                    "Unknown APK source",
-                    "Check source",
-                  ],
-                  [
-                    "🟢",
-                    "Unexpected OTP request",
-                    "Red flag",
-                  ],
-                  [
-                    "🔵",
-                    "Look-alike domain",
-                    "Check URL",
-                  ],
-                  [
-                    "🟡",
-                    "Prize or refund claim",
-                    "Be cautious",
-                  ],
-                ].map((item) => (
-                  <div
-                    className="activity-item"
-                    key={item[1]}
+                  "Share the OTP to block the transaction",
+                  "End the call and contact the bank using its official number",
+                  "Ask the caller to send an identity card",
+                ].map((option, index) => (
+                  <button
+                    className={`${
+                      dailyAnswer === index ? "selected" : ""
+                    } ${
+                      dailySubmitted && index === 1 ? "correct" : ""
+                    }`}
+                    key={option}
+                    type="button"
+                    disabled={dailySubmitted}
+                    onClick={() => setDailyAnswer(index)}
                   >
-                    <span>{item[0]}</span>
-                    <strong>{item[1]}</strong>
-                    <small>{item[2]}</small>
-                  </div>
+                    <span>{String.fromCharCode(65 + index)}</span>
+                    {option}
+                  </button>
                 ))}
               </div>
+
+              {!dailySubmitted ? (
+                <button
+                  className="daily-submit"
+                  type="button"
+                  disabled={dailyAnswer === null}
+                  onClick={() => setDailySubmitted(true)}
+                >
+                  CHECK MY DECISION →
+                </button>
+              ) : (
+                <div
+                  className={`daily-feedback ${
+                    dailyAnswer === 1 ? "good" : "bad"
+                  }`}
+                >
+                  <strong>
+                    {dailyAnswer === 1
+                      ? "Correct decision!"
+                      : "Not the safest choice."}
+                  </strong>
+
+                  <span>
+                    Never share an OTP. Disconnect and contact your bank
+                    through its official channel.
+                  </span>
+                </div>
+              )}
             </div>
 
-            <div className="dashboard-metrics">
-              <div>
-                <strong>Local</strong>
-                <small>Pattern checks</small>
-              </div>
-
-              <div>
-                <strong>3 tools</strong>
-                <small>Website · App · Message</small>
-              </div>
-
-              <div>
-                <strong>No guarantee</strong>
-                <small>Use caution</small>
-              </div>
-            </div>
-
-            <div className="dashboard-note">
-              <strong>
-                ⚙ Learn to spot common warning signs.
-              </strong>
-
-              <small>
-                Examples only. This is not a live threat feed or
-                malware scan.
-              </small>
-            </div>
+            <small className="daily-demo-note">
+              Educational scenario · Not a live alert
+            </small>
           </aside>
-        </section>
-
-        {/* TOOLS + DASHBOARD */}
+        </section>        {/* TOOLS + DASHBOARD */}
         <section className="workspace" id="tools">
           <div className="workspace-main">
             <div className="section-heading">
               <span>— &nbsp; OUR TOOLS</span>
 
-              <h2>Stay Aware. Stay One Step Ahead.</h2>
+              <h2>Your Cyber Safety Toolkit</h2>
 
               <p>
-                Powerful tools to help you identify, analyse and
-                learn about online threats.
+                Practical tools and guidance to help you make safer decisions online.
               </p>
             </div>
 
-            <div className="tools-grid">
+            {/* INTERACTIVE TOOLS */}
+            <div className="tools-grid" id="interactive-zone">
               {tools.map((tool) => (
                 <button
                   className="tool-card"
@@ -533,129 +483,6 @@ export default function App() {
                   <span className="tool-arrow">→</span>
                 </button>
               ))}
-            </div>
-
-            <div className="lower-panels">
-              {/* THREAT RADAR */}
-              <section
-                className="radar-panel"
-                id="threat-radar"
-              >
-                <div className="panel-heading">
-                  <strong>◉ &nbsp; THREAT RADAR</strong>
-                  <span>● DEMO</span>
-                </div>
-
-                <h3>Common Scam Warning Signs</h3>
-
-                <p>
-                  Educational categories only; not measured
-                  statistics.
-                </p>
-
-                <div className="radar-content">
-                  <div className="threat-list">
-                    {[
-                      ["Phishing", "Common"],
-                      ["UPI Scams", "Watch"],
-                      ["Fake Job Offers", "Check"],
-                      ["Loan App Frauds", "Check"],
-                    ].map((item, index) => (
-                      <div
-                        className="threat-row"
-                        key={item[0]}
-                      >
-                        <span
-                          className={`threat-dot dot-${index}`}
-                        />
-
-                        <span>{item[0]}</span>
-                        <strong>{item[1]}</strong>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="globe-visual">
-                    <span>✦</span>
-                    <span>✧</span>
-                    <span>✦</span>
-                  </div>
-                </div>
-              </section>
-
-              {/* SCAM IN FOCUS */}
-              <section className="scam-panel">
-                <div className="panel-heading">
-                  <strong>▣ &nbsp; SCAM IN FOCUS</strong>
-
-                  <span>
-                    {scamIndex + 1} / {scams.length}{" "}
-
-                    <button
-                      onClick={() =>
-                        setScamIndex(
-                          (scamIndex + scams.length - 1) %
-                            scams.length
-                        )
-                      }
-                      type="button"
-                      aria-label="Previous scam"
-                    >
-                      ←
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        setScamIndex(
-                          (scamIndex + 1) % scams.length
-                        )
-                      }
-                      type="button"
-                      aria-label="Next scam"
-                    >
-                      →
-                    </button>
-                  </span>
-                </div>
-
-                <div className="scam-content">
-                  <div className="fake-message">
-                    <small>● ● ●</small>
-
-                    <p>
-                      Your bank account will be blocked today!
-                    </p>
-
-                    <mark>Verify immediately</mark>
-
-                    <p>using this link:</p>
-
-                    <mark>example.invalid</mark>
-
-                    <small>DEMO MESSAGE</small>
-                  </div>
-
-                  <div className="scam-description">
-                    <h3>{scams[scamIndex].title}</h3>
-
-                    <p>{scams[scamIndex].description}</p>
-
-                    <ul>
-                      <li>⚠ Creates panic</li>
-                      <li>↗ May contain fake links</li>
-                      <li>✕ May steal your data</li>
-                    </ul>
-
-                    <button
-                      className="primary-button compact"
-                      onClick={() => navigate("learn")}
-                      type="button"
-                    >
-                      Learn More →
-                    </button>
-                  </div>
-                </div>
-              </section>
             </div>
           </div>
 
@@ -697,73 +524,160 @@ export default function App() {
               </div>
             </section>
 
-            {/* SUSPICIOUS MESSAGE EXPLAINER */}
-            <section className="suspicious-panel">
+            {/* RED FLAG EXPLORER */}
+            <section className="suspicious-panel red-flag-panel">
               <div className="suspicious-heading">
-                <h3>Why is this suspicious?</h3>
+                <div>
+                  <span className="red-flag-kicker">
+                    INTERACTIVE GUIDE
+                  </span>
+                  <h3>Red Flag Explorer</h3>
+                </div>
 
-                <span>{clueIndex + 1} / 4</span>
-
-                <button
-                  onClick={() =>
-                    setClueIndex(
-                      (clueIndex + 1) % clues.length
-                    )
-                  }
-                  type="button"
-                  aria-label="Next warning sign"
-                >
-                  →
-                </button>
+                <span>{activeRedFlag + 1} / 5</span>
               </div>
 
-              <div className="clue-content">
-                <span className="warning-icon">!</span>
+              <div className="red-flag-tabs">
+                {[
+                  ["Urgency", "⏱"],
+                  ["Fake Identity", "♙"],
+                  ["Payment Trap", "₹"],
+                  ["Data Theft", "⌑"],
+                  ["Suspicious Link", "↗"],
+                ].map((item, index) => (
+                  <button
+                    className={
+                      activeRedFlag === index ? "selected" : ""
+                    }
+                    key={item[0]}
+                    type="button"
+                    onClick={() => setActiveRedFlag(index)}
+                  >
+                    <span>{item[1]}</span>
+                    {item[0]}
+                  </button>
+                ))}
+              </div>
+
+              <div className="red-flag-detail">
+                <span className="red-flag-number">
+                  0{activeRedFlag + 1}
+                </span>
 
                 <div>
-                  <strong>{clues[clueIndex].title}</strong>
-                  <p>{clues[clueIndex].description}</p>
+                  <strong>
+                    {[
+                      "Pressure to act immediately",
+                      "Someone pretending to be trusted",
+                      "A request to pay or scan unexpectedly",
+                      "A demand for private information",
+                      "A link you were not expecting",
+                    ][activeRedFlag]}
+                  </strong>
+
+                  <p>
+                    {[
+                      "Scammers create panic or set short deadlines so you do not stop to verify the claim.",
+                      "Check unusual requests directly with the person or organisation using a known contact method.",
+                      "Never enter a UPI PIN to receive money or pay an unexplained fee to unlock a reward.",
+                      "Never share OTPs, passwords, PINs or full banking details in response to an unsolicited request.",
+                      "Check the complete domain and avoid opening unexpected links or attachments.",
+                    ][activeRedFlag]}
+                  </p>
                 </div>
               </div>
 
-              <div className="safe-message">
-                <strong>✓</strong>
-
-                <p>
-                  Verify through the official website or app.
-                  Do not trust unexpected message links.
-                </p>
-              </div>
-
-              <div className="clue-tabs">
-                {clues.map((clue, index) => (
-                  <button
-                    className={
-                      clueIndex === index ? "selected" : ""
-                    }
-                    key={clue.title}
-                    onClick={() => setClueIndex(index)}
-                    type="button"
-                  >
-                    {clue.title}
-                  </button>
-                ))}
+              <div className="red-flag-footer">
+                PAUSE · VERIFY · THEN ACT
               </div>
             </section>
           </aside>
         </section>
 
+        {/* CYBER MYTH BUSTER */}
+        <section className="awareness-lab" id="awareness-lab">
+          <div className="awareness-heading">
+            <span>— &nbsp; BUILD BETTER DIGITAL HABITS</span>
+
+            <h2>Small Checks. Stronger Safety.</h2>
+
+            <p>
+              Test a common cyber safety belief and learn the fact behind it.
+            </p>
+          </div>
+
+          <div className="awareness-grid">
+            <article className="myth-card">
+              <div className="lab-card-heading">
+                <span className="lab-icon myth-icon">✳</span>
+
+                <span>
+                  <small>QUICK KNOWLEDGE TEST</small>
+                  <strong>Cyber Myth Buster</strong>
+                </span>
+              </div>
+
+              <span className="myth-label">TRUE OR FALSE?</span>
+
+              <h3>
+                “You need to enter your UPI PIN to receive money.”
+              </h3>
+
+              <div className="myth-options">
+                {["True", "False"].map((item) => (
+                  <button
+                    className={
+                      mythAnswer === item ? "selected" : ""
+                    }
+                    type="button"
+                    key={item}
+                    onClick={() => setMythAnswer(item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+
+              {mythAnswer && (
+                <div
+                  className={`myth-feedback ${
+                    mythAnswer === "False" ? "good" : "bad"
+                  }`}
+                >
+                  <strong>
+                    {mythAnswer === "False"
+                      ? "Correct — that's a myth."
+                      : "Not quite — this is a myth."}
+                  </strong>
+
+                  <p>
+                    A UPI PIN authorises a payment. You do not need it
+                    to receive money.
+                  </p>
+                </div>
+              )}
+
+              <small className="myth-footnote">
+                One quick fact to remember when using digital payments.
+              </small>
+            </article>
+          </div>
+        </section>
+
         {/* LEARN SECTION */}
-        <section className="learn-section" id="learn">
+        <section
+          className="learn-section learn-cta-section"
+          id="learn"
+        >
           <div className="learn-heading">
             <div>
-              <span>— &nbsp; LEARN BY EXPLORING</span>
+              <span>— &nbsp; WANT TO LEARN MORE?</span>
 
-              <h2>Common Scams You Should Know</h2>
+              <h2>Explore the Cyber Safety Library</h2>
 
               <p>
-                Explore examples, understand the red flags and
-                learn how to stay safe.
+                Go deeper with eight learning guides covering phishing,
+                UPI fraud, malicious apps, online shopping and more.
               </p>
             </div>
 
@@ -771,40 +685,9 @@ export default function App() {
               onClick={() => navigate("learn")}
               type="button"
             >
-              Explore All →
+              Explore All Topics →
             </button>
           </div>
-
-          <div className="learn-grid">
-            {visibleScams.map((scam, index) => (
-              <button
-                className="learn-card"
-                key={scam.title}
-                onClick={() => navigate("learn", null, scam.title)}
-                type="button"
-              >
-                <span
-                  className={`learn-icon ${
-                    tools[index % tools.length].color
-                  }`}
-                >
-                  {scam.icon}
-                </span>
-
-                <span>
-                  <strong>{scam.title}</strong>
-                  <small>{scam.description}</small>
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {visibleScams.length === 0 && (
-            <p className="no-results">
-              No matching topics. Try searching for Phishing or
-              UPI.
-            </p>
-          )}
         </section>
       </main>
 
@@ -840,7 +723,6 @@ export default function App() {
           >
             Verify
           </button>
-
 
           <button
             onClick={() => navigate("cyrax")}

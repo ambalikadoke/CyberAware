@@ -1,0 +1,268 @@
+.safety-score-page {
+  min-height: 100vh;
+  padding: 55px 22px 80px;
+  background: var(--bg, #f7f5f1);
+  color: var(--text, #242424);
+}
+
+.safety-score-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.safety-score-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.safety-score-header > span,
+.habit-heading > div > span {
+  color: #f16d45;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.safety-score-header h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  margin: 12px 0;
+}
+
+.safety-score-header p {
+  max-width: 580px;
+  margin: auto;
+  color: var(--muted, #777);
+  line-height: 1.7;
+}
+
+.score-overview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  padding: 35px;
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #e8e4dd);
+  border-radius: 22px;
+  margin-bottom: 25px;
+}
+
+.score-orb {
+  width: 185px;
+  height: 185px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.score-orb-inner {
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--card, #fff);
+}
+
+.score-orb-inner strong {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.score-orb-inner span {
+  margin-top: 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted, #777);
+  font-weight: 800;
+}
+
+.score-overview-text {
+  max-width: 420px;
+}
+
+.score-label {
+  color: #f16d45;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.score-overview-text h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.score-overview-text p {
+  color: var(--muted, #777);
+  line-height: 1.7;
+}
+
+.habit-section {
+  padding: 30px;
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #e8e4dd);
+  border-radius: 22px;
+}
+
+.habit-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.habit-heading h2 {
+  margin: 8px 0 0;
+  font-size: 25px;
+}
+
+.habit-heading > strong {
+  color: #f16d45;
+  font-size: 13px;
+}
+
+.habit-list {
+  display: grid;
+  gap: 12px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 17px;
+  border: 1px solid var(--border, #e8e4dd);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.habit-item:hover {
+  border-color: #f16d45;
+}
+
+.habit-item.completed {
+  background: rgba(38, 155, 104, 0.07);
+  border-color: #269b68;
+}
+
+.habit-icon {
+  font-size: 25px;
+}
+
+.habit-copy {
+  flex: 1;
+}
+
+.habit-copy strong,
+.habit-copy small {
+  display: block;
+}
+
+.habit-copy strong {
+  font-size: 14px;
+}
+
+.habit-copy small {
+  margin-top: 5px;
+  color: var(--muted, #777);
+  line-height: 1.5;
+}
+
+.habit-item input {
+  width: 19px;
+  height: 19px;
+  accent-color: #f16d45;
+  cursor: pointer;
+}
+
+.habit-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.habit-actions button {
+  padding: 11px 17px;
+  border: 1px solid var(--border, #ddd);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text, #242424);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.safety-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(241, 109, 69, 0.1);
+}
+
+.safety-tip > span {
+  font-size: 25px;
+}
+
+.safety-tip strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.safety-tip p {
+  margin: 0;
+  color: var(--muted, #777);
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .safety-score-page {
+    padding: 35px 14px 55px;
+  }
+
+  .score-overview {
+    flex-direction: column;
+    text-align: center;
+    gap: 22px;
+    padding: 25px 18px;
+  }
+
+  .score-orb {
+    width: 160px;
+    height: 160px;
+  }
+
+  .score-orb-inner {
+    width: 135px;
+    height: 135px;
+  }
+
+  .habit-section {
+    padding: 20px 15px;
+  }
+
+  .habit-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .habit-item {
+    padding: 13px 10px;
+    gap: 10px;
+  }
+
+  .habit-copy strong {
+    font-size: 12px;
+  }
+
+  .habit-copy small {
+    font-size: 11px;
+  }
+}

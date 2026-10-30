@@ -2376,3 +2376,164 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     max-height: 62px;
   }
 }
+
+/* =========================================================
+   CYBERAWARE INTERACTIVE HOMEPAGE REFRESH
+   Uses the existing orange / charcoal / warm-neutral palette.
+========================================================= */
+
+/* Hero mission card replaces the old decorative preview. */
+.daily-mission-card {
+  padding: 17px;
+  border-color: #526168;
+  background: linear-gradient(155deg, #101a1e, #071014 78%);
+}
+.daily-mission-card .dashboard-heading strong { color: #ff7955; letter-spacing: .8px; }
+.mission-pill, .simulator-tag {
+  padding: 5px 8px;
+  border: 1px solid #536168;
+  border-radius: 999px;
+  color: #d9e2df !important;
+  font-size: 8px !important;
+  letter-spacing: .8px;
+}
+.daily-mission-body { margin-top: 17px; }
+.daily-mission-label, .simulator-step, .red-flag-kicker {
+  color: #ff987a;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+.daily-mission-body h3 { margin: 9px 0; color: #fffaf4; font: 700 17px/1.35 'Space Grotesk', sans-serif; }
+.daily-mission-body > p { margin: 0 0 11px; color: #c0cbc8; font-size: 10px; }
+.daily-options { display: grid; gap: 7px; }
+.daily-options button, .simulator-decision > button:not(.simulator-submit) {
+  width: 100%; display: flex; align-items: flex-start; gap: 8px; padding: 9px;
+  border: 1px solid #39474b; border-radius: 8px; background: #172226; color: #edf1ed;
+  text-align: left; font-size: 9px; line-height: 1.45; transition: border-color .18s, background .18s;
+}
+.daily-options button > span, .simulator-decision > button > span {
+  display: inline-grid; place-items: center; flex: 0 0 19px; width: 19px; height: 19px;
+  border-radius: 6px; background: #29383c; color: #ff9b7b; font-size: 9px; font-weight: 900;
+}
+.daily-options button:hover, .daily-options button.selected, .simulator-decision > button.selected { border-color: #ff7955; background: #2a2522; }
+.daily-options button.correct, .simulator-decision > button.correct { border-color: #6bbd8b; background: #172c25; }
+.daily-options button:disabled, .simulator-decision > button:disabled { cursor: default; opacity: 1; }
+.daily-submit, .simulator-submit {
+  width: 100%; margin-top: 10px; padding: 10px 12px; border: 0; border-radius: 8px;
+  background: #ff572f; color: white; font-size: 9px; font-weight: 900; letter-spacing: .5px;
+}
+.daily-submit:disabled, .simulator-submit:disabled { cursor: not-allowed; opacity: .45; }
+.daily-feedback { display: grid; gap: 4px; margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 9px; line-height: 1.45; }
+.daily-feedback.good, .simulator-feedback.good, .myth-feedback.good { background: #17372b; border: 1px solid #397b59; color: #d8f5e4; }
+.daily-feedback.bad, .simulator-feedback.bad, .myth-feedback.bad { background: #3a2622; border: 1px solid #8a5142; color: #ffe3d9; }
+.daily-demo-note { display: block; margin-top: 10px; color: #9eadaa; font-size: 8px; }
+
+/* Tool hub is one clear destination for all three Verify modes. */
+.tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tool-card { min-height: 78px; padding: 14px; }
+.tool-description strong { font-size: 12px; }
+.tool-description small { font-size: 9px; }
+.site.dark .tool-card { border-color: var(--line); }
+
+/* Simulator: realistic training conversation + user decision. */
+.lower-panels { grid-template-columns: minmax(0, 1fr); margin-top: 16px; }
+.simulator-panel { padding: 17px; border-radius: 15px; background: linear-gradient(145deg, #101a1e, #071014); border-color: #39484e; }
+.simulator-panel .panel-heading > strong { font-size: 10px; letter-spacing: .8px; }
+.simulator-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 17px; margin-top: 15px; align-items: stretch; }
+.simulator-chat { min-height: 265px; padding: 12px; border: 1px solid #354247; border-radius: 13px; background: #e9eeeb; color: #1c2928; display: flex; flex-direction: column; gap: 12px; }
+.simulator-chat-top { display: flex; align-items: center; gap: 8px; padding-bottom: 9px; border-bottom: 1px solid #d1d9d5; }
+.simulator-chat-top > span { color: #6a7b75; font-size: 9px; letter-spacing: 2px; }
+.simulator-chat-top strong { font-size: 10px; }
+.simulator-chat-top small { margin-left: auto; color: #718078; font-size: 7px; font-weight: 900; letter-spacing: .7px; }
+.simulator-bubble { max-width: 92%; padding: 11px; border-radius: 12px; font-size: 10px; line-height: 1.55; box-shadow: 0 2px 5px #14251b0d; }
+.simulator-bubble.incoming { align-self: flex-start; background: white; border: 1px solid #dce4df; }
+.simulator-bubble.link-bubble { align-self: flex-start; margin-top: -7px; background: #fff0e9; color: #c44628; font-weight: 800; overflow-wrap: anywhere; }
+.simulator-bubble.outgoing { align-self: flex-end; background: #d8f3df; color: #245c39; }
+.simulator-decision { min-width: 0; padding: 5px 0; }
+.simulator-decision h3 { margin: 7px 0 5px; color: #fffaf4; font: 700 19px 'Space Grotesk', sans-serif; }
+.simulator-decision > p { margin: 0 0 12px; color: #c0cbc8; font-size: 10px; line-height: 1.5; }
+.simulator-decision > button:not(.simulator-submit) { margin-top: 7px; }
+.simulator-feedback { margin-top: 11px; padding: 11px; border-radius: 9px; font-size: 10px; line-height: 1.5; }
+.simulator-feedback p { margin: 5px 0 9px; }
+.simulator-feedback button { padding: 7px 10px; border: 1px solid currentColor; border-radius: 7px; background: transparent; color: inherit; font-size: 8px; font-weight: 900; }
+.simulator-disclaimer { display: block; margin-top: 12px; color: #aab6b7; font-size: 8px; line-height: 1.5; }
+
+/* Red Flag Explorer replaces the static suspicious-message panel. */
+.red-flag-panel { display: block; padding: 15px; }
+.red-flag-panel .suspicious-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 13px; }
+.red-flag-panel .suspicious-heading h3 { margin: 4px 0 0; color: var(--ink); font: 700 18px 'Space Grotesk', sans-serif; }
+.red-flag-panel .suspicious-heading > span { color: var(--muted); }
+.red-flag-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.red-flag-tabs button { display: flex; align-items: center; gap: 7px; padding: 9px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); text-align: left; font-size: 9px; font-weight: 800; }
+.red-flag-tabs button span { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; background: #ffe3d7; color: #c64b2c; font-size: 12px; }
+.red-flag-tabs button.selected { border-color: #ff987a; background: #fff0e9; color: #bd4526; }
+.site.dark .red-flag-tabs button.selected { background: #38251f; color: #ffb097; }
+.site.dark .red-flag-tabs button span { background: #432a22; color: #ffb097; }
+.red-flag-detail { display: flex; gap: 11px; margin-top: 13px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.red-flag-number { color: #ff6844; font: 800 22px 'Space Grotesk', sans-serif; }
+.red-flag-detail strong { color: var(--ink); font-size: 11px; }
+.red-flag-detail p { margin: 5px 0 0; color: var(--muted); font-size: 9px; line-height: 1.6; }
+.red-flag-footer { margin-top: 11px; color: #e45b35; font-size: 8px; font-weight: 900; letter-spacing: 1.5px; }
+
+/* Safety score + myth buster use the same light/dark theme tokens. */
+.awareness-lab { padding: 30px 3.2% 28px; }
+.awareness-heading { margin-bottom: 15px; }
+.awareness-heading > span { color: var(--orange); font-size: 10px; font-weight: 900; letter-spacing: 1px; }
+.awareness-heading h2 { margin: 7px 0 5px; color: var(--ink); font: 700 25px 'Space Grotesk', sans-serif; letter-spacing: -.8px; }
+.awareness-heading p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.awareness-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; }
+.safety-score-card, .myth-card { min-width: 0; padding: 19px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 8px 24px #1b17100a; }
+.lab-card-heading { display: flex; align-items: center; gap: 10px; }
+.lab-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 11px; background: #ffe3d7; color: #d64e2b; font-size: 22px; }
+.myth-icon { background: #e9e1ff; color: #7046c9; }
+.lab-card-heading small, .lab-card-heading strong { display: block; }
+.lab-card-heading small { color: var(--orange); font-size: 8px; font-weight: 900; letter-spacing: 1px; }
+.lab-card-heading strong { margin-top: 3px; color: var(--ink); font: 700 16px 'Space Grotesk', sans-serif; }
+.safety-score-card > p { margin: 12px 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+.safety-check-list { display: grid; gap: 7px; }
+.safety-check-list label { display: flex; align-items: flex-start; gap: 9px; padding: 9px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: var(--bg); font-size: 9px; line-height: 1.45; cursor: pointer; }
+.safety-check-list input { width: 14px; height: 14px; margin: 0; accent-color: #e95b36; flex: 0 0 14px; }
+.safety-score-result { display: flex; align-items: center; gap: 15px; margin-top: 13px; padding: 11px; border-radius: 9px; background: var(--bg); }
+.safety-score-result > div:first-child { display: grid; gap: 2px; min-width: 70px; }
+.safety-score-result strong { color: var(--ink); font: 800 23px 'Space Grotesk', sans-serif; }
+.safety-score-result strong small { color: var(--muted); font-size: 10px; }
+.safety-score-result span { color: var(--muted); font-size: 7px; font-weight: 900; letter-spacing: .8px; }
+.score-track { height: 8px; flex: 1; overflow: hidden; border-radius: 99px; background: var(--line); }
+.score-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff572f, #f4a64e); transition: width .2s ease; }
+.myth-label { display: inline-block; margin-top: 22px; color: var(--orange); font-size: 8px; font-weight: 900; letter-spacing: 1.3px; }
+.myth-card h3 { margin: 9px 0 16px; color: var(--ink); font: 700 18px/1.4 'Space Grotesk', sans-serif; }
+.myth-options { display: flex; gap: 8px; }
+.myth-options button { min-width: 88px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-size: 10px; font-weight: 800; }
+.myth-options button.selected { border-color: #ff805d; background: #fff0e9; color: #bd4526; }
+.site.dark .myth-options button.selected { background: #38251f; color: #ffb097; }
+.myth-feedback { margin-top: 13px; padding: 11px; border-radius: 9px; font-size: 10px; line-height: 1.5; }
+.myth-feedback p { margin: 5px 0 0; }
+.myth-footnote { display: block; margin-top: 17px; color: var(--muted); font-size: 8px; }
+.learn-cta-section { padding-top: 16px; padding-bottom: 28px; border-top: 1px solid var(--line); }
+.learn-cta-section .learn-heading { margin: 0; }
+.learn-cta-section .learn-heading h2 { color: var(--ink); }
+.learn-cta-section .learn-heading > button { padding: 12px 16px; border-radius: 9px; background: var(--orange); color: #fff; }
+
+/* Keep the homepage feature sections readable in both themes. */
+.site.dark .safety-score-card, .site.dark .myth-card { box-shadow: 0 8px 24px #0002; }
+.site.dark .red-flag-detail { background: #1c2422; }
+.site.dark .learn-cta-section { border-color: var(--line); }
+
+@media (max-width: 850px) {
+  .simulator-layout { grid-template-columns: 1fr; }
+  .simulator-chat { min-height: 220px; }
+  .awareness-grid { grid-template-columns: 1fr 1fr; }
+  .daily-mission-card { justify-self: stretch; }
+}
+@media (max-width: 560px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .simulator-panel { padding: 13px; }
+  .simulator-chat { min-height: 205px; }
+  .awareness-lab { padding: 25px 5%; }
+  .awareness-grid { grid-template-columns: 1fr; }
+  .awareness-heading h2 { font-size: 22px; }
+  .learn-cta-section .learn-heading { align-items: flex-start; flex-direction: column; }
+  .learn-cta-section .learn-heading > button { align-self: flex-start; }
+  .red-flag-tabs { grid-template-columns: 1fr 1fr; }
+}
