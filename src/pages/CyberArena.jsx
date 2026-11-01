@@ -75,7 +75,7 @@ function loadProgress() {
   }
 }
 
-export default function CyberArena() {
+export default function CyberArena({ initialMission = null, onInitialMissionHandled }) {
   const [progress, setProgress] = useState(loadProgress);
   const [activeMission, setActiveMission] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -101,6 +101,16 @@ export default function CyberArena() {
     setSubmitted(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  useEffect(() => {
+    if (initialMission !== null && missions.some((item) => item.id === Number(initialMission))) {
+      setActiveMission(Number(initialMission));
+      setSelectedAnswer(null);
+      setSubmitted(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      onInitialMissionHandled?.();
+    }
+  }, [initialMission, onInitialMissionHandled]);
 
   function checkAnswer() {
     if (selectedAnswer === null || submitted || !mission) return;

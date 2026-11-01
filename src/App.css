@@ -2482,7 +2482,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .awareness-heading > span { color: var(--orange); font-size: 10px; font-weight: 900; letter-spacing: 1px; }
 .awareness-heading h2 { margin: 7px 0 5px; color: var(--ink); font: 700 25px 'Space Grotesk', sans-serif; letter-spacing: -.8px; }
 .awareness-heading p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
-.awareness-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; }
+.awareness-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
 .safety-score-card, .myth-card { min-width: 0; padding: 19px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 8px 24px #1b17100a; }
 .lab-card-heading { display: flex; align-items: center; gap: 10px; }
 .lab-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 11px; background: #ffe3d7; color: #d64e2b; font-size: 22px; }
@@ -2502,13 +2502,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .score-track { height: 8px; flex: 1; overflow: hidden; border-radius: 99px; background: var(--line); }
 .score-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff572f, #f4a64e); transition: width .2s ease; }
 .myth-label { display: inline-block; margin-top: 22px; color: var(--orange); font-size: 8px; font-weight: 900; letter-spacing: 1.3px; }
-.myth-card h3 { margin: 9px 0 16px; color: var(--ink); font: 700 18px/1.4 'Space Grotesk', sans-serif; }
+.myth-card { min-height: 0; padding: 24px 26px 20px; }
+.myth-card h3 { margin: 9px 0 20px; color: var(--ink); font: 700 clamp(20px, 2vw, 26px)/1.4 'Space Grotesk', sans-serif; max-width: 900px; }
 .myth-options { display: flex; gap: 8px; }
 .myth-options button { min-width: 88px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-size: 10px; font-weight: 800; }
 .myth-options button.selected { border-color: #ff805d; background: #fff0e9; color: #bd4526; }
 .site.dark .myth-options button.selected { background: #38251f; color: #ffb097; }
-.myth-feedback { margin-top: 13px; padding: 11px; border-radius: 9px; font-size: 10px; line-height: 1.5; }
-.myth-feedback p { margin: 5px 0 0; }
+.myth-feedback { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-size: 11px; line-height: 1.55; }
+.myth-feedback strong { display: block; margin-bottom: 7px; font-size: 12px; }
+.myth-feedback ul { display: grid; gap: 5px; margin: 0; padding-left: 18px; }
+.myth-feedback li { padding-left: 2px; }
+.myth-footnote { display: block; margin-top: 17px; color: var(--muted); font-size: 9px; }
+.myth-slider-window { margin-top: 18px; }
+.myth-slider-track .myth-question { padding-bottom: 4px; }
+.myth-question h3 { margin-bottom: 18px; }
+.myth-slider-controls { margin-top: 12px; }
 .myth-footnote { display: block; margin-top: 17px; color: var(--muted); font-size: 8px; }
 .learn-cta-section { padding-top: 16px; padding-bottom: 28px; border-top: 1px solid var(--line); }
 .learn-cta-section .learn-heading { margin: 0; }
@@ -2523,7 +2531,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 850px) {
   .simulator-layout { grid-template-columns: 1fr; }
   .simulator-chat { min-height: 220px; }
-  .awareness-grid { grid-template-columns: 1fr 1fr; }
+  .awareness-grid { grid-template-columns: minmax(0, 1fr); }
   .daily-mission-card { justify-self: stretch; }
 }
 @media (max-width: 560px) {
@@ -2533,7 +2541,1278 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .awareness-lab { padding: 25px 5%; }
   .awareness-grid { grid-template-columns: 1fr; }
   .awareness-heading h2 { font-size: 22px; }
+  .myth-card { min-height: 0; padding: 19px; }
+  .myth-card h3 { font-size: 18px; }
   .learn-cta-section .learn-heading { align-items: flex-start; flex-direction: column; }
   .learn-cta-section .learn-heading > button { align-self: flex-start; }
   .red-flag-tabs { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* =========================================================
+   CYBERAWARE TOOLKIT — SINGLE COLUMN DESKTOP LAYOUT
+   Keep the existing mobile layout unchanged.
+========================================================= */
+@media (min-width: 851px) {
+  .tools-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .tool-card {
+    min-height: 96px;
+    padding: 18px 22px;
+    gap: 16px;
+  }
+
+  .tool-card .tool-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+  }
+
+  .tool-card .tool-description strong {
+    font-size: 14px;
+  }
+
+  .tool-card .tool-description small {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   CYBERAWARE — DARK MODE TEXT CONTRAST & READABILITY
+   Light mode remains unchanged.
+========================================================= */
+.site.dark {
+  --ink: #f8faf9;
+  --muted: #d0d8d5;
+  --line: #3b4542;
+  color: var(--ink);
+}
+
+/* General text across inner pages and homepage */
+.site.dark p,
+.site.dark li,
+.site.dark label,
+.site.dark small,
+.site.dark .subtitle,
+.site.dark .description,
+.site.dark .helper-text,
+.site.dark .page-description {
+  color: #d0d8d5;
+}
+
+/* Headings and important content */
+.site.dark h1,
+.site.dark h2,
+.site.dark h3,
+.site.dark h4,
+.site.dark h5,
+.site.dark h6,
+.site.dark strong,
+.site.dark b,
+.site.dark .title,
+.site.dark .section-title {
+  color: #f8faf9;
+}
+
+/* Muted text should still be comfortably readable */
+.site.dark .muted,
+.site.dark .text-muted,
+.site.dark .form-text,
+.site.dark .hint,
+.site.dark .meta,
+.site.dark .tool-description small,
+.site.dark .learn-card small,
+.site.dark .section-heading p,
+.site.dark .learn-heading p,
+.site.dark .awareness-heading p,
+.site.dark .safety-score-card > p,
+.site.dark .red-flag-detail p,
+.site.dark .myth-footnote {
+  color: #c7d1cd;
+}
+
+/* Form controls and placeholders on dark pages */
+.site.dark input,
+.site.dark textarea,
+.site.dark select {
+  color: #f4f7f5;
+  background-color: #202725;
+  border-color: #46514d;
+}
+
+.site.dark input::placeholder,
+.site.dark textarea::placeholder {
+  color: #aebbb5;
+  opacity: 1;
+}
+
+/* Common cards and content surfaces */
+.site.dark .tool-card,
+.site.dark .learn-card,
+.site.dark .safety-score-card,
+.site.dark .myth-card,
+.site.dark .red-flag-detail,
+.site.dark .suspicious-panel {
+  color: #f4f7f5;
+}
+
+/* Homepage feature-card text */
+.site.dark .red-flag-panel .suspicious-heading h3,
+.site.dark .red-flag-detail strong,
+.site.dark .lab-card-heading strong,
+.site.dark .safety-score-result strong,
+.site.dark .awareness-heading h2 {
+  color: #f8faf9;
+}
+
+/* Keep the hero's deliberately light background readable */
+.site.dark .hero h1,
+.site.dark .hero-stats strong {
+  color: #111514;
+}
+.site.dark .hero-content > p {
+  color: #283136;
+}
+.site.dark .hero-stats small {
+  color: #40484d;
+}
+
+/* Preserve readable text on dark showcase panels */
+.site.dark .live-dashboard,
+.site.dark .radar-panel,
+.site.dark .scam-panel,
+.site.dark .cyrax-banner,
+.site.dark .simulator-panel {
+  color: #f4f7f5;
+}
+.site.dark .live-dashboard p,
+.site.dark .radar-panel p,
+.site.dark .scam-panel p,
+.site.dark .cyrax-banner p,
+.site.dark .simulator-panel p {
+  color: #d0d8d5;
+}
+
+
+/* CyberAware: hide the navbar search control */
+.nav-actions .search-box {
+  display: none !important;
+}
+
+/* Match the hover lift on both hero action buttons */
+.hero-buttons .secondary-button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-buttons .secondary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(21, 26, 29, 0.14);
+  border-color: #ff704f;
+}
+
+.hero-buttons .secondary-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* DAILY CYBER CHALLENGE — classic layout with subtle polish */
+.daily-challenge-card {
+  padding: 16px;
+  background: #050b0eeb;
+  color: #f8f8f4;
+  border: 1px solid #65747b;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px #0003;
+}
+.challenge-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.challenge-brand { display: flex; align-items: center; gap: 8px; color: #ff7955; font-size: 10px; font-weight: 900; letter-spacing: .7px; }
+.challenge-spark { color: #ff7955; font-size: 17px; }
+.challenge-time { padding: 5px 8px; border: 1px solid #536168; border-radius: 999px; color: #d9e2df; font-size: 8px; letter-spacing: .7px; }
+.challenge-intro { margin-top: 15px; }
+.challenge-category { color: #ff987a; font-size: 9px; font-weight: 900; letter-spacing: 1px; }
+.challenge-intro h3 { margin: 8px 0; color: #fffaf4; font: 700 16px/1.4 'Space Grotesk', sans-serif; }
+.challenge-intro p { margin: 0 0 11px; color: #c0cbc8; font-size: 10px; }
+.challenge-options { display: grid; gap: 7px; }
+.challenge-options .challenge-option { width: 100%; display: flex; align-items: center; gap: 9px; padding: 9px; border: 1px solid #39474b; border-radius: 8px; background: #172226; color: #edf1ed; text-align: left; font-size: 9px; line-height: 1.45; transition: border-color .18s, background .18s, transform .18s; }
+.challenge-options .challenge-option:hover:not(:disabled) { border-color: #ff7955; transform: translateX(2px); }
+.option-letter { display: inline-grid; place-items: center; flex: 0 0 20px; width: 20px; height: 20px; border-radius: 6px; background: #29383c; color: #ff9b7b; font-size: 9px; font-weight: 900; }
+.challenge-options .challenge-option.selected { border-color: #ff7955; background: #2a2522; }
+.challenge-options .challenge-option.correct { border-color: #6bbd8b; background: #17372b; }
+.challenge-options .challenge-option.incorrect { border-color: #c66c5c; background: #3a2622; }
+.challenge-options .challenge-option:disabled { cursor: default; opacity: 1; }
+.option-copy { flex: 1; }
+.option-mark { font-weight: 900; }
+.challenge-submit { width: 100%; margin-top: 10px; padding: 10px 12px; border: 0; border-radius: 8px; background: #ff572f; color: white; font-size: 9px; font-weight: 900; letter-spacing: .5px; transition: transform .2s, box-shadow .2s; }
+.challenge-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 7px 18px #ff572f35; }
+.challenge-submit:disabled { cursor: not-allowed; opacity: .45; }
+.challenge-feedback { display: grid; gap: 5px; margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 9px; line-height: 1.5; }
+.challenge-feedback.good { background: #17372b; border: 1px solid #397b59; color: #d8f5e4; }
+.challenge-feedback.bad { background: #3a2622; border: 1px solid #8a5142; color: #ffe3d9; }
+.challenge-footer { display: flex; justify-content: space-between; gap: 8px; margin-top: 11px; color: #9eadaa; font-size: 7px; font-weight: 800; letter-spacing: .6px; }
+
+/* Light mode gets its own clean surface; dark mode keeps the familiar original look. */
+.site:not(.dark) .daily-challenge-card { background: linear-gradient(145deg, #fff 0%, #f4f0ff 100%); color: #20232b; border-color: #e3dafa; box-shadow: 0 12px 30px rgba(63, 47, 100, .10); }
+.site:not(.dark) .challenge-time { color: #5e5475; border-color: #ded4f1; background: #fff; }
+.site:not(.dark) .challenge-intro h3 { color: #20232b; }
+.site:not(.dark) .challenge-intro p { color: #686477; }
+.site:not(.dark) .challenge-options .challenge-option { background: #fff; color: #292638; border-color: #e6e0ef; }
+.site:not(.dark) .option-letter { background: #f0eaff; color: #8057c8; }
+.site:not(.dark) .challenge-options .challenge-option.selected { background: #fff0e9; border-color: #ff8b6c; }
+.site:not(.dark) .challenge-options .challenge-option.correct { background: #e5f8ed; border-color: #72c394; color: #175c38; }
+.site:not(.dark) .challenge-options .challenge-option.incorrect { background: #fff0ed; border-color: #e59a8c; color: #8b3327; }
+.site:not(.dark) .challenge-footer { color: #817990; }
+@media (max-width: 560px) { .challenge-footer { flex-wrap: wrap; } .challenge-intro h3 { font-size: 15px; } }
+/* DAILY CYBER CHALLENGE — Classic Design */
+
+.daily-challenge-card {
+  padding: 16px;
+  background: #050b0eeb;
+  color: #f8f8f4;
+  border: 1px solid #65747b;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px #0003;
+}
+
+.challenge-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.challenge-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff7955;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .7px;
+}
+
+.challenge-spark {
+  color: #ff7955;
+  font-size: 17px;
+}
+
+.challenge-intro {
+  margin-top: 15px;
+}
+
+.challenge-category {
+  color: #ff987a;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.challenge-intro h3 {
+  margin: 8px 0;
+  color: #fffaf4;
+  font: 700 16px/1.4 'Space Grotesk', sans-serif;
+}
+
+.challenge-intro p {
+  margin: 0 0 11px;
+  color: #c0cbc8;
+  font-size: 10px;
+}
+
+.challenge-options {
+  display: grid;
+  gap: 7px;
+}
+
+.challenge-options .challenge-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px;
+  border: 1px solid #39474b;
+  border-radius: 8px;
+  background: #172226;
+  color: #edf1ed;
+  text-align: left;
+  font-size: 9px;
+  line-height: 1.45;
+  transition: border-color .18s, background .18s, transform .18s;
+}
+
+.challenge-options .challenge-option:hover:not(:disabled) {
+  border-color: #ff7955;
+  transform: translateX(2px);
+}
+
+.option-letter {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #29383c;
+  color: #ff9b7b;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.challenge-options .challenge-option.selected {
+  border-color: #ff7955;
+  background: #2a2522;
+}
+
+.challenge-options .challenge-option.correct {
+  border-color: #6bbd8b;
+  background: #17372b;
+}
+
+.challenge-options .challenge-option.incorrect {
+  border-color: #c66c5c;
+  background: #3a2622;
+}
+
+.challenge-options .challenge-option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option-copy {
+  flex: 1;
+}
+
+.option-mark {
+  font-weight: 900;
+}
+
+.challenge-submit {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #ff572f;
+  color: white;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.challenge-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px #ff572f35;
+}
+
+.challenge-submit:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.challenge-feedback {
+  display: grid;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.challenge-feedback.good {
+  background: #17372b;
+  border: 1px solid #397b59;
+  color: #d8f5e4;
+}
+
+.challenge-feedback.bad {
+  background: #3a2622;
+  border: 1px solid #8a5142;
+  color: #ffe3d9;
+}
+
+.challenge-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 11px;
+  color: #9eadaa;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .6px;
+}
+
+/* Light Mode */
+
+.site:not(.dark) .daily-challenge-card {
+  background: linear-gradient(145deg, #fff 0%, #f4f0ff 100%);
+  color: #20232b;
+  border-color: #e3dafa;
+  box-shadow: 0 12px 30px rgba(63, 47, 100, .10);
+}
+
+.site:not(.dark) .challenge-intro h3 {
+  color: #20232b;
+}
+
+.site:not(.dark) .challenge-intro p {
+  color: #686477;
+}
+
+.site:not(.dark) .challenge-options .challenge-option {
+  background: #fff;
+  color: #292638;
+  border-color: #e6e0ef;
+}
+
+.site:not(.dark) .option-letter {
+  background: #f0eaff;
+  color: #8057c8;
+}
+
+.site:not(.dark) .challenge-options .challenge-option.selected {
+  background: #fff0e9;
+  border-color: #ff8b6c;
+}
+
+.site:not(.dark) .challenge-options .challenge-option.correct {
+  background: #e5f8ed;
+  border-color: #72c394;
+  color: #175c38;
+}
+
+.site:not(.dark) .challenge-options .challenge-option.incorrect {
+  background: #fff0ed;
+  border-color: #e59a8c;
+  color: #8b3327;
+}
+
+.site:not(.dark) .challenge-footer {
+  color: #817990;
+}
+
+@media (max-width: 560px) {
+  .challenge-footer {
+    flex-wrap: wrap;
+  }
+
+  .challenge-intro h3 {
+    font-size: 15px;
+  }
+}
+/* FIX: Daily Cyber Challenge Option Layout */
+
+.daily-options.challenge-options .challenge-option {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.daily-options.challenge-options .challenge-option > .option-letter {
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.daily-options.challenge-options .challenge-option > .option-copy {
+  display: block !important;
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.5 !important;
+}
+
+.daily-options.challenge-options .challenge-option > .option-mark {
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important;
+}
+
+.site:not(.dark) .daily-options.challenge-options .challenge-option > .option-copy {
+  color: inherit;
+}
+
+
+/* =========================================================
+   DAILY CYBER CHALLENGE — FINAL OPTION TEXT FIX
+   Overrides the older .daily-options button > span rule.
+   Keeps option text readable in BOTH light and dark modes.
+========================================================= */
+
+.daily-options button {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+.daily-options button > span:first-child {
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  background: #29383c !important;
+  color: #ff9b7b !important;
+  border-radius: 6px !important;
+  line-height: 1 !important;
+}
+
+/* The second span is the answer text, NOT a letter badge. */
+.daily-options button > span:nth-child(2),
+.daily-options button > .option-copy {
+  display: block !important;
+  flex: 1 1 0% !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.45 !important;
+  font-size: inherit !important;
+}
+
+.daily-options button > .option-mark {
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  margin-left: auto !important;
+  background: #29383c !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+}
+
+.site:not(.dark) .daily-options button > span:first-child {
+  background: #f0eaff !important;
+  color: #8057c8 !important;
+}
+
+.site:not(.dark) .daily-options button > .option-mark {
+  background: #29383c !important;
+  color: #ffffff !important;
+}
+
+/* Prevent old global span styles from shrinking answer text. */
+.daily-options button > span:not(:first-child) {
+  flex-shrink: 1 !important;
+}
+
+/* =========================================================
+   FINAL TARGETED FIXES — HERO + DAILY CYBER CHALLENGE
+   These overrides intentionally affect only these components.
+========================================================= */
+
+/* Keep the old hero stats hidden; stack the two action buttons. */
+.hero-stats {
+  display: none !important;
+}
+
+.hero-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 11px !important;
+  width: 100% !important;
+  margin-top: 18px !important;
+}
+
+.hero-buttons .primary-button,
+.hero-buttons .secondary-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 46px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* The lower button is intentionally longer than the upper button. */
+.hero-buttons .primary-button {
+  width: 86% !important;
+  align-self: flex-start !important;
+}
+
+.hero-buttons .secondary-button {
+  width: 100% !important;
+  align-self: flex-start !important;
+}
+
+/* Challenge card: reliable dark-mode colors, independent of old dashboard rules. */
+.site.dark .daily-challenge-card {
+  background: linear-gradient(145deg, #071116 0%, #101d23 100%) !important;
+  color: #f4f7f5 !important;
+  border: 1px solid #43545b !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .24) !important;
+}
+
+.site.dark .daily-challenge-card .challenge-brand,
+.site.dark .daily-challenge-card .challenge-spark,
+.site.dark .daily-challenge-card .challenge-category {
+  color: #ff987a !important;
+}
+
+.site.dark .daily-challenge-card .challenge-intro h3 {
+  color: #fffaf4 !important;
+}
+
+.site.dark .daily-challenge-card .challenge-intro p {
+  color: #c0cbc8 !important;
+}
+
+.site.dark .daily-challenge-card .challenge-options .challenge-option {
+  background: #172226 !important;
+  color: #edf1ed !important;
+  border: 1px solid #39474b !important;
+}
+
+.site.dark .daily-challenge-card .challenge-options .challenge-option.selected {
+  background: #2a2522 !important;
+  border-color: #ff7955 !important;
+}
+
+.site.dark .daily-challenge-card .challenge-options .challenge-option.correct {
+  background: #17372b !important;
+  border-color: #6bbd8b !important;
+  color: #e7fff0 !important;
+}
+
+.site.dark .daily-challenge-card .challenge-options .challenge-option.incorrect {
+  background: #3a2622 !important;
+  border-color: #c66c5c !important;
+  color: #ffe3d9 !important;
+}
+
+.site.dark .daily-challenge-card .option-letter {
+  background: #29383c !important;
+  color: #ff9b7b !important;
+}
+
+.site.dark .daily-challenge-card .challenge-footer {
+  color: #aebbb7 !important;
+}
+
+.site.dark .daily-challenge-card .challenge-time {
+  color: #d9e2df !important;
+  border-color: #536168 !important;
+  background: transparent !important;
+}
+
+/* Challenge card: clean lavender-white surface in light mode. */
+.site:not(.dark) .daily-challenge-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f4f0ff 100%) !important;
+  color: #20232b !important;
+  border: 1px solid #e3dafa !important;
+  box-shadow: 0 12px 30px rgba(63, 47, 100, .10) !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-brand,
+.site:not(.dark) .daily-challenge-card .challenge-spark,
+.site:not(.dark) .daily-challenge-card .challenge-category {
+  color: #d95d3d !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-intro h3 {
+  color: #20232b !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-intro p {
+  color: #686477 !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-options .challenge-option {
+  background: #ffffff !important;
+  color: #292638 !important;
+  border: 1px solid #e6e0ef !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-options .challenge-option.selected {
+  background: #fff0e9 !important;
+  border-color: #ff8b6c !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-options .challenge-option.correct {
+  background: #e5f8ed !important;
+  border-color: #72c394 !important;
+  color: #175c38 !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-options .challenge-option.incorrect {
+  background: #fff0ed !important;
+  border-color: #e59a8c !important;
+  color: #8b3327 !important;
+}
+
+.site:not(.dark) .daily-challenge-card .option-letter {
+  background: #f0eaff !important;
+  color: #8057c8 !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-footer {
+  color: #817990 !important;
+}
+
+.site:not(.dark) .daily-challenge-card .challenge-time {
+  color: #5e5475 !important;
+  border-color: #ded4f1 !important;
+  background: #ffffff !important;
+}
+
+@media (max-width: 560px) {
+  .hero-buttons .primary-button { width: 86% !important; }
+  .hero-buttons .secondary-button { width: 100% !important; }
+}
+
+
+/* =========================
+   CYBER ARENA HOMEPAGE FEATURE
+========================= */
+.arena-home-section {
+  margin: 8px 3.2% 42px;
+  padding: clamp(22px, 3.2vw, 42px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(22px, 4vw, 54px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 77, 36, 0.24);
+  border-radius: 22px;
+  background: linear-gradient(120deg, #fff5ef 0%, var(--surface) 65%);
+}
+.arena-home-section::before {
+  content: ""; position: absolute; width: 240px; height: 240px; right: -85px; top: -120px;
+  border-radius: 50%; background: rgba(255, 77, 36, 0.08); pointer-events: none;
+}
+.arena-home-copy, .arena-home-missions { position: relative; z-index: 1; }
+.arena-home-kicker { color: var(--orange); font-size: 10px; font-weight: 800; letter-spacing: 1.4px; }
+.arena-home-copy h2 { margin: 12px 0 10px; font: 700 clamp(28px, 3.2vw, 42px)/1.1 'Space Grotesk', sans-serif; color: var(--ink); }
+.arena-home-copy > p { max-width: 440px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.arena-home-button { margin-top: 22px; padding: 13px 18px; display: inline-flex; align-items: center; gap: 22px; border: 0; border-radius: 10px; background: var(--orange); color: #fff; font-size: 12px; font-weight: 800; transition: transform .2s, box-shadow .2s; }
+.arena-home-button:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(255,77,36,.22); }
+.arena-home-button span { font-size: 18px; line-height: 1; }
+.arena-home-missions { display: grid; gap: 10px; }
+.arena-mission-card { min-width: 0; display: grid; grid-template-columns: 42px minmax(0,1fr) 20px; align-items: center; gap: 12px; padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); transition: transform .2s, border-color .2s; }
+.arena-mission-card:hover { transform: translateX(4px); border-color: rgba(255,77,36,.55); }
+.arena-mission-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 11px; background: rgba(255,77,36,.10); font-size: 20px; }
+.arena-mission-card div { display: grid; gap: 3px; }
+.arena-mission-card small { color: var(--orange); font-size: 8px; font-weight: 800; letter-spacing: 1px; }
+.arena-mission-card strong { color: var(--ink); font-size: 12px; }
+.arena-mission-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.arena-mission-arrow { color: var(--orange); font-size: 18px; }
+.arena-home-reward { padding: 11px 14px; border-radius: 10px; background: rgba(255,77,36,.08); color: var(--ink); font-size: 10px; font-weight: 700; text-align: center; }
+.site.dark .arena-home-section { background: linear-gradient(120deg, #292321 0%, var(--surface) 68%); border-color: rgba(255,110,75,.28); }
+.site.dark .arena-mission-card { background: #1c2221; }
+.site.dark .arena-home-reward { background: rgba(255,110,75,.12); }
+@media (max-width: 760px) {
+  .arena-home-section { grid-template-columns: 1fr; margin-left: 4%; margin-right: 4%; padding: 22px; gap: 24px; }
+  .arena-home-copy h2 { font-size: 30px; }
+}
+@media (max-width: 420px) {
+  .arena-mission-card { padding: 11px; grid-template-columns: 36px minmax(0,1fr) 16px; gap: 9px; }
+  .arena-mission-icon { width: 35px; height: 35px; font-size: 17px; }
+}
+
+
+/* Expanded Red Flag Explorer content */
+.red-flag-detail { align-items: flex-start; }
+.red-flag-content { min-width: 0; flex: 1; }
+.red-flag-content > strong { display: block; margin: 2px 0 9px; }
+.red-flag-content ul { margin: 0; padding-left: 17px; display: grid; gap: 7px; }
+.red-flag-content li { padding-left: 2px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+
+/* Homepage mission cards are isolated from the full Cyber Arena cards. */
+.arena-home-mission-card {
+  width: 100%; min-width: 0; display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 22px;
+  align-items: center; gap: 15px; padding: 20px 22px;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--surface); color: var(--ink); text-align: left;
+  cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.arena-home-mission-card:hover, .arena-home-mission-card:focus-visible {
+  transform: translateY(-2px); border-color: rgba(255,77,36,.6);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08); outline: none;
+}
+.arena-home-mission-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,77,36,.10); font-size: 25px; }
+.arena-home-mission-copy { min-width: 0; display: grid; gap: 5px; }
+.arena-home-mission-copy small { color: var(--orange); font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+.arena-home-mission-copy strong { color: var(--ink); font-size: 14px; line-height: 1.35; }
+.arena-home-mission-copy > span { color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.arena-home-mission-arrow { justify-self: end; color: var(--orange); font-size: 22px; line-height: 1; }
+.site.dark .arena-home-mission-card { background: #1c2221; }
+@media (max-width: 420px) {
+  .arena-home-mission-card { grid-template-columns: 44px minmax(0,1fr) 18px; gap: 11px; padding: 15px; }
+  .arena-home-mission-icon { width: 44px; height: 44px; font-size: 21px; }
+  .arena-home-mission-copy strong { font-size: 13px; }
+  .arena-home-mission-copy > span { font-size: 11px; }
+  .red-flag-content li { font-size: 9px; }
+}
+
+
+/* TRAP DETECTOR quote */
+.trap-detector-quote {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+  font-style: italic;
+}
+.red-flag-tabs button {
+  min-width: 0;
+}
+.red-flag-tabs button span {
+  flex-shrink: 0;
+}
+.red-flag-content li {
+  font-size: 11px;
+  line-height: 1.65;
+}
+@media (max-width: 600px) {
+  .trap-detector-quote { font-size: 10px; }
+  .red-flag-content li { font-size: 10px; }
+}
+
+
+/* Cyber Myth Buster: five scrollable weekly questions */
+.myth-question-list { display: grid; gap: 25px; margin-top: 22px; }
+.myth-question { padding: 0 0 23px; border-bottom: 1px solid var(--line); scroll-margin-top: 24px; }
+.myth-question:last-child { padding-bottom: 0; border-bottom: 0; }
+.myth-question-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.myth-question-top .myth-label { margin-top: 0; }
+.myth-counter { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .5px; }
+.myth-question h3 { margin: 12px 0 18px; }
+.myth-options button:disabled { cursor: default; opacity: .9; }
+.myth-options button.selected { border-color: #ff805d; background: #fff0e9; color: #bd4526; }
+.site.dark .myth-options button.selected { background: #38251f; color: #ffb097; }
+@media (max-width: 560px) {
+  .myth-question-list { gap: 20px; margin-top: 18px; }
+  .myth-question { padding-bottom: 19px; }
+}
+
+
+/* Cyber Myth Buster: one-question horizontal slider */
+.myth-slider-window { width: 100%; overflow: hidden; margin-top: 22px; }
+.myth-slider-track { display: flex; width: 100%; transition: transform .48s cubic-bezier(.22,.75,.25,1); will-change: transform; }
+.myth-slider-track .myth-question { flex: 0 0 100%; width: 100%; min-width: 100%; padding: 0 2px 8px; border: 0; }
+.myth-slider-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 14px; }
+.myth-slider-controls button { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink); font-size: 19px; cursor: pointer; transition: .2s ease; }
+.myth-slider-controls button:hover:not(:disabled) { border-color: #ff805d; color: #e65c37; transform: translateX(2px); }
+.myth-slider-controls button:disabled { opacity: .3; cursor: not-allowed; }
+.myth-slider-controls span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .5px; }
+.myth-slider-controls i { padding: 0 3px; font-style: normal; opacity: .55; }
+@media (max-width: 560px) {
+  .myth-card { padding: 19px; }
+  .myth-slider-window { margin-top: 16px; }
+  .myth-feedback { padding: 12px; font-size: 10px; }
+}
+
+
+/* =========================================================
+   HOMEPAGE CYBER SAFETY LIBRARY CARDS
+   Theme-aware using the site's existing light/dark variables.
+========================================================= */
+.learn-cta-section {
+  padding-top: 28px;
+  padding-bottom: 34px;
+}
+.learn-cta-section .learn-heading {
+  align-items: center;
+  margin-bottom: 22px;
+}
+.learn-cta-section .learn-heading h2 {
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.2;
+}
+.learn-cta-section .learn-heading p {
+  max-width: 760px;
+  font-size: 14px;
+}
+.learn-cta-section .learn-heading > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 1px solid var(--orange);
+  border-radius: 12px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.learn-cta-section .learn-heading > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px #ff4d242b;
+}
+.home-library-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+.home-library-card {
+  display: flex;
+  min-width: 0;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 17px 16px 15px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--surface);
+  box-shadow: 0 5px 18px rgba(30, 24, 18, .035);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.home-library-card:hover {
+  transform: translateY(-4px);
+  border-color: #ff9b80;
+  box-shadow: 0 12px 26px rgba(30, 24, 18, .08);
+}
+.home-library-card-top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.home-library-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--orange) 11%, var(--surface));
+  font-size: 19px;
+}
+.home-library-tag {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-align: right;
+}
+.home-library-card h3 {
+  margin: 0 0 7px;
+  color: var(--ink);
+  font: 700 15px/1.25 'Space Grotesk', sans-serif;
+  letter-spacing: -.25px;
+}
+.home-library-card p {
+  margin: 0 0 15px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.home-library-card > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.home-library-card > button span {
+  display: inline-grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-size: 13px;
+  transition: transform .2s ease;
+}
+.home-library-card > button:hover span { transform: translateX(3px); }
+.site.dark .home-library-card {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, .14);
+}
+.site.dark .home-library-card:hover { border-color: #a94b32; }
+@media (max-width: 1100px) {
+  .home-library-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .learn-cta-section .learn-heading { align-items: flex-start; flex-direction: column; }
+  .learn-cta-section .learn-heading > button { align-self: flex-start; }
+  .home-library-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .home-library-card { min-height: 185px; padding: 14px 12px; }
+}
+@media (max-width: 390px) {
+  .home-library-grid { grid-template-columns: 1fr; }
+  .home-library-card { min-height: 0; }
+}
+
+
+/* =========================================================
+   DESKTOP WORKSPACE BALANCE FIX
+   Gives the four tool cards enough vertical presence to
+   balance the taller CYRA X + Trap Detector column.
+   Tablet/mobile layouts remain unchanged.
+========================================================= */
+@media (min-width: 851px) {
+  .workspace {
+    align-items: stretch;
+  }
+
+  .workspace-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tools-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .tool-card {
+    min-height: 124px;
+    padding: 20px 22px;
+  }
+}
+
+
+/* =========================================================
+   CYBERAWARE FOOTER FINAL FIX
+   Fixes footer text collisions and legal-bar alignment.
+   Keeps the existing dark premium footer on every theme.
+========================================================= */
+.footer {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.25fr) minmax(110px, .72fr) minmax(155px, .95fr) minmax(270px, 1.3fr);
+  align-items: start;
+  column-gap: clamp(22px, 3vw, 48px);
+  row-gap: 28px;
+  padding: 34px clamp(22px, 3.2vw, 54px) 18px;
+  background: #070d0f;
+  color: #edf2f2;
+  overflow: hidden;
+}
+
+.footer, .footer * { box-sizing: border-box; }
+.footer-brand-block { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 13px; }
+.footer-brand-block .brand { width: 100%; max-width: 270px; margin: 0 0 2px; }
+.footer-brand-block .brand-logo { width: min(100%, 245px); height: auto; max-height: 76px; object-fit: contain; object-position: left center; }
+.footer-brand-copy { margin: 0; color: #f4f6f6; font-size: 16px; font-weight: 700; line-height: 1.45; }
+.footer-brand-description { max-width: 340px; margin: 0; color: #b8c2c4; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.footer-socials { display: flex; align-items: center; gap: 13px; margin-top: 3px; }
+.footer-socials span { display: inline-flex; width: 28px; height: 28px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; color: #f5f7f7; font-size: 13px; font-weight: 800; line-height: 1; }
+.footer-links { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 11px; padding-top: 8px; }
+.footer-links strong { margin: 0 0 5px; color: #fff; font-size: 12px; line-height: 1.4; letter-spacing: .5px; }
+.footer-links button, .footer-links a { display: inline-block; width: auto; max-width: 100%; margin: 0; padding: 0; border: 0; background: transparent; color: #bdc7c8; font: inherit; font-size: 12px; line-height: 1.45; text-align: left; text-decoration: none; cursor: pointer; overflow-wrap: anywhere; transition: color .18s ease, transform .18s ease; }
+.footer-links button:hover, .footer-links a:hover { color: #ff633d; transform: translateX(2px); }
+.footer-alert-card { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 4px 0 0; }
+.footer-alert-kicker { color: #ff6947; font-size: 10px; font-weight: 900; line-height: 1.5; letter-spacing: 1.2px; }
+.footer-alert-card h3 { margin: 0; color: #fff; font-size: clamp(17px, 1.35vw, 21px); line-height: 1.3; }
+.footer-alert-card p { max-width: 360px; margin: 0; color: #c2cbcc; font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
+.footer-helpline { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 7px; max-width: 100%; margin: 1px 0 0; padding: 10px 13px; border: 1px solid rgba(255,99,61,.35); border-radius: 10px; background: rgba(255,99,61,.09); color: #fff; text-decoration: none; line-height: 1.3; }
+.footer-helpline span { color: #ff6947; font-size: 16px; }
+.footer-helpline strong { color: #fff; font-size: 19px; letter-spacing: .2px; }
+.footer-helpline small { color: #c8d0d1; font-size: 11px; }
+.footer-report-link { display: inline-flex; align-items: center; gap: 6px; color: #ff7958; font-size: 12px; font-weight: 700; line-height: 1.5; text-decoration: none; overflow-wrap: anywhere; }
+.footer-report-link:hover { color: #ff9a7e; }
+.footer-legal-bar { grid-column: 1 / -1; min-width: 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 22px; margin-top: 2px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.13); color: #9eaaac; }
+.footer-legal-bar small, .footer-legal-bar span { margin: 0; color: inherit; font-size: 10px; line-height: 1.6; }
+.footer-legal-bar > span { color: #c3cccc; }
+.footer-made-for { text-align: right; }
+
+@media (max-width: 1050px) and (min-width: 851px) {
+  .footer { grid-template-columns: minmax(210px, 1.2fr) minmax(100px, .7fr) minmax(140px, .9fr) minmax(230px, 1.2fr); column-gap: 18px; padding-left: 24px; padding-right: 24px; }
+  .footer-brand-copy { font-size: 14px; }
+  .footer-brand-description, .footer-alert-card p { font-size: 11px; }
+}
+@media (max-width: 850px) {
+  .footer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 24px; padding: 28px 5% 18px; }
+  .footer-brand-block { grid-column: 1 / -1; }
+  .footer-brand-description { max-width: 520px; }
+  .footer-alert-card { padding-top: 4px; }
+  .footer-legal-bar { grid-column: 1 / -1; justify-content: flex-start; }
+  .footer-made-for { text-align: left; }
+}
+@media (max-width: 560px) {
+  .footer { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 23px 16px; padding: 25px 20px 16px; }
+  .footer-brand-block, .footer-alert-card, .footer-legal-bar { grid-column: 1 / -1; }
+  .footer-brand-block .brand-logo { width: min(100%, 215px); }
+  .footer-brand-copy { font-size: 14px; }
+  .footer-brand-description { font-size: 11px; }
+  .footer-links { gap: 9px; padding-top: 0; }
+  .footer-links strong { font-size: 10px; }
+  .footer-links button, .footer-links a { font-size: 11px; }
+  .footer-alert-card { gap: 10px; }
+  .footer-alert-card h3 { font-size: 18px; }
+  .footer-alert-card p { font-size: 11px; }
+  .footer-legal-bar { flex-direction: column; align-items: flex-start; gap: 5px; padding-top: 13px; }
+  .footer-legal-bar small, .footer-legal-bar span { font-size: 9px; text-align: left; }
+}
+
+
+/* =========================================================
+   HERO ACTION BUTTONS — SIMPLE, PREMIUM & THEME AWARE
+   Only styles the two homepage hero actions.
+========================================================= */
+.hero-buttons .primary-button,
+.hero-buttons .secondary-button {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px;
+  min-height: 54px !important;
+  padding: 0 17px !important;
+  border-radius: 12px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .05px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease,
+    background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.hero-buttons .primary-button {
+  color: #fff !important;
+  background: linear-gradient(110deg, #ff542d 0%, #f0441f 100%) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: 0 7px 18px rgba(255,77,36,.16);
+}
+
+.hero-buttons .secondary-button {
+  color: #202725 !important;
+  background: rgba(255,253,249,.88) !important;
+  border: 1px solid rgba(35,45,43,.22) !important;
+  box-shadow: 0 4px 13px rgba(20,25,23,.07);
+}
+
+.hero-action-icon {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,.17);
+}
+.hero-action-icon svg { width: 17px; height: 17px; display: block; }
+.hero-buttons .secondary-button .hero-action-icon {
+  color: #e84b2a;
+  background: rgba(255,77,36,.09);
+}
+.hero-action-label { white-space: nowrap; }
+.hero-action-arrow {
+  margin-left: auto;
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+
+.hero-buttons .primary-button:hover,
+.hero-buttons .secondary-button:hover {
+  transform: translateY(-2px);
+}
+.hero-buttons .primary-button:hover {
+  box-shadow: 0 10px 22px rgba(255,77,36,.27);
+}
+.hero-buttons .secondary-button:hover {
+  border-color: #ff805f !important;
+  box-shadow: 0 8px 18px rgba(25,30,28,.12);
+}
+.hero-buttons button:hover .hero-action-arrow { transform: translateX(3px); }
+.hero-buttons button:active { transform: translateY(0); }
+.hero-buttons button:focus-visible {
+  outline: 3px solid rgba(255,77,36,.35);
+  outline-offset: 3px;
+}
+
+/* Dark theme: secondary action switches to a subtle dark glass surface. */
+.site.dark .hero-buttons .secondary-button {
+  color: #f4f5f2 !important;
+  background: rgba(22,30,31,.88) !important;
+  border-color: rgba(225,235,230,.24) !important;
+  box-shadow: 0 5px 16px rgba(0,0,0,.18);
+}
+.site.dark .hero-buttons .secondary-button .hero-action-icon {
+  color: #ff7959;
+  background: rgba(255,99,61,.14);
+}
+.site.dark .hero-buttons .secondary-button:hover {
+  border-color: rgba(255,121,89,.72) !important;
+  background: rgba(31,41,42,.96) !important;
+}
+
+/* Desktop: balanced side-by-side actions; small screens keep a clean stack. */
+@media (min-width: 851px) {
+  .hero-buttons {
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .hero-buttons .primary-button,
+  .hero-buttons .secondary-button {
+    width: auto !important;
+    max-width: none !important;
+    flex: 1 1 0;
+    align-self: stretch !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .hero-buttons { flex-direction: column !important; align-items: stretch !important; }
+  .hero-buttons .primary-button,
+  .hero-buttons .secondary-button { width: 100% !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-buttons .primary-button,
+  .hero-buttons .secondary-button,
+  .hero-action-arrow { transition: none !important; }
 }
