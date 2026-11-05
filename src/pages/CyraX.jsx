@@ -9,10 +9,9 @@ const INITIAL_MESSAGE = {
 };
 
 const QUICK_QUESTIONS = [
-  "I received an OTP request",
-  "Is this UPI payment safe?",
-  "How do I identify phishing?",
-  "How can I spot a fake app?",
+  { icon: "💳", text: "Is this payment safe?" },
+  { icon: "🔗", text: "Check a suspicious link" },
+  { icon: "🚨", text: "I think this is a scam" },
 ];
 
 function getDefaultResponse(input) {
@@ -69,12 +68,7 @@ function getDefaultResponse(input) {
     return "📱 Before installing an app, verify its developer, reviews, official source and requested permissions. Avoid installing APK files received through unknown links. Unnecessary permissions can be a warning sign.";
   }
 
-  if (
-    contains(
-      "password",
-      "पासवर्ड"
-    )
-  ) {
+  if (contains("password", "पासवर्ड")) {
     return "🔑 Use a strong, unique password for each important account. Enable two-factor authentication where available. Never share passwords, recovery codes or OTPs with anyone.";
   }
 
@@ -125,7 +119,6 @@ function CyraX() {
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // Automatically scroll to the latest message.
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -151,7 +144,6 @@ function CyraX() {
       },
     ]);
 
-    // Known cybersecurity questions receive instant local responses.
     const defaultResponse = getDefaultResponse(userMessage);
 
     if (defaultResponse) {
@@ -162,11 +154,9 @@ function CyraX() {
           text: defaultResponse,
         },
       ]);
-
       return;
     }
 
-    // Send the previous conversation context to the AI backend.
     const history = currentMessages
       .filter(
         (item) =>
@@ -216,13 +206,12 @@ function CyraX() {
         "AI is temporarily unavailable. Check your connection or try again shortly."
       );
 
-      // Keep the user message visible and offer a retry.
       setMessages((previous) => [
         ...previous,
         {
           type: "bot",
           text:
-            "Sorry, bhava! 😅 I couldn't connect to the AI service right now. Your message is still here. Please try again in a moment.",
+            "Sorry, bhava! 😅 I couldn't connect to the AI service right now. Please try again in a moment.",
         },
       ]);
     } finally {
@@ -251,196 +240,218 @@ function CyraX() {
 
   return (
     <main className="cyrax-page">
-      <section className="cyrax-header">
-        <div className="cyrax-avatar">🤖</div>
+      <div className="cyrax-glow glow-one" />
+      <div className="cyrax-glow glow-two" />
 
-        <div className="cyrax-brand">
-          <div className="cyrax-title">
-            CYRA <span>X</span>
-          </div>
-
-          <p>Your AI Cyber Safety Assistant</p>
-        </div>
-
-        <div className="cyrax-status">
-          <span className="cyrax-status-dot" />
-          <span>Assistant</span>
-        </div>
-      </section>
-
-      <section className="cyrax-intro">
-        <span className="cyrax-eyebrow">
-          YOUR DIGITAL SAFETY COMPANION
-        </span>
-
-        <h1>
-          Stay Smart. <span>Stay Safe.</span>
-        </h1>
-
-        <p>
-          Ask questions, explore cybersecurity, or simply start
-          a conversation. CYRA X is here to help.
-        </p>
-      </section>
-
-      <section
-        className="cyrax-chat"
-        aria-label="CYRA X conversation"
-      >
-        <header className="cyrax-chat-header">
-          <div className="cyrax-chat-heading">
-            <div className="cyrax-chat-icon">✦</div>
+      <section className="cyrax-layout">
+        {/* SIMPLE BRAND PANEL */}
+        <aside className="cyrax-side-panel">
+          <div className="cyrax-brand-top">
+            <div className="cyrax-avatar">
+              <span>✦</span>
+            </div>
 
             <div>
-              <h2>Chat with CYRA X</h2>
-              <p>Ask in your preferred language</p>
-            </div>
+              <div className="cyrax-title">
+                CYRA <span>X</span>
+              </div>
+<p>Smart. Safe. Always here. ✦</p>            </div>
           </div>
 
-          <button
-            type="button"
-            className="cyrax-clear-button"
-            onClick={clearChat}
-            disabled={isLoading}
-            title="Clear conversation"
-          >
-            <span aria-hidden="true">↻</span>
-            <span>New chat</span>
-          </button>
-        </header>
+          <div className="cyrax-side-content">
+            <span className="cyrax-eyebrow">
+              <i />
+              CYBERAWARE AI
+            </span>
 
-        <div
-          className="cyrax-messages"
-          aria-live="polite"
-          aria-busy={isLoading}
+            <h1>
+              Stay curious.
+              <span> Stay protected.</span>
+            </h1>
+
+            <p>
+              Simple answers for safer choices online.
+            </p>
+          </div>
+
+          <div className="cyrax-side-footer">
+            <span className="cyrax-status-dot" />
+            CYRA X IS READY
+          </div>
+        </aside>
+
+        {/* CHAT PANEL */}
+        <section
+          className="cyrax-chat"
+          aria-label="CYRA X conversation"
         >
-          {messages.map((item, index) => (
-            <div
-              key={`${index}-${item.type}`}
-              className={`cyrax-message-row ${item.type}`}
-            >
-              {item.type === "bot" && (
-                <div className="cyrax-small-avatar">✦</div>
-              )}
+          <header className="cyrax-chat-header">
+            <div className="cyrax-chat-heading">
+              <div className="cyrax-chat-icon">✦</div>
 
-              <div className="cyrax-message-content">
+              <div>
+                <div className="chat-heading-row">
+                  <h2>Chat with CYRA X</h2>
+
+                  <span className="chat-live">
+                    <i />
+                    Ready
+                  </span>
+                </div>
+
+                <p>Ask in your preferred language</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="cyrax-clear-button"
+              onClick={clearChat}
+              disabled={isLoading}
+              title="Clear conversation"
+            >
+              <span>↻</span>
+              <span>New chat</span>
+            </button>
+          </header>
+
+          <div
+            className="cyrax-messages"
+            aria-live="polite"
+            aria-busy={isLoading}
+          >
+            <div className="cyrax-chat-welcome">
+              <h3>Hey, I'm CYRA X 👋</h3>
+              <p>What can I help you with today?</p>
+            </div>
+
+            {messages.map((item, index) => (
+              <div
+                key={`${index}-${item.type}`}
+                className={`cyrax-message-row ${item.type}`}
+              >
                 {item.type === "bot" && (
+                  <div className="cyrax-small-avatar">✦</div>
+                )}
+
+                <div className="cyrax-message-content">
+                  {item.type === "bot" && (
+                    <span className="cyrax-sender-label">
+                      CYRA X
+                    </span>
+                  )}
+
+                  <div className="cyrax-bubble">
+                    {item.text}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="cyrax-message-row bot">
+                <div className="cyrax-small-avatar">✦</div>
+
+                <div className="cyrax-message-content">
                   <span className="cyrax-sender-label">
                     CYRA X
                   </span>
-                )}
 
-                <div className="cyrax-bubble">
-                  {item.text}
+                  <div className="cyrax-bubble cyrax-typing">
+                    <span />
+                    <span />
+                    <span />
+                    <small>CYRA is thinking...</small>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )}
 
-          {isLoading && (
-            <div className="cyrax-message-row bot">
-              <div className="cyrax-small-avatar">✦</div>
+            <div ref={messagesEndRef} />
+          </div>
 
-              <div className="cyrax-message-content">
-                <span className="cyrax-sender-label">
-                  CYRA X
-                </span>
-
-                <div
-                  className="cyrax-bubble cyrax-typing"
-                  aria-label="CYRA X is thinking"
-                >
-                  <span />
-                  <span />
-                  <span />
-                  <small>Thinking...</small>
-                </div>
+          {messages.length <= 2 && !isLoading && (
+            <section className="cyrax-quick-section">
+              <div className="cyrax-quick-heading">
+                <h3>Try one of these</h3>
               </div>
+
+              <div className="cyrax-quick-buttons">
+                {QUICK_QUESTIONS.map((question) => (
+                  <button
+                    type="button"
+                    key={question.text}
+                    onClick={() => sendMessage(question.text)}
+                    disabled={isLoading}
+                  >
+                    <span className="quick-question-icon">
+                      {question.icon}
+                    </span>
+
+                    <span className="quick-question-text">
+                      {question.text}
+                    </span>
+
+                    <span className="quick-arrow">↗</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {errorMessage && (
+            <div className="cyrax-error">
+              <span>{errorMessage}</span>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setErrorMessage("");
+                  textareaRef.current?.focus();
+                }}
+              >
+                Dismiss
+              </button>
             </div>
           )}
 
-          <div ref={messagesEndRef} />
-        </div>
-
-        {messages.length <= 2 && !isLoading && (
-          <section className="cyrax-quick-section">
-            <div className="cyrax-quick-heading">
-              <span>✦</span>
-              <p>Try asking</p>
-            </div>
-
-            <div className="cyrax-quick-buttons">
-              {QUICK_QUESTIONS.map((question) => (
-                <button
-                  type="button"
-                  key={question}
-                  onClick={() => sendMessage(question)}
-                  disabled={isLoading}
-                >
-                  {question}
-                  <span aria-hidden="true">↗</span>
-                </button>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {errorMessage && (
-          <div className="cyrax-error" role="status">
-            <span>{errorMessage}</span>
-            <button
-              type="button"
-              onClick={() => {
-                setErrorMessage("");
-                textareaRef.current?.focus();
-              }}
-            >
-              Dismiss
-            </button>
-          </div>
-        )}
-
-        <form
-          className="cyrax-input-area"
-          onSubmit={(event) => {
-            event.preventDefault();
-            sendMessage();
-          }}
-        >
-          <textarea
-            ref={textareaRef}
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Message CYRA X in any language..."
-            rows={1}
-            maxLength={4000}
-            disabled={isLoading}
-            aria-label="Type your message"
-          />
-
-          <button
-            type="submit"
-            className="cyrax-send"
-            disabled={!message.trim() || isLoading}
-            aria-label="Send message"
-            title="Send message"
+          <form
+            className="cyrax-input-area"
+            onSubmit={(event) => {
+              event.preventDefault();
+              sendMessage();
+            }}
           >
-            {isLoading ? "…" : "↑"}
-          </button>
-        </form>
+            <div className="cyrax-input-wrap">
+              <textarea
+                ref={textareaRef}
+                value={message}
+                onChange={(event) =>
+                  setMessage(event.target.value)
+                }
+                onKeyDown={handleKeyDown}
+                placeholder="Ask CYRA anything..."
+                rows={1}
+                maxLength={4000}
+                disabled={isLoading}
+              />
 
-        <footer className="cyrax-warning">
-          <span>🛡️</span>
-          Never share your OTP, PIN, password, CVV or API key.
-          CYRA X provides awareness guidance, not professional
-          financial or legal advice.
-        </footer>
+              <span className="input-hint">
+                Enter to send
+              </span>
+            </div>
+
+            <button
+              type="submit"
+              className="cyrax-send"
+              disabled={!message.trim() || isLoading}
+              aria-label="Send message"
+            >
+              {isLoading ? "…" : "↑"}
+            </button>
+          </form>
+        </section>
       </section>
-
-      <p className="cyrax-footer-note">
-        Powered by CyberAware <span>·</span> Think before you click.
-      </p>
     </main>
   );
 }

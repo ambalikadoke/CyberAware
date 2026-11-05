@@ -6,7 +6,6 @@ import Verify from "./pages/Verify";
 import CyraX from "./pages/CyraX";
 import CyberArena from "./pages/CyberArena";
 import CyberDetective from "./pages/CyberDetective";
-import ScamSimulator from "./pages/ScamSimulator";
 import SafetyScore from "./pages/SafetyScore";
 
 const tools = [
@@ -23,13 +22,6 @@ const tools = [
     icon: "🔎",
     color: "purple",
     page: "detective",
-  },
-  {
-    title: "Scam Simulator",
-    description: "Practice identifying scam situations before they happen.",
-    icon: "🎯",
-    color: "pink",
-    page: "simulator",
   },
   {
     title: "My Safety Score",
@@ -307,7 +299,6 @@ export default function App() {
         )}
 
         {page === "detective" && <CyberDetective />}
-        {page === "simulator" && <ScamSimulator />}
         {page === "safety" && <SafetyScore />}
       </div>
     );
@@ -381,8 +372,6 @@ export default function App() {
                     navigate("cyrax");
                   else if (/detective|investigation|case/.test(term))
                     navigate("detective");
-                  else if (/simulator|practice/.test(term))
-                    navigate("simulator");
                   else if (/safety score|scorecard|safety habits/.test(term))
                     navigate("safety");
                   else if (/arena|game|mission/.test(term))
@@ -412,14 +401,6 @@ export default function App() {
             type="button"
           >
             {darkMode ? "☀" : "☾"}
-          </button>
-
-          <button
-            className="get-started"
-            onClick={() => navigate("learn")}
-            type="button"
-          >
-            Get Started <span>→</span>
           </button>
         </div>
       </header>

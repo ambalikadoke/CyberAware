@@ -3,34 +3,35 @@ import "./Verify.css";
 
 function Verify() {
   const [mode, setMode] = useState(() => {
-    const savedMode = sessionStorage.getItem("cyberaware-verify-mode");
+    const savedMode = sessionStorage.getItem(
+      "cyberaware-verify-mode"
+    );
+
     return ["website", "app", "message"].includes(savedMode)
       ? savedMode
       : "website";
   });
 
-  // Website states
   const [url, setUrl] = useState("");
   const [websiteResult, setWebsiteResult] = useState(null);
 
-  // App states
   const [appName, setAppName] = useState("");
   const [source, setSource] = useState("");
   const [permissions, setPermissions] = useState([]);
   const [appResult, setAppResult] = useState(null);
 
-  // Message states
   const [message, setMessage] = useState("");
   const [messageResult, setMessageResult] = useState(null);
 
   const [checking, setChecking] = useState(false);
 
-  // =========================
-  // TAB SWITCHING
-  // =========================
-
   const switchMode = (newMode) => {
     setMode(newMode);
+    sessionStorage.setItem(
+      "cyberaware-verify-mode",
+      newMode
+    );
+
     setWebsiteResult(null);
     setAppResult(null);
     setMessageResult(null);
@@ -46,7 +47,8 @@ function Verify() {
       setWebsiteResult({
         level: "warning",
         title: "Enter a website or link",
-        message: "Please enter a URL before starting the safety check.",
+        message:
+          "Please enter a URL before starting the safety check.",
         warnings: [],
       });
       return;
@@ -58,7 +60,10 @@ function Verify() {
     setTimeout(() => {
       let value = url.trim().toLowerCase();
 
-      if (!value.startsWith("http://") && !value.startsWith("https://")) {
+      if (
+        !value.startsWith("http://") &&
+        !value.startsWith("https://")
+      ) {
         value = "https://" + value;
       }
 
@@ -67,7 +72,9 @@ function Verify() {
 
       if (value.startsWith("http://")) {
         score += 2;
-        warnings.push("The website is not using HTTPS.");
+        warnings.push(
+          "The website is not using HTTPS."
+        );
       }
 
       const suspiciousWords = [
@@ -87,7 +94,9 @@ function Verify() {
       suspiciousWords.forEach((word) => {
         if (value.includes(word)) {
           score += 2;
-          warnings.push(`Suspicious keyword detected: "${word}"`);
+          warnings.push(
+            `Suspicious keyword detected: "${word}"`
+          );
         }
       });
 
@@ -112,7 +121,8 @@ function Verify() {
         .replace(/^https?:\/\//, "")
         .split("/")[0];
 
-      const hyphenCount = (domainPart.match(/-/g) || []).length;
+      const hyphenCount =
+        (domainPart.match(/-/g) || []).length;
 
       if (hyphenCount >= 3) {
         score += 2;
@@ -152,7 +162,6 @@ function Verify() {
         title,
         message: resultMessage,
         warnings,
-        checkedUrl: value,
       });
 
       setChecking(false);
@@ -176,7 +185,8 @@ function Verify() {
       setAppResult({
         level: "warning",
         title: "Enter an app name",
-        message: "Please enter the name of the app you want to check.",
+        message:
+          "Please enter the name of the app you want to check.",
         warnings: [],
       });
       return;
@@ -210,47 +220,48 @@ function Verify() {
         );
       }
 
-      if (permissions.includes("Contacts")) {
-        score += 2;
-        warnings.push(
-          "Contacts permission can expose your personal contact list."
-        );
-      }
+      const permissionScores = {
+        Contacts: {
+          score: 2,
+          warning:
+            "Contacts permission can expose your personal contact list.",
+        },
+        SMS: {
+          score: 3,
+          warning:
+            "SMS access can expose verification messages and sensitive information.",
+        },
+        Microphone: {
+          score: 2,
+          warning:
+            "Microphone access should only be required when the app's purpose needs it.",
+        },
+        Location: {
+          score: 1,
+          warning:
+            "Location access can reveal your physical location.",
+        },
+        Storage: {
+          score: 1,
+          warning:
+            "Storage access may allow the app to access files on your device.",
+        },
+        Accessibility: {
+          score: 3,
+          warning:
+            "Accessibility access is powerful and should only be granted to apps you fully trust.",
+        },
+      };
 
-      if (permissions.includes("SMS")) {
-        score += 3;
-        warnings.push(
-          "SMS access can expose verification messages and sensitive information."
-        );
-      }
+      permissions.forEach((permission) => {
+        if (permissionScores[permission]) {
+          score += permissionScores[permission].score;
 
-      if (permissions.includes("Microphone")) {
-        score += 2;
-        warnings.push(
-          "Microphone access should only be required when the app's purpose needs it."
-        );
-      }
-
-      if (permissions.includes("Location")) {
-        score += 1;
-        warnings.push(
-          "Location access can reveal your physical location."
-        );
-      }
-
-      if (permissions.includes("Storage")) {
-        score += 1;
-        warnings.push(
-          "Storage access may allow the app to access files on your device."
-        );
-      }
-
-      if (permissions.includes("Accessibility")) {
-        score += 3;
-        warnings.push(
-          "Accessibility access is powerful and should only be granted to apps you fully trust."
-        );
-      }
+          warnings.push(
+            permissionScores[permission].warning
+          );
+        }
+      });
 
       let level;
       let title;
@@ -285,7 +296,7 @@ function Verify() {
   };
 
   // =========================
-  // MESSAGE ANALYZER
+  // MESSAGE CHECKER
   // =========================
 
   const analyzeMessage = () => {
@@ -305,7 +316,6 @@ function Verify() {
 
     setTimeout(() => {
       const value = message.toLowerCase();
-
       let score = 0;
       const warnings = [];
 
@@ -322,7 +332,11 @@ function Verify() {
         "money",
       ];
 
-      if (moneyWords.some((word) => value.includes(word))) {
+      if (
+        moneyWords.some((word) =>
+          value.includes(word)
+        )
+      ) {
         score += 2;
         warnings.push(
           "The message contains money, prize or reward-related language."
@@ -340,7 +354,11 @@ function Verify() {
         "verify now",
       ];
 
-      if (urgencyWords.some((word) => value.includes(word))) {
+      if (
+        urgencyWords.some((word) =>
+          value.includes(word)
+        )
+      ) {
         score += 2;
         warnings.push(
           "The message creates urgency or pressure to act quickly."
@@ -356,7 +374,11 @@ function Verify() {
         "login",
       ];
 
-      if (securityWords.some((word) => value.includes(word))) {
+      if (
+        securityWords.some((word) =>
+          value.includes(word)
+        )
+      ) {
         score += 3;
         warnings.push(
           "The message mentions sensitive account or verification information."
@@ -374,7 +396,11 @@ function Verify() {
         "qr code",
       ];
 
-      if (paymentWords.some((word) => value.includes(word))) {
+      if (
+        paymentWords.some((word) =>
+          value.includes(word)
+        )
+      ) {
         score += 2;
         warnings.push(
           "The message contains payment or banking-related language."
@@ -401,7 +427,11 @@ function Verify() {
         "delete your account",
       ];
 
-      if (threatWords.some((word) => value.includes(word))) {
+      if (
+        threatWords.some((word) =>
+          value.includes(word)
+        )
+      ) {
         score += 2;
         warnings.push(
           "The message uses threats or consequences to pressure you."
@@ -438,21 +468,22 @@ function Verify() {
 
       setChecking(false);
     }, 1200);
-  };
-
-  // =========================
-  // CLEAR
+  };  // =========================
+  // CLEAR ALL DATA
   // =========================
 
   const clearAll = () => {
     setUrl("");
     setWebsiteResult(null);
+
     setAppName("");
     setSource("");
     setPermissions([]);
     setAppResult(null);
+
     setMessage("");
     setMessageResult(null);
+
     setChecking(false);
   };
 
@@ -467,90 +498,87 @@ function Verify() {
       ? appResult
       : messageResult;
 
+  const permissionOptions = [
+    "Contacts",
+    "SMS",
+    "Microphone",
+    "Location",
+    "Storage",
+    "Accessibility",
+  ];
+
+  // =========================
+  // PAGE UI
+  // =========================
+
   return (
     <div className="verify-page">
 
       {/* HERO */}
       <section className="verify-hero">
-
         <div className="verify-badge">
           🛡️ CYBERAWARE VERIFY
         </div>
 
         <h1>
-          Check Before
-          <span> You Trust.</span>
+          Check Before <span>You Trust.</span>
         </h1>
 
         <p>
-          Check suspicious websites, app permissions and messages for common
-          warning signs before sharing information or taking action.
+          Quickly check websites, apps and suspicious messages
+          before you interact with them.
         </p>
-
-        <div className="verify-hero-note">
-          <span>✓</span> Basic pattern-based checks · No passwords or OTPs required
-        </div>
-
       </section>
 
-
+      {/* MAIN CONTAINER */}
       <section className="verify-container">
 
-        {/* MODE TABS */}
+        {/* TABS */}
         <div className="verify-tabs">
-
           <button
             className={mode === "website" ? "active" : ""}
             onClick={() => switchMode("website")}
+            type="button"
           >
-            🌐 Website
+            <span>🌐</span> Website
           </button>
 
           <button
             className={mode === "app" ? "active" : ""}
             onClick={() => switchMode("app")}
+            type="button"
           >
-            📱 App
+            <span>📱</span> App
           </button>
 
           <button
             className={mode === "message" ? "active" : ""}
             onClick={() => switchMode("message")}
+            type="button"
           >
-            💬 Message
+            <span>💬</span> Message
           </button>
-
         </div>
 
-
-        {/* ================= WEBSITE ================= */}
-
+        {/* WEBSITE CHECKER */}
         {mode === "website" && (
-
           <div className="checker-card">
 
             <div className="checker-header">
-
-              <div className="checker-icon">
-                🌐
-              </div>
-
               <div>
-                <h2>Website Safety Checker</h2>
-                <p>
-                  Review a URL for common warning signs using local checks.
+                <p className="checker-eyebrow">
+                  WEBSITE CHECK
                 </p>
+                <h2>Is this link safe?</h2>
               </div>
 
+              <span className="checker-emoji">🌐</span>
             </div>
 
-
             <div className="input-area">
-
               <label>Website or URL</label>
 
               <div className="url-input-wrapper">
-
                 <span>🔗</span>
 
                 <input
@@ -564,74 +592,57 @@ function Verify() {
                     }
                   }}
                 />
-
               </div>
-
             </div>
 
-
             <div className="checker-actions">
-
               <button
                 className="check-button"
                 onClick={analyzeWebsite}
                 disabled={checking}
+                type="button"
               >
-                {checking ? "Checking..." : "🔍 Check Website"}
+                {checking
+                  ? "Checking..."
+                  : "Check Website →"}
               </button>
 
               {url && (
                 <button
                   className="clear-button"
                   onClick={clearAll}
+                  type="button"
                 >
                   Clear
                 </button>
               )}
-
             </div>
 
-
-            <div className="privacy-note">
-              🔒
-              <span>
-                Never enter passwords, OTPs, PINs or card details here.
-              </span>
-            </div>
-
+            <p className="privacy-note">
+              🔒 Never enter passwords, OTPs, PINs or card details.
+            </p>
           </div>
-
         )}
 
-
-        {/* ================= APP ================= */}
-
+        {/* APP CHECKER */}
         {mode === "app" && (
-
-          <div className="checker-card">
+          <div className="checker-card app-checker">
 
             <div className="checker-header">
-
-              <div className="checker-icon">
-                📱
-              </div>
-
               <div>
-                <h2>App Safety Checker</h2>
-                <p>
-                  Review the download source and permissions you select.
+                <p className="checker-eyebrow">
+                  APP CHECK
                 </p>
+                <h2>Check your app before installing.</h2>
               </div>
 
+              <span className="checker-emoji">📱</span>
             </div>
 
-
             <div className="input-area">
-
               <label>App Name</label>
 
               <div className="url-input-wrapper">
-
                 <span>📱</span>
 
                 <input
@@ -640,17 +651,11 @@ function Verify() {
                   value={appName}
                   onChange={(e) => setAppName(e.target.value)}
                 />
-
               </div>
-
             </div>
 
-
-            <div className="input-area app-source">
-
-              <label>
-                Where did you download it from?
-              </label>
+            <div className="input-area">
+              <label>Where did you get it?</label>
 
               <div className="source-grid">
 
@@ -663,8 +668,7 @@ function Verify() {
                   }
                   onClick={() => setSource("playstore")}
                 >
-                  <strong>▶</strong>
-                  <span>Official Store</span>
+                  <span>✓</span> Official Store
                 </button>
 
                 <button
@@ -676,8 +680,7 @@ function Verify() {
                   }
                   onClick={() => setSource("apk")}
                 >
-                  <strong>📦</strong>
-                  <span>APK File</span>
+                  <span>📦</span> APK File
                 </button>
 
                 <button
@@ -689,324 +692,175 @@ function Verify() {
                   }
                   onClick={() => setSource("unknown")}
                 >
-                  <strong>❓</strong>
-                  <span>Unknown Source</span>
+                  <span>?</span> Unknown
                 </button>
 
               </div>
-
             </div>
-
 
             <div className="input-area">
-
-              <label>
-                Permissions requested by the app
-              </label>
-
-              <p className="permission-help">
-                Select the permissions the app asks for.
-              </p>
+              <label>Permissions requested</label>
 
               <div className="permission-grid">
-
-                {[
-                  "Contacts",
-                  "SMS",
-                  "Microphone",
-                  "Location",
-                  "Storage",
-                  "Accessibility",
-                ].map((permission) => (
-
+                {permissionOptions.map((permission) => (
                   <button
-                    type="button"
                     key={permission}
+                    type="button"
                     className={
                       permissions.includes(permission)
-                        ? "permission-option selected"
-                        : "permission-option"
+                        ? "permission-chip selected"
+                        : "permission-chip"
                     }
-                    onClick={() => togglePermission(permission)}
+                    onClick={() =>
+                      togglePermission(permission)
+                    }
                   >
-                    <span>
-                      {permissions.includes(permission) ? "✓" : "+"}
-                    </span>
+                    {permissions.includes(permission) && "✓ "}
                     {permission}
                   </button>
-
                 ))}
-
               </div>
-
             </div>
 
-
             <div className="checker-actions">
-
               <button
                 className="check-button"
                 onClick={analyzeApp}
                 disabled={checking}
+                type="button"
               >
-                {checking ? "Analyzing..." : "🛡️ Check App Safety"}
+                {checking
+                  ? "Checking..."
+                  : "Check App Safety →"}
               </button>
 
-              {(appName || source || permissions.length > 0) && (
+              {(appName ||
+                source ||
+                permissions.length > 0) && (
                 <button
                   className="clear-button"
                   onClick={clearAll}
+                  type="button"
                 >
                   Clear
                 </button>
               )}
-
             </div>
-
-
-            <div className="privacy-note">
-              🔒
-              <span>
-                Never enter OTPs, passwords, PINs or banking details.
-              </span>
-            </div>
-
           </div>
-
         )}
 
-
-        {/* ================= MESSAGE ================= */}
-
+        {/* MESSAGE CHECKER */}
         {mode === "message" && (
-
           <div className="checker-card">
 
             <div className="checker-header">
-
-              <div className="checker-icon">
-                💬
-              </div>
-
               <div>
-                <h2>Message Scam Analyzer</h2>
-                <p>
-                  Paste a suspicious SMS, WhatsApp message or email
-                  to check for common scam patterns.
+                <p className="checker-eyebrow">
+                  MESSAGE CHECK
                 </p>
+                <h2>Something feels suspicious?</h2>
               </div>
 
+              <span className="checker-emoji">💬</span>
             </div>
 
-
             <div className="input-area">
-
-              <label>Suspicious Message</label>
+              <label>Paste the suspicious message</label>
 
               <textarea
-                className="message-textarea"
-                placeholder="Paste the suspicious SMS, WhatsApp message or email here..."
+                className="message-input"
+                placeholder="Paste an SMS, WhatsApp message or email text here..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-
             </div>
-
-
-            <div className="message-example">
-              💡 Example: "Congratulations! You won ₹50,000.
-              Click this link immediately to claim your reward."
-            </div>
-
 
             <div className="checker-actions">
-
               <button
                 className="check-button"
                 onClick={analyzeMessage}
                 disabled={checking}
+                type="button"
               >
-                {checking ? "Analyzing..." : "🔍 Analyze Message"}
+                {checking
+                  ? "Checking..."
+                  : "Analyze Message →"}
               </button>
 
               {message && (
                 <button
                   className="clear-button"
                   onClick={clearAll}
+                  type="button"
                 >
                   Clear
                 </button>
               )}
-
             </div>
 
-
-            <div className="privacy-note">
-              🔒
-              <span>
-                Never paste passwords, OTPs, PINs or banking details.
-              </span>
-            </div>
-
-          </div>
-
-        )}
-
-
-        {/* LOADING */}
-
-        {checking && (
-
-          <div className="checking-card">
-
-            <div className="loading-spinner"></div>
-
-            <h3>Analyzing...</h3>
-
-            <p>
-              Running basic pattern checks on the information you entered.
+            <p className="privacy-note">
+              🔒 Remove personal details before pasting a message.
             </p>
-
           </div>
-
         )}
 
-
-        {/* RESULT */}
-
+        {/* RESULT SECTION */}
         {currentResult && !checking && (
-
-          <div className={`result-card ${currentResult.level}`}>
-
+          <div
+            className={
+              "result-card " + currentResult.level
+            }
+          >
             <div className="result-top">
 
-              <div className="result-status-icon">
-
-                {currentResult.level === "danger" && "🚨"}
-                {currentResult.level === "caution" && "⚠️"}
-                {currentResult.level === "safe" && "🟢"}
-                {currentResult.level === "warning" && "ℹ️"}
-
-              </div>
+              <span className="result-icon">
+                {currentResult.level === "safe"
+                  ? "✓"
+                  : currentResult.level === "danger"
+                  ? "!"
+                  : "⚠"}
+              </span>
 
               <div>
+                <h3>{currentResult.title}</h3>
 
-                <span className="result-label">
-                  SCAN RESULT
-                </span>
-
-                <h2>
-                  {currentResult.title}
-                </h2>
-
+                <p>
+                  {currentResult.message}
+                </p>
               </div>
-
             </div>
-
-
-            <p className="result-message">
-              {currentResult.message}
-            </p>
-
-
-            {currentResult.checkedUrl && (
-
-              <div className="checked-url">
-
-                <span>Checked URL</span>
-
-                <strong>
-                  {currentResult.checkedUrl}
-                </strong>
-
-              </div>
-
-            )}
-
 
             {currentResult.warnings &&
               currentResult.warnings.length > 0 && (
+                <div className="warning-list">
 
-                <div className="warnings-section">
-
-                  <h3>🚩 Warning Signs Found</h3>
+                  <strong>What we noticed</strong>
 
                   <ul>
-
                     {currentResult.warnings.map(
                       (warning, index) => (
                         <li key={index}>
-                          <span>•</span>
                           {warning}
                         </li>
                       )
                     )}
-
                   </ul>
 
                 </div>
-
               )}
 
-
             {currentResult.level === "safe" && (
-
-              <div className="safe-note">
-                ✓ Basic checks passed. Always verify independently
-                before sharing sensitive information.
-              </div>
-
+              <p className="safe-note">
+                ✓ Basic checks passed. Always verify
+                independently before sharing sensitive
+                information.
+              </p>
             )}
 
           </div>
-
         )}
 
-
-        {/* TIPS */}
-
-        <div className="verify-tips">
-
-          <div className="tips-title">
-
-            <span>💡</span>
-
-            <div>
-
-              <h3>Remember</h3>
-
-              <p>
-                CyberAware results are guidance, not a guarantee.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div className="tips-grid">
-
-            <div>
-              <strong>01</strong>
-              <span>Check the developer and source.</span>
-            </div>
-
-            <div>
-              <strong>02</strong>
-              <span>Review permissions and links carefully.</span>
-            </div>
-
-            <div>
-              <strong>03</strong>
-              <span>Never share OTPs or passwords.</span>
-            </div>
-
-          </div>
-
-        </div>
-
       </section>
-
     </div>
   );
 }

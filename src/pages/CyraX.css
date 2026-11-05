@@ -1,182 +1,274 @@
 /* =========================================
-   CYRA X — LIGHT MODE
+   CYRA X — GLASSMORPHISM GEN-Z DESIGN
 ========================================= */
 
 .cyrax-page {
-  --cyrax-bg: #fffaf5;
-  --cyrax-surface: #ffffff;
-  --cyrax-surface-soft: #fff5ed;
-  --cyrax-ink: #24211f;
-  --cyrax-muted: #77716d;
-  --cyrax-line: #eee4db;
-  --cyrax-orange: #ff542e;
-  --cyrax-orange-soft: #fff0e8;
-  --cyrax-user-bubble: #ff542e;
-  --cyrax-bot-bubble: #ffffff;
-  --cyrax-shadow: 0 18px 55px rgba(54, 38, 25, 0.07);
+  --cyrax-bg: #f7f4f0;
+  --cyrax-ink: #201e1c;
+  --cyrax-muted: #716b66;
+  --cyrax-orange: #f2633b;
+  --cyrax-orange-bright: #ff8b67;
+  --cyrax-glass: rgba(255, 255, 255, 0.72);
+  --cyrax-glass-strong: rgba(255, 255, 255, 0.88);
+  --cyrax-line: rgba(255, 255, 255, 0.75);
+  --cyrax-soft-line: #e7ded7;
+  --cyrax-bot: rgba(255, 255, 255, 0.75);
+  --cyrax-shadow: 0 25px 70px rgba(63, 43, 31, 0.1);
 
+  position: relative;
   width: 100%;
   min-height: 100%;
-  padding: 30px;
+  padding: 32px;
+  overflow: hidden;
   box-sizing: border-box;
   color: var(--cyrax-ink);
-  background: var(--cyrax-bg);
-  border-radius: 24px;
-  transition:
-    background 0.25s ease,
-    color 0.25s ease;
+  background:
+    radial-gradient(circle at 5% 10%, rgba(255, 147, 107, 0.2), transparent 25%),
+    radial-gradient(circle at 95% 90%, rgba(255, 190, 151, 0.16), transparent 25%),
+    var(--cyrax-bg);
 }
 
-/* =========================================
-   DARK MODE
-   Uses the existing .site.dark class
-========================================= */
+/* DARK MODE */
 
 .site.dark .cyrax-page {
-  --cyrax-bg: #151918;
-  --cyrax-surface: #202523;
-  --cyrax-surface-soft: #252b28;
-  --cyrax-ink: #f4f4ef;
-  --cyrax-muted: #b0b9b5;
-  --cyrax-line: #373e3a;
-  --cyrax-orange: #ff7654;
-  --cyrax-orange-soft: #34251f;
-  --cyrax-user-bubble: #e94f2d;
-  --cyrax-bot-bubble: #252b28;
-  --cyrax-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+  --cyrax-bg: #101413;
+  --cyrax-ink: #f7f4f1;
+  --cyrax-muted: #aab1ac;
+  --cyrax-orange: #ff7854;
+  --cyrax-orange-bright: #ff9b7b;
+  --cyrax-glass: rgba(30, 37, 34, 0.68);
+  --cyrax-glass-strong: rgba(30, 37, 34, 0.86);
+  --cyrax-line: rgba(255, 255, 255, 0.08);
+  --cyrax-soft-line: #303a35;
+  --cyrax-bot: rgba(38, 47, 43, 0.8);
+  --cyrax-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+
+  background:
+    radial-gradient(circle at 5% 10%, rgba(255, 110, 75, 0.1), transparent 24%),
+    radial-gradient(circle at 95% 90%, rgba(255, 110, 75, 0.06), transparent 28%),
+    var(--cyrax-bg);
 }
 
-/* HEADER */
+/* BACKGROUND GLOWS */
 
-.cyrax-header {
+.cyrax-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+.glow-one {
+  width: 260px;
+  height: 260px;
+  top: -100px;
+  left: -80px;
+  background: rgba(255, 116, 76, 0.13);
+}
+
+.glow-two {
+  width: 300px;
+  height: 300px;
+  right: -130px;
+  bottom: -130px;
+  background: rgba(255, 157, 114, 0.12);
+}
+
+/* MAIN LAYOUT */
+
+.cyrax-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.85fr 1.5fr;
+  gap: 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* LEFT GLASS PANEL */
+
+.cyrax-side-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 690px;
+  padding: 28px;
+  border: 1px solid var(--cyrax-line);
+  border-radius: 28px;
+  background: var(--cyrax-glass);
+  box-shadow: var(--cyrax-shadow);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.site.dark .cyrax-side-panel {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.cyrax-brand-top {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 20px 24px;
-  border-radius: 22px;
-  color: #ffffff;
-  background:
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(255, 115, 75, 0.25),
-      transparent 34%
-    ),
-    linear-gradient(130deg, #1d2522, #111715);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: var(--cyrax-shadow);
+  gap: 13px;
 }
 
 .cyrax-avatar {
   width: 56px;
   height: 56px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   border-radius: 18px;
-  background: linear-gradient(135deg, #ff714c, #ff4928);
-  color: #ffffff;
-  font-size: 27px;
-  box-shadow: 0 7px 20px rgba(255, 84, 46, 0.24);
+  color: white;
+  background: linear-gradient(135deg, var(--cyrax-orange-bright), var(--cyrax-orange));
+  box-shadow: 0 12px 28px rgba(242, 99, 59, 0.25);
 }
 
-.cyrax-brand {
-  min-width: 0;
+.cyrax-avatar span {
+  font-size: 25px;
 }
 
 .cyrax-title {
-  color: #ffffff;
-  font-size: 25px;
-  font-weight: 850;
-  letter-spacing: 1px;
-  line-height: 1.2;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: var(--cyrax-ink);
 }
 
 .cyrax-title span {
-  color: #ff815f;
+  color: var(--cyrax-orange);
 }
 
-.cyrax-header p {
+.cyrax-brand-top p {
   margin: 5px 0 0;
-  color: #c0c9c3;
-  font-size: 13px;
+  color: var(--cyrax-muted);
+  font-size: 11px;
 }
 
-.cyrax-status {
-  margin-left: auto;
+.cyrax-side-content {
+  margin: auto 0;
+  padding: 45px 0;
+}
+
+.cyrax-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
+  border: 1px solid rgba(242, 99, 59, 0.2);
   border-radius: 30px;
-  color: #d5f7de;
-  background: rgba(34, 197, 94, 0.11);
-  border: 1px solid rgba(74, 222, 128, 0.18);
-  font-size: 12px;
-  font-weight: 650;
-  white-space: nowrap;
+  color: var(--cyrax-orange);
+  background: rgba(242, 99, 59, 0.07);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
 }
 
-.cyrax-status-dot {
-  width: 8px;
-  height: 8px;
+.cyrax-eyebrow i {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.55);
+  background: var(--cyrax-orange);
+  box-shadow: 0 0 10px var(--cyrax-orange);
 }
 
-/* INTRO */
-
-.cyrax-intro {
-  text-align: center;
-  padding: 42px 15px 28px;
+.cyrax-side-content h1 {
+  margin: 20px 0 0;
+  max-width: 400px;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
 }
 
-.cyrax-eyebrow {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: var(--cyrax-orange);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.8px;
-}
-
-.cyrax-intro h1 {
-  margin: 0;
-  color: var(--cyrax-ink);
-  font-size: clamp(28px, 4vw, 39px);
-  font-weight: 850;
-  letter-spacing: -1.3px;
-  line-height: 1.2;
-}
-
-.cyrax-intro h1 span {
+.cyrax-side-content h1 span {
+  display: block;
   color: var(--cyrax-orange);
 }
 
-.cyrax-intro p {
-  max-width: 590px;
-  margin: 13px auto 0;
+.cyrax-side-content > p {
+  max-width: 380px;
+  margin: 18px 0 0;
   color: var(--cyrax-muted);
   font-size: 14px;
   line-height: 1.8;
 }
 
-/* CHAT PANEL */
+.cyrax-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.cyrax-feature-list > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px;
+  border: 1px solid var(--cyrax-soft-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site.dark .cyrax-feature-list > div {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.cyrax-feature-list > div > span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: rgba(242, 99, 59, 0.1);
+}
+
+.cyrax-feature-list p {
+  margin: 0;
+}
+
+.cyrax-feature-list strong {
+  display: block;
+  font-size: 11px;
+}
+
+.cyrax-feature-list small {
+  display: block;
+  margin-top: 3px;
+  color: var(--cyrax-muted);
+  font-size: 9px;
+}
+
+.cyrax-side-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  color: var(--cyrax-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.cyrax-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4cd783;
+  box-shadow: 0 0 12px rgba(76, 215, 131, 0.8);
+}
+
+/* CHAT GLASS PANEL */
 
 .cyrax-chat {
-  width: 100%;
-  max-width: 950px;
-  margin: 0 auto;
   overflow: hidden;
-  background: var(--cyrax-surface);
+  min-width: 0;
   border: 1px solid var(--cyrax-line);
-  border-radius: 24px;
+  border-radius: 28px;
+  background: var(--cyrax-glass);
   box-shadow: var(--cyrax-shadow);
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .cyrax-chat-header {
@@ -185,8 +277,13 @@
   justify-content: space-between;
   gap: 15px;
   padding: 20px 24px;
-  background: var(--cyrax-surface);
-  border-bottom: 1px solid var(--cyrax-line);
+  border-bottom: 1px solid var(--cyrax-soft-line);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.site.dark .cyrax-chat-header {
+  border-color: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .cyrax-chat-heading {
@@ -196,56 +293,74 @@
 }
 
 .cyrax-chat-icon {
-  width: 43px;
-  height: 43px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  color: var(--cyrax-orange);
+  background: rgba(242, 99, 59, 0.1);
+  font-size: 20px;
+}
+
+.chat-heading-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 14px;
-  background: var(--cyrax-orange-soft);
-  color: var(--cyrax-orange);
-  font-size: 23px;
+  gap: 9px;
 }
 
 .cyrax-chat-heading h2 {
   margin: 0;
-  color: var(--cyrax-ink);
   font-size: 15px;
-  font-weight: 800;
 }
 
 .cyrax-chat-heading p {
   margin: 5px 0 0;
   color: var(--cyrax-muted);
-  font-size: 12px;
+  font-size: 10px;
+}
+
+.chat-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #35a867;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.chat-live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4cd783;
 }
 
 .cyrax-clear-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 7px;
-  padding: 10px 13px;
-  border: 1px solid var(--cyrax-line);
+  padding: 9px 13px;
+  border: 1px solid var(--cyrax-soft-line);
   border-radius: 12px;
-  background: var(--cyrax-surface);
   color: var(--cyrax-muted);
+  background: transparent;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 650;
+  font-size: 11px;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .cyrax-clear-button span:first-child {
-  font-size: 18px;
+  color: var(--cyrax-orange);
+  font-size: 16px;
 }
 
 .cyrax-clear-button:hover:not(:disabled) {
   color: var(--cyrax-orange);
   border-color: var(--cyrax-orange);
-  background: var(--cyrax-orange-soft);
+  background: rgba(242, 99, 59, 0.06);
 }
 
 .cyrax-clear-button:disabled {
@@ -253,33 +368,54 @@
   cursor: not-allowed;
 }
 
-/* MESSAGE AREA */
+/* MESSAGES */
 
 .cyrax-messages {
   display: flex;
   flex-direction: column;
-  gap: 23px;
-  min-height: 350px;
-  max-height: 520px;
+  gap: 20px;
+  min-height: 400px;
+  max-height: 540px;
   overflow-y: auto;
-  padding: 26px;
-  background: var(--cyrax-bg);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.08);
   scroll-behavior: smooth;
 }
 
+.site.dark .cyrax-messages {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 .cyrax-messages::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .cyrax-messages::-webkit-scrollbar-thumb {
-  background: var(--cyrax-line);
-  border-radius: 20px;
+  border-radius: 10px;
+  background: var(--cyrax-soft-line);
+}
+
+.cyrax-chat-welcome {
+  text-align: center;
+}
+
+.cyrax-chat-welcome span {
+  color: var(--cyrax-orange);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.cyrax-chat-welcome p {
+  margin: 7px 0 0;
+  color: var(--cyrax-muted);
+  font-size: 10px;
 }
 
 .cyrax-message-row {
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 9px;
   width: 100%;
 }
 
@@ -290,23 +426,20 @@
 .cyrax-small-avatar {
   width: 34px;
   height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
   border-radius: 11px;
   color: var(--cyrax-orange);
-  background: var(--cyrax-orange-soft);
-  font-size: 19px;
+  background: rgba(242, 99, 59, 0.1);
 }
 
 .cyrax-message-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 5px;
   max-width: 78%;
-  min-width: 0;
 }
 
 .cyrax-message-row.user .cyrax-message-content {
@@ -314,18 +447,26 @@
 }
 
 .cyrax-sender-label {
-  padding-left: 4px;
   color: var(--cyrax-muted);
-  font-size: 10px;
-  font-weight: 800;
+  font-size: 9px;
+  font-weight: 900;
   letter-spacing: 0.7px;
 }
 
+.cyrax-sender-label i {
+  margin-left: 4px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--cyrax-orange);
+  background: rgba(242, 99, 59, 0.1);
+  font-size: 7px;
+  font-style: normal;
+}
+
 .cyrax-bubble {
-  max-width: 100%;
-  padding: 13px 16px;
-  border-radius: 17px;
-  font-size: 14px;
+  padding: 14px 17px;
+  border-radius: 19px;
+  font-size: 13px;
   line-height: 1.75;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
@@ -333,25 +474,28 @@
 
 .cyrax-message-row.bot .cyrax-bubble {
   color: var(--cyrax-ink);
-  background: var(--cyrax-bot-bubble);
+  background: var(--cyrax-bot);
   border: 1px solid var(--cyrax-line);
   border-bottom-left-radius: 5px;
 }
 
 .cyrax-message-row.user .cyrax-bubble {
-  color: #ffffff;
-  background: var(--cyrax-user-bubble);
-  border: 1px solid transparent;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--cyrax-orange-bright),
+    var(--cyrax-orange)
+  );
   border-bottom-right-radius: 5px;
+  box-shadow: 0 10px 25px rgba(242, 99, 59, 0.2);
 }
 
-/* THINKING INDICATOR */
+/* THINKING */
 
 .cyrax-typing {
   display: flex;
   align-items: center;
   gap: 5px;
-  min-height: 42px;
 }
 
 .cyrax-typing > span {
@@ -373,15 +517,13 @@
 .cyrax-typing small {
   margin-left: 6px;
   color: var(--cyrax-muted);
-  font-size: 11px;
+  font-size: 10px;
 }
 
 @keyframes cyrax-bounce {
-  0%,
-  60%,
-  100% {
+  0%, 60%, 100% {
     transform: translateY(0);
-    opacity: 0.45;
+    opacity: 0.4;
   }
 
   30% {
@@ -393,68 +535,91 @@
 /* QUICK QUESTIONS */
 
 .cyrax-quick-section {
-  padding: 20px 24px;
-  background: var(--cyrax-surface);
-  border-top: 1px solid var(--cyrax-line);
+  padding: 19px 24px;
+  border-top: 1px solid var(--cyrax-soft-line);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.site.dark .cyrax-quick-section {
+  border-color: rgba(255, 255, 255, 0.07);
 }
 
 .cyrax-quick-heading {
   display: flex;
   align-items: center;
-  gap: 7px;
-  margin-bottom: 13px;
+  justify-content: space-between;
+  margin-bottom: 14px;
 }
 
-.cyrax-quick-heading span {
+.cyrax-quick-heading > div > span {
   color: var(--cyrax-orange);
-  font-size: 16px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
 }
 
-.cyrax-quick-heading p {
-  margin: 0;
-  color: var(--cyrax-muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.9px;
-  text-transform: uppercase;
+.cyrax-quick-heading h3 {
+  margin: 5px 0 0;
+  font-size: 15px;
+}
+
+.quick-spark {
+  color: var(--cyrax-orange);
+  font-size: 21px;
 }
 
 .cyrax-quick-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 9px;
 }
 
 .cyrax-quick-buttons button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 13px;
-  border: 1px solid var(--cyrax-line);
-  border-radius: 12px;
+  gap: 9px;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid var(--cyrax-soft-line);
+  border-radius: 15px;
   color: var(--cyrax-ink);
-  background: var(--cyrax-surface);
+  background: rgba(255, 255, 255, 0.18);
   font-family: inherit;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 11px;
   text-align: left;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
+  transition: 0.2s ease;
 }
 
-.cyrax-quick-buttons button span {
+.site.dark .cyrax-quick-buttons button {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.quick-question-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(242, 99, 59, 0.1);
+}
+
+.quick-question-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.quick-arrow {
   color: var(--cyrax-orange);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .cyrax-quick-buttons button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  border-color: var(--cyrax-orange);
-  background: var(--cyrax-orange-soft);
+  transform: translateY(-3px);
+  border-color: rgba(242, 99, 59, 0.45);
+  background: rgba(242, 99, 59, 0.06);
+  box-shadow: 0 10px 22px rgba(40, 30, 25, 0.06);
 }
 
 .cyrax-quick-buttons button:disabled {
@@ -466,23 +631,19 @@
 
 .cyrax-error {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 12px 20px;
   color: var(--cyrax-ink);
-  background: var(--cyrax-orange-soft);
-  border-top: 1px solid var(--cyrax-line);
-  font-size: 12px;
-  line-height: 1.5;
+  background: rgba(242, 99, 59, 0.08);
+  font-size: 11px;
 }
 
 .cyrax-error button {
   border: none;
-  background: transparent;
   color: var(--cyrax-orange);
+  background: transparent;
   font-family: inherit;
-  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -492,75 +653,87 @@
 .cyrax-input-area {
   display: flex;
   align-items: flex-end;
-  gap: 12px;
+  gap: 10px;
   padding: 18px 20px;
-  background: var(--cyrax-surface);
-  border-top: 1px solid var(--cyrax-line);
+  border-top: 1px solid var(--cyrax-soft-line);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.site.dark .cyrax-input-area {
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.cyrax-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 
 .cyrax-input-area textarea {
-  flex: 1;
   width: 100%;
-  min-width: 0;
-  min-height: 48px;
+  min-height: 52px;
   max-height: 140px;
-  padding: 13px 15px;
+  padding: 14px 95px 14px 16px;
   resize: vertical;
   box-sizing: border-box;
-  border: 1px solid var(--cyrax-line);
-  border-radius: 14px;
+  border: 1px solid var(--cyrax-soft-line);
+  border-radius: 16px;
   outline: none;
   color: var(--cyrax-ink);
-  background: var(--cyrax-bg);
+  background: rgba(255, 255, 255, 0.28);
   font-family: inherit;
-  font-size: 14px;
-  line-height: 1.6;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.25s ease;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: 0.2s ease;
+}
+
+.site.dark .cyrax-input-area textarea {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .cyrax-input-area textarea::placeholder {
   color: var(--cyrax-muted);
-  opacity: 0.85;
 }
 
 .cyrax-input-area textarea:focus {
   border-color: var(--cyrax-orange);
-  box-shadow: 0 0 0 3px rgba(255, 84, 46, 0.1);
+  box-shadow: 0 0 0 4px rgba(242, 99, 59, 0.08);
 }
 
-.cyrax-input-area textarea:disabled {
-  opacity: 0.7;
-  cursor: wait;
+.input-hint {
+  position: absolute;
+  right: 14px;
+  bottom: 17px;
+  color: var(--cyrax-muted);
+  font-size: 9px;
+  pointer-events: none;
 }
 
 .cyrax-send {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
-  border-radius: 14px;
-  color: #ffffff;
-  background: linear-gradient(135deg, #ff704a, #ff4928);
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--cyrax-orange-bright),
+    var(--cyrax-orange)
+  );
   font-family: inherit;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(255, 84, 46, 0.2);
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    box-shadow 0.2s ease;
+  box-shadow: 0 10px 24px rgba(242, 99, 59, 0.25);
+  transition: 0.2s ease;
 }
 
 .cyrax-send:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 9px 20px rgba(255, 84, 46, 0.28);
+  box-shadow: 0 14px 28px rgba(242, 99, 59, 0.32);
 }
 
 .cyrax-send:disabled {
@@ -573,148 +746,392 @@
 
 .cyrax-warning {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 13px 20px 17px;
+  gap: 8px;
+  padding: 13px 18px 16px;
   color: var(--cyrax-muted);
-  background: var(--cyrax-surface);
   font-size: 10px;
-  line-height: 1.7;
   text-align: center;
 }
 
-.cyrax-warning span {
-  flex-shrink: 0;
+.cyrax-warning p {
+  margin: 0;
+}
+
+.cyrax-warning strong {
+  color: var(--cyrax-ink);
 }
 
 /* BOTTOM NOTE */
 
 .cyrax-footer-note {
-  margin: 19px 0 0;
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 0;
   color: var(--cyrax-muted);
   font-size: 11px;
-  line-height: 1.7;
   text-align: center;
 }
 
+.cyrax-footer-note strong {
+  color: var(--cyrax-ink);
+}
+
 .cyrax-footer-note span {
-  padding: 0 5px;
+  padding: 0 6px;
   color: var(--cyrax-orange);
 }
 
-/* ACCESSIBILITY */
+/* RESPONSIVE */
 
-.cyrax-page button:focus-visible {
-  outline: 2px solid var(--cyrax-orange);
-  outline-offset: 3px;
+@media (max-width: 950px) {
+  .cyrax-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cyrax-side-panel {
+    min-height: auto;
+  }
+
+  .cyrax-side-content {
+    margin: 25px 0;
+    padding: 20px 0;
+  }
+
+  .cyrax-feature-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-
-/* =========================================
-   RESPONSIVE DESIGN
-========================================= */
 
 @media (max-width: 700px) {
   .cyrax-page {
-    padding: 15px;
-    border-radius: 17px;
+    padding: 12px;
   }
 
-  .cyrax-header {
-    gap: 12px;
-    padding: 16px;
-    border-radius: 18px;
+  .cyrax-layout {
+    gap: 14px;
   }
 
-  .cyrax-avatar {
-    width: 47px;
-    height: 47px;
-    border-radius: 14px;
-    font-size: 23px;
-  }
-
-  .cyrax-title {
-    font-size: 21px;
-  }
-
-  .cyrax-header p {
-    max-width: 170px;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  .cyrax-status {
-    gap: 6px;
-    padding: 7px 9px;
-    font-size: 10px;
-  }
-
-  .cyrax-intro {
-    padding: 32px 5px 22px;
-  }
-
-  .cyrax-intro h1 {
-    font-size: 30px;
-  }
-
-  .cyrax-intro p {
-    font-size: 13px;
-  }
-
+  .cyrax-side-panel,
   .cyrax-chat {
-    border-radius: 18px;
+    border-radius: 21px;
+  }
+
+  .cyrax-side-panel {
+    padding: 20px;
+  }
+
+  .cyrax-side-content h1 {
+    font-size: 38px;
+  }
+
+  .cyrax-feature-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cyrax-feature-list > div {
+    padding: 10px;
   }
 
   .cyrax-chat-header {
-    padding: 16px;
-  }
-
-  .cyrax-chat-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-  }
-
-  .cyrax-chat-heading h2 {
-    font-size: 13px;
+    padding: 15px;
   }
 
   .cyrax-chat-heading p {
-    font-size: 10px;
+    font-size: 9px;
+  }
+
+  .chat-live {
+    display: none;
   }
 
   .cyrax-clear-button {
-    gap: 5px;
-    padding: 8px;
+    padding: 8px 10px;
     font-size: 10px;
   }
 
   .cyrax-messages {
     min-height: 380px;
-    max-height: 480px;
-    gap: 19px;
-    padding: 18px 12px;
-  }
-
-  .cyrax-small-avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 9px;
-    font-size: 16px;
+    max-height: 500px;
+    padding: 17px 12px;
   }
 
   .cyrax-message-content {
-    max-width: 86%;
+    max-width: 87%;
   }
 
   .cyrax-bubble {
     padding: 11px 13px;
-    border-radius: 15px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .cyrax-quick-section {
     padding: 16px 13px;
+  }
+
+  .cyrax-quick-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .cyrax-input-area {
+    padding: 12px;
+  }
+
+  .cyrax-input-area textarea {
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .input-hint {
+    display: none;
+  }
+
+  .cyrax-send {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cyrax-page {
+    padding: 8px;
+  }
+
+  .cyrax-side-panel {
+    padding: 16px;
+  }
+
+  .cyrax-status-dot {
+    flex-shrink: 0;
+  }
+
+  .cyrax-side-content h1 {
+    font-size: 33px;
+  }
+
+  .cyrax-message-content {
+    max-width: 90%;
+  }
+
+  .cyrax-clear-button span:last-child {
+    display: none;
+  }
+}
+
+/* =========================================
+   CYRA X — CLEAN SIMPLE GEN-Z UPDATE
+========================================= */
+
+/* Less information on the left panel */
+.cyrax-side-panel {
+  justify-content: space-between;
+}
+
+.cyrax-side-content {
+  margin: auto 0;
+  padding: 35px 0;
+}
+
+.cyrax-side-content > p {
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cyrax-feature-list {
+  display: none;
+}
+
+/* Cleaner chat welcome */
+.cyrax-chat-welcome {
+  padding: 12px 0 4px;
+}
+
+.cyrax-chat-welcome h3 {
+  margin: 0;
+  color: var(--cyrax-ink);
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.cyrax-chat-welcome p {
+  margin: 6px 0 0;
+  color: var(--cyrax-muted);
+  font-size: 11px;
+}
+
+.cyrax-chat-welcome span {
+  display: none;
+}
+
+/* Keep the chat as the main visual focus */
+.cyrax-chat {
+  min-height: 690px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cyrax-messages {
+  flex: 1;
+  min-height: 360px;
+}
+
+/* Cleaner sender label */
+.cyrax-sender-label {
+  letter-spacing: 0.5px;
+}
+
+/* Simple quick prompt pills */
+.cyrax-quick-section {
+  padding: 14px 24px 18px;
+  background: transparent;
+}
+
+.cyrax-quick-heading {
+  margin-bottom: 10px;
+}
+
+.cyrax-quick-heading h3 {
+  margin: 0;
+  color: var(--cyrax-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.cyrax-quick-heading > div,
+.quick-spark {
+  display: none;
+}
+
+.cyrax-quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cyrax-quick-buttons button {
+  width: auto;
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  border-radius: 999px;
+  font-size: 10px;
+  background: rgba(242, 99, 59, 0.055);
+}
+
+.quick-question-icon {
+  width: auto;
+  height: auto;
+  background: transparent;
+}
+
+.quick-arrow {
+  display: none;
+}
+
+/* More compact header */
+.cyrax-chat-header {
+  padding: 18px 24px;
+}
+
+.cyrax-chat-heading p {
+  margin-top: 4px;
+}
+
+/* Mobile: no extra menu, no hamburger, clean single-column chat */
+@media (max-width: 950px) {
+  .cyrax-side-panel {
+    min-height: auto;
+  }
+
+  .cyrax-side-content {
+    margin: 18px 0;
+    padding: 18px 0;
+  }
+
+  .cyrax-side-footer {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .cyrax-page {
+    padding: 10px;
+  }
+
+  .cyrax-side-panel {
+    padding: 18px;
+  }
+
+  .cyrax-side-content h1 {
+    margin-top: 14px;
+    font-size: 36px;
+  }
+
+  .cyrax-side-content > p {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+
+  .cyrax-side-footer {
+    font-size: 8px;
+  }
+
+  .cyrax-chat {
+    min-height: 620px;
+  }
+
+  .cyrax-chat-header {
+    padding: 14px;
+  }
+
+  .cyrax-chat-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cyrax-chat-heading h2 {
+    font-size: 14px;
+  }
+
+  .cyrax-chat-heading p {
+    display: none;
+  }
+
+  .chat-live {
+    display: inline-flex;
+    font-size: 8px;
+  }
+
+  .cyrax-clear-button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .cyrax-clear-button span:last-child {
+    display: none;
+  }
+
+  .cyrax-messages {
+    min-height: 310px;
+    max-height: 440px;
+    padding: 18px 13px;
+    gap: 16px;
+  }
+
+  .cyrax-chat-welcome h3 {
+    font-size: 16px;
+  }
+
+  .cyrax-quick-section {
+    padding: 12px 13px 14px;
   }
 
   .cyrax-quick-buttons {
@@ -723,55 +1140,8 @@
 
   .cyrax-quick-buttons button {
     width: 100%;
-    font-size: 12px;
-  }
-
-  .cyrax-input-area {
-    gap: 9px;
-    padding: 12px;
-  }
-
-  .cyrax-input-area textarea {
-    min-height: 45px;
-    padding: 11px;
-    font-size: 13px;
-  }
-
-  .cyrax-send {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-  }
-
-  .cyrax-warning {
-    padding: 12px;
-    font-size: 10px;
-  }
-}
-
-@media (max-width: 380px) {
-  .cyrax-page {
-    padding: 10px;
-  }
-
-  .cyrax-status {
-    font-size: 0;
-  }
-
-  .cyrax-status-dot {
-    width: 9px;
-    height: 9px;
-  }
-
-  .cyrax-intro h1 {
-    font-size: 26px;
-  }
-
-  .cyrax-clear-button span:last-child {
-    display: none;
-  }
-
-  .cyrax-message-content {
-    max-width: 88%;
+    justify-content: flex-start;
+    padding: 10px 12px;
+    border-radius: 13px;
   }
 }
