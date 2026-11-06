@@ -5,7 +5,7 @@ const API_URL = "http://localhost:5000/api/chat";
 
 const INITIAL_MESSAGE = {
   type: "bot",
-  text: "Hey! 👋 I'm CYRA X, your AI assistant from CyberAware. Ask me about online safety, scams, or anything else. You can talk to me in Marathi, Hindi, English or Hinglish!",
+  text: "Hello! I'm CYRA X, your Cyber Awareness Assistant. I'm here to help you stay safe online and guide you through cybersecurity concerns, online scams, fraud prevention, and digital safety. How can I assist you today?",
 };
 
 const QUICK_QUESTIONS = [
@@ -100,12 +100,10 @@ function getDefaultResponse(input) {
   }
 
   if (
-    /^(hi|hello|hey|hii|hlo|नमस्कार|नमस्ते|हाय)[!. ]*$/i.test(
-      text
-    )
-  ) {
-    return "Hey there! 👋😊 I'm CYRA X. You can ask me about cybersecurity, technology, studies or everyday questions. Which language would you like to chat in?";
-  }
+  /^(hi|hello|hey|hii|hlo|नमस्कार|नमस्ते|हाय)[!. ]*$/i.test(text)
+) {
+  return "Hello! I'm CYRA X, your Cyber Awareness Assistant. I'm here to help you stay safe online and guide you through cybersecurity concerns, online scams, fraud prevention, and digital safety. How can I assist you today?";
+}
 
   return null;
 }
@@ -210,9 +208,8 @@ function CyraX() {
         ...previous,
         {
           type: "bot",
-          text:
-            "Sorry, bhava! 😅 I couldn't connect to the AI service right now. Please try again in a moment.",
-        },
+text:
+  "CYRA X is temporarily unavailable. Please check your connection and try again in a moment.",        },
       ]);
     } finally {
       setIsLoading(false);
@@ -299,8 +296,7 @@ function CyraX() {
                   </span>
                 </div>
 
-                <p>Ask in your preferred language</p>
-              </div>
+<p>Ask in any language — CYRA replies in English</p>              </div>
             </div>
 
             <button

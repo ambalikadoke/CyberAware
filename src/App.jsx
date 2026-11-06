@@ -340,11 +340,6 @@ export default function App() {
           <button onClick={() => navigate("cyrax")}>
             CYRA X
           </button>
-
-          <button onClick={() => navigate("arena")}>
-            Cyber Arena
-          </button>
-
           <a
             href="#community"
             onClick={() => setMenuOpen(false)}
@@ -734,71 +729,7 @@ export default function App() {
           </aside>
         </section>
 
-        {/* CYBER MYTH BUSTER */}
-        <section className="awareness-lab" id="awareness-lab">
-          <div className="awareness-heading">
-            <h2>Small Checks. Stronger Safety.</h2>
-          </div>
-
-          <div className="awareness-grid">
-            <article className="myth-card">
-              <div className="lab-card-heading">
-                <span className="lab-icon myth-icon">✳</span>
-                <span>
-                  <strong>Cyber Myth Buster</strong>
-                </span>
-              </div>
-
-              <div className="myth-slider-window">
-                <div
-                  className="myth-slider-track"
-                  style={{ transform: `translateX(-${activeMythIndex * 100}%)` }}
-                >
-                  {weeklyMyths.map((item, index) => {
-                    const selectedAnswer = mythAnswers[index];
-                    const isCorrect = selectedAnswer === item.answer;
-                    return (
-                      <section className="myth-question" key={`${mythWeekStart}-${index}`}>
-                        <div className="myth-question-top">
-                          <span className="myth-label">TRUE OR FALSE?</span>
-                        </div>
-                        <h3>“{item.question}”</h3>
-                        <div className="myth-options">
-                          {["True", "False"].map((option) => (
-                            <button
-                              className={selectedAnswer === option ? "selected" : ""}
-                              type="button"
-                              key={option}
-                              aria-pressed={selectedAnswer === option}
-                              onClick={() => chooseMythAnswer(index, option)}
-                            >
-                              {option}
-                            </button>
-                          ))}
-                        </div>
-                        {selectedAnswer && (
-                          <div className={`myth-feedback ${isCorrect ? "good" : "bad"}`}>
-                            <strong>{isCorrect ? "Correct!" : "Not quite — here's the fact."}</strong>
-                            <ul>
-                              {item.explanation.map((point) => <li key={point}>{point}</li>)}
-                            </ul>
-                          </div>
-                        )}
-                      </section>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="myth-slider-controls">
-                <button type="button" onClick={() => setActiveMythIndex((i) => Math.max(0, i - 1))} disabled={activeMythIndex === 0} aria-label="Previous question">←</button>
-                <span>{activeMythIndex + 1} <i>/</i> 5</span>
-                <button type="button" onClick={() => setActiveMythIndex((i) => Math.min(4, i + 1))} disabled={activeMythIndex === 4} aria-label="Next question">→</button>
-              </div>
-              <small className="myth-footnote">New myths every Monday.</small>
-            </article>
-          </div>
-        </section>
-
+       
         {/* LEARN SECTION */}
         <section className="learn-section learn-cta-section" id="learn">
           <div className="learn-heading">
@@ -837,42 +768,8 @@ export default function App() {
             ))}
           </div>
         </section>
-
-        {/* CYBER ARENA HOMEPAGE FEATURE */}
-        <section className="arena-home-section" aria-labelledby="arena-home-title">
-          <div className="arena-home-copy">
-            <span className="arena-home-kicker">⚔️ &nbsp; PLAY SMART. STAY SCAM-PROOF.</span>
-            <h2 id="arena-home-title">Cyber Arena</h2>
-            <p>
-              Take on real-world scam challenges. Think fast, choose smart and
-              stay one step ahead.
-            </p>
-            <button className="arena-home-button" onClick={() => navigate("arena")} type="button">
-              Enter Cyber Arena <span aria-hidden="true">→</span>
-            </button>
-          </div>
-
-          <div className="arena-home-missions">
-            <button className="arena-home-mission-card" type="button" onClick={() => openArenaMission(1)} aria-label="Open Phishing Attack mission">
-              <span className="arena-home-mission-icon">🎣</span>
-              <span className="arena-home-mission-copy"><small>MISSION 01</small><strong>Phishing Attack</strong><span>Spot suspicious messages and links.</span></span>
-              <span className="arena-home-mission-arrow" aria-hidden="true">↗</span>
-            </button>
-            <button className="arena-home-mission-card" type="button" onClick={() => openArenaMission(2)} aria-label="Open UPI Fraud mission">
-              <span className="arena-home-mission-icon">💳</span>
-              <span className="arena-home-mission-copy"><small>MISSION 02</small><strong>UPI Fraud</strong><span>Make safer choices with digital payments.</span></span>
-              <span className="arena-home-mission-arrow" aria-hidden="true">↗</span>
-            </button>
-            <button className="arena-home-mission-card" type="button" onClick={() => openArenaMission(3)} aria-label="Open Job Scam mission">
-              <span className="arena-home-mission-icon">💼</span>
-              <span className="arena-home-mission-copy"><small>MISSION 03</small><strong>Job Scam</strong><span>Separate genuine offers from fake jobs.</span></span>
-              <span className="arena-home-mission-arrow" aria-hidden="true">↗</span>
-            </button>
-          </div>
-        </section>
-      </main>
-
-      {/* FOOTER */}
+      
+          {/* FOOTER */}
       <footer className="footer" id="community">
         <div className="footer-brand-block">
           <Logo darkMode={!darkMode} />
@@ -896,7 +793,6 @@ export default function App() {
           <button onClick={() => navigate("learn")} type="button">Learn</button>
           <button onClick={() => navigate("verify")} type="button">Verify</button>
           <button onClick={() => navigate("cyrax")} type="button">CYRA X</button>
-          <button onClick={() => navigate("arena")} type="button">Cyber Arena</button>
         </div>
 
         <div className="footer-links">
@@ -925,6 +821,7 @@ export default function App() {
           <small className="footer-made-for">Built for a safer digital India.</small>
         </div>
       </footer>
+      </main>
     </div>
-  );
-}
+    );
+    }

@@ -3630,14 +3630,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   display: grid;
   grid-template-columns: minmax(240px, 1.25fr) minmax(110px, .72fr) minmax(155px, .95fr) minmax(270px, 1.3fr);
   align-items: start;
-  column-gap: clamp(22px, 3vw, 48px);
-  row-gap: 28px;
-  padding: 34px clamp(22px, 3.2vw, 54px) 18px;
+  column-gap: clamp(18px, 2.5vw, 38px);
+  row-gap: 16px;
+  padding: 20px clamp(18px, 3vw, 45px) 15px;
   background: #070d0f;
   color: #edf2f2;
   overflow: hidden;
 }
-
 .footer, .footer * { box-sizing: border-box; }
 .footer-brand-block { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 13px; }
 .footer-brand-block .brand { width: 100%; max-width: 270px; margin: 0 0 2px; }
@@ -3679,19 +3678,83 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .footer-made-for { text-align: left; }
 }
 @media (max-width: 560px) {
-  .footer { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 23px 16px; padding: 25px 20px 16px; }
-  .footer-brand-block, .footer-alert-card, .footer-legal-bar { grid-column: 1 / -1; }
-  .footer-brand-block .brand-logo { width: min(100%, 215px); }
-  .footer-brand-copy { font-size: 14px; }
-  .footer-brand-description { font-size: 11px; }
-  .footer-links { gap: 9px; padding-top: 0; }
-  .footer-links strong { font-size: 10px; }
-  .footer-links button, .footer-links a { font-size: 11px; }
-  .footer-alert-card { gap: 10px; }
-  .footer-alert-card h3 { font-size: 18px; }
-  .footer-alert-card p { font-size: 11px; }
-  .footer-legal-bar { flex-direction: column; align-items: flex-start; gap: 5px; padding-top: 13px; }
-  .footer-legal-bar small, .footer-legal-bar span { font-size: 9px; text-align: left; }
+  .footer {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px 14px;
+    padding: 20px 16px 12px;
+  }
+
+  .footer-brand-block,
+  .footer-alert-card,
+  .footer-legal-bar {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand-block {
+    gap: 8px;
+  }
+
+  .footer-brand-block .brand-logo {
+    width: min(100%, 180px);
+  }
+
+  .footer-brand-copy {
+    font-size: 13px;
+  }
+
+  .footer-brand-description {
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .footer-socials {
+    margin-top: 2px;
+    gap: 9px;
+  }
+
+  .footer-links {
+    gap: 7px;
+    padding-top: 0;
+  }
+
+  .footer-links strong {
+    font-size: 10px;
+  }
+
+  .footer-links button,
+  .footer-links a {
+    font-size: 10px;
+  }
+
+  .footer-alert-card {
+    gap: 8px;
+  }
+
+  .footer-alert-card h3 {
+    font-size: 17px;
+  }
+
+  .footer-alert-card p {
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .footer-helpline {
+    padding: 9px 12px;
+  }
+
+  .footer-legal-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-top: 10px;
+  }
+
+  .footer-legal-bar small,
+  .footer-legal-bar span {
+    font-size: 9px;
+    text-align: left;
+  }
 }
 
 
@@ -3844,5 +3907,177 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
   .theme-button {
     margin: 0;
+  }
+}
+/* =========================
+   COMPACT FOOTER
+========================= */
+
+.footer {
+  padding: 45px 55px 20px;
+}
+
+.footer-brand-block {
+  gap: 12px;
+}
+
+.footer-brand-block p {
+  margin: 0;
+}
+
+.footer-brand-copy {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.footer-brand-description {
+  max-width: 370px;
+  line-height: 1.55;
+}
+
+.footer-socials {
+  margin-top: 8px;
+  gap: 10px;
+}
+
+.footer-socials span {
+  width: 36px;
+  height: 36px;
+}
+
+.footer-links {
+  gap: 12px;
+}
+
+.footer-links strong {
+  margin-bottom: 4px;
+}
+
+.footer-alert-card {
+  padding: 0;
+}
+
+.footer-alert-card h3 {
+  margin: 10px 0;
+}
+
+.footer-alert-card p {
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.footer-helpline {
+  padding: 12px 16px;
+}
+
+.footer-report-link {
+  margin-top: 12px;
+}
+
+.footer-legal-bar {
+  margin-top: 35px;
+  padding-top: 18px;
+}
+/* ================================
+   COMPACT FOOTER - FINAL FIX
+================================ */
+
+.footer {
+  padding: 14px 5% 8px !important;
+  row-gap: 8px !important;
+  column-gap: 35px !important;
+}
+
+/* Left brand section compact */
+.footer-brand-block {
+  gap: 4px !important;
+}
+
+.footer-brand-block .brand-logo {
+  width: 230px !important;
+  margin-bottom: 2px !important;
+}
+
+.footer-brand-copy {
+  margin: 5px 0 !important;
+}
+
+.footer-brand-description {
+  margin: 0 !important;
+  line-height: 1.45 !important;
+}
+
+/* Social icons */
+.footer-socials {
+  margin-top: 3px !important;
+}
+
+/* Footer links */
+.footer-links {
+  gap: 9px !important;
+}
+
+/* Right alert section */
+.footer-alert-card {
+  gap: 8px !important;
+}
+
+.footer-alert-card h3 {
+  margin: 4px 0 8px !important;
+}
+
+.footer-alert-card p {
+  margin: 4px 0 10px !important;
+  line-height: 1.45 !important;
+}
+
+.footer-helpline {
+  padding: 11px 16px !important;
+}
+
+.footer-report-link {
+  margin-top: 8px !important;
+}
+
+/* Bottom legal bar */
+.footer-legal-bar {
+  margin-top: 10px !important;
+  padding-top: 8px !important;
+}
+
+
+/* ================================
+   COMPACT MOBILE FOOTER
+================================ */
+
+@media (max-width: 560px) {
+  .footer {
+    padding: 18px 16px 10px !important;
+    gap: 14px 12px !important;
+  }
+
+  .footer-brand-block {
+    gap: 7px !important;
+  }
+
+  .footer-brand-block .brand-logo {
+    width: 180px !important;
+  }
+
+  .footer-socials {
+    margin-top: 4px !important;
+  }
+
+  .footer-links {
+    gap: 7px !important;
+  }
+
+  .footer-alert-card {
+    gap: 7px !important;
+  }
+
+  .footer-legal-bar {
+    margin-top: 14px !important;
+    padding-top: 10px !important;
   }
 }
