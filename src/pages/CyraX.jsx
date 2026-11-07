@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./CyraX.css";
 
-const API_URL = "http://localhost:5000/api/chat";
-
+const API_URL = "https://cyra-backend-a41p.onrender.com/api/chat";
 const INITIAL_MESSAGE = {
   type: "bot",
   text: "Hello! I'm CYRA X, your Cyber Awareness Assistant. I'm here to help you stay safe online and guide you through cybersecurity concerns, online scams, fraud prevention, and digital safety. How can I assist you today?",
